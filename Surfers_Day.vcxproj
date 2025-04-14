@@ -194,32 +194,15 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="AssetLib.c" />
     <ClCompile Include="FlowBackGround.c" />
     <ClCompile Include="FlowObstacle.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="GlobalVariables.c" />
-=======
->>>>>>> 5572481c88055a1c8e5d86f563ca4e2e6c8a208b
+    <ClInclude Include="GameStruct.h" />
     <ClCompile Include="KeyInput.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="MainMenu.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AssetLib.h" />
-    <ClInclude Include="FlowBackGround.h" />
-    <ClInclude Include="FlowObstacle.h" />
-    <ClInclude Include="GameStruct.h" />
-    <ClInclude Include="GlobalVariables.h" />
-    <ClInclude Include="KeyInput.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="MainMenu.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameStruct.h" />
-    <ClInclude Include="GlobalVariables.h" />
-    <ClInclude Include="KeyInput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
