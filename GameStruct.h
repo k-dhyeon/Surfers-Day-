@@ -14,7 +14,10 @@ typedef enum EObsticleType {
 
 typedef struct FCharacterData {
 	CP_Vector CharacterPos;
+	CP_Vector CharaterDrawSize;
+	int AnimationFrame;
 	CP_Image CharacterImage;
+	float AnimationTimer;
 	ECharacterState ChracterState;
 
 	bool bHasRecentlyJumped;
@@ -39,9 +42,9 @@ typedef struct FObstacleData {
 
 typedef struct FGameData {
 	float Speed;
+	float SpeedTimer;
 	CP_Vector LaneMin;
 	CP_Vector LaneMax;
-	unsigned int score;
 	//TODO : do it later
 	//
 }FGameData;

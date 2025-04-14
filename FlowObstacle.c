@@ -54,7 +54,7 @@ void UpdateObstaclesPosition()
 			}
 			else
 			{
-				Obstacles[i].ObstaclePos.x -= GameData.Speed;
+				Obstacles[i].ObstaclePos.x -= GameData.Speed*CP_System_GetDt();
 				
 			}
 		}
@@ -164,8 +164,30 @@ void RemoveObstacle(int RemoveIndex)
 	if (Obstacles[RemoveIndex].bIsValid)
 	{
 		Obstacles[RemoveIndex].bIsValid = false;
-		CharacterData.Score += 100.f * GameData.Speed;
+		CharacterData.Score += Obstacles[RemoveIndex].Score * GameData.Speed;
 	}
+}
+
+void RenderCharacter_Internal()
+{
+	//RenderCharacter
+	CharacterData.AnimationTimer += CP_System_GetDt();
+	if (CharacterData.AnimationTimer > 0.3f)
+	{
+		if (CharacterData.AnimationFrame == 6)
+		{
+			CharacterData.AnimationFrame = 0;
+			CharacterData.AnimationTimer = 0.f;
+		}
+		else
+		{
+			CharacterData.AnimationFrame++;
+			CharacterData.AnimationTimer = 0.f;
+		}
+	}
+	CP_Image_DrawSubImage(CharacterData.CharacterImage, GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y, CharacterData.CharaterDrawSize.x, CharacterData.CharaterDrawSize.y, 100.f * CharacterData.AnimationFrame, 0.f, 100.f * (CharacterData.AnimationFrame+1), 100.f, 255);
+//	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+//	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
 }
 
 void RenderObjects()
@@ -182,8 +204,7 @@ void RenderObjects()
 				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
 			}
 		}
-		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
+		RenderCharacter_Internal();
 	}
 	else
 	{
@@ -194,9 +215,7 @@ void RenderObjects()
 			// 캐릭터가 Obstacle[i]보다 앞에 있고, 아직 안 그렸으면 먼저 캐릭터 그리기
 			if (!characterDrawn && CharacterData.CharacterPos.y < Obstacles[i].ObstaclePos.y)
 			{
-				// 캐릭터 그리기
-				CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-				CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x,GameData.LaneMin.y + CharacterData.CharacterPos.y,40.f, 20.f);
+				RenderCharacter_Internal();
 				characterDrawn = true;
 			}
 			if (Obstacles[i].bIsValid)
@@ -212,8 +231,7 @@ void RenderObjects()
 		// 만약 캐릭터가 가장 아래쪽일 경우 (아직 안 그려졌다면)
 		if (!characterDrawn)
 		{
-			CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-			CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x,GameData.LaneMin.y + CharacterData.CharacterPos.y,40.f, 20.f);
+			RenderCharacter_Internal();
 		}
 	}
 }
@@ -237,7 +255,7 @@ int CompareByYPos(const void* a, const void* b) {
 
 void SetObstacleByRandom(int Index)
 {
-	int RandomNum = CP_Random_GetInt();
+	unsigned int RandomNum = CP_Random_GetInt();
 	Obstacles[Index].bIsValid = true;
 	switch (RandomNum % OBSTACLE_NUM)
 	{

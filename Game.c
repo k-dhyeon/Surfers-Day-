@@ -34,7 +34,7 @@ void game_update(void)
 	}
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
-	FlowWater();
+	FlowWater();//TODO : 직관적인이름으로 변경
 	//	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
 	RenderObjects();
 	UpdateKeyInput();
@@ -42,6 +42,7 @@ void game_update(void)
 	UpdateObstaclesPosition();
 	if (CharacterData.bHasRecentlyJumped)
 	{
+		//Debug
 		CP_Settings_Fill(CP_Color_Create(128, 128, 128, 128));
 		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
 		CharacterData.JumpTimer += CP_System_GetDt();
@@ -50,7 +51,7 @@ void game_update(void)
 			CharacterData.bHasRecentlyJumped = false;
 		}
 	}
-	if (CharacterData.JumpTimer != 0.f)
+	if (CharacterData.JumpTimer != 0.f)//TODO : nearly 0
 	{
 		CharacterData.JumpTimer += CP_System_GetDt();
 		if (CharacterData.JumpTimer > 5.f)
@@ -70,6 +71,21 @@ void game_update(void)
 		}
 	}
 
+
+	if (GameData.Speed < 1000.f)
+	{
+		GameData.SpeedTimer += CP_System_GetDt();
+		if (GameData.SpeedTimer > 5.f)
+		{
+			GameData.SpeedTimer = 0.f;
+			GameData.Speed *= 1.1f;
+		}
+	}
+	else
+	{
+		int a = 0;
+		a++;
+	}
 	//TEST
 	char buffer[128] = { 0 };
 	if (CharacterData.bHasRecentlyJumped)
