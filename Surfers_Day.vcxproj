@@ -199,10 +199,17 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClCompile Include="FlowObstacle.c" />
     <ClCompile Include="Game.c" />
     <ClCompile Include="GlobalVariables.c" />
+    <ClInclude Include="AssetLib.h" />
+    <ClInclude Include="FlowBackGround.h" />
+    <ClInclude Include="FlowObstacle.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameStruct.h" />
     <ClCompile Include="KeyInput.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="MainMenu.c" />
+    <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="KeyInput.h" />
+    <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #include "cprocessing.h"
 #include "GlobalVariables.h"
 #include "KeyInput.h"
@@ -8,11 +8,7 @@ bool bIsForwardPressed = false;
 bool bIsBackwardPressed = false;
 bool bIsLeftPressed = false;
 bool bIsRightPressed=false;
-=======
-#include "KeyInput.h"
-#include "cprocessing.h"
 
->>>>>>> 5572481c88055a1c8e5d86f563ca4e2e6c8a208b
 void UpdateKeyInput()
 {
 
@@ -48,7 +44,7 @@ void UpdateKeyInput()
 	{
 		bIsBackwardPressed = false;
 	}
-<<<<<<< HEAD
+
 	if (CP_Input_KeyTriggered(KEY_SPACE))//Jump?
 	{
 		if (CharacterData.JumpTimer == 0.f)
@@ -60,20 +56,14 @@ void UpdateKeyInput()
 	//TODO : Submersion?
 	//TEST ONLY
 
-=======
-	if (CP_Input_KeyDown(KEY_SPACE))//Jump?
-	{
 
-	}
-	//TODO : Submersion?
->>>>>>> 5572481c88055a1c8e5d86f563ca4e2e6c8a208b
 }
 
 void CheckCollision()
 {
 	
 }
-<<<<<<< HEAD
+
 
 bool CheckForwardLaneCollision()
 {
@@ -154,5 +144,4 @@ void UpdateCharacterPosition()
 		}
 	}
 }
-=======
->>>>>>> 5572481c88055a1c8e5d86f563ca4e2e6c8a208b
+
