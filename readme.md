@@ -13,7 +13,7 @@
 | 빌드 안정화 | 5주차 | 05-10 ~ 05-15 | [5주차 목표 작성] | [비고 작성] |  |
 
 ## Daily Report
-- 링크 추가
+- https://docs.google.com/spreadsheets/d/1cP7TboqXumQnqSF8PZOUngY9OARGYa4DKsrlEdt19QE/edit?gid=0#gid=0
 
 ## 🎮 게임 개요
 - **장르**: 하이퍼 캐주얼 / 플랫포머

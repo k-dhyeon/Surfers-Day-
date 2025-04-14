@@ -156,7 +156,7 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     </ClCompile>
     <Link>
       <AdditionalDependencies>CProcessingd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
@@ -194,7 +194,24 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetLib.c" />
+    <ClCompile Include="FlowBackGround.c" />
+    <ClCompile Include="FlowObstacle.c" />
+    <ClCompile Include="Game.c" />
+    <ClCompile Include="GlobalVariables.c" />
+    <ClCompile Include="KeyInput.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="MainMenu.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AssetLib.h" />
+    <ClInclude Include="FlowBackGround.h" />
+    <ClInclude Include="FlowObstacle.h" />
+    <ClInclude Include="GameStruct.h" />
+    <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="KeyInput.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

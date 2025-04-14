@@ -13,36 +13,29 @@
 //---------------------------------------------------------
 
 #include "cprocessing.h"
+//#include "GlobalVariables.h"
+//#include "KeyInput.h"
+//#include "FlowObstacle.h"
+//#include "AssetLib.h"
+//#include "FlowBackGround.h"
+//#include "stdio.h"
+#include "MainMenu.h"
 
-// use CP_Engine_SetNextGameState to specify this function as the initialization function
-// this function will be called once at the beginning of the program
-void game_init(void)
-{
-	// initialize variables and CProcessing settings for this gamestate
-}
 
-// use CP_Engine_SetNextGameState to specify this function as the update function
-// this function will be called repeatedly every frame
-void game_update(void)
-{
-	CP_Graphics_ClearBackground(CP_Color_Create(255, 0, 255,255));
-	// check input, update simulation, render etc.
-}
 
-// use CP_Engine_SetNextGameState to specify this function as the exit function
-// this function will be called once just before leaving the current gamestate
-void game_exit(void)
-{
-	// shut down the gamestate and cleanup any dynamic memory
-}
+
+
+
+
 
 // main() the starting point for the program
 // CP_Engine_SetNextGameState() tells CProcessing which functions to use for init, update and exit
 // CP_Engine_Run() is the core function that starts the simulation
 int main(void)
 {
-	CP_Engine_SetNextGameState(game_init, game_update, game_exit);
+	CP_Engine_SetNextGameState(MainMenuInit, MainMenuUpdate, MainMenuExit);
+	//CP_Engine_SetNextGameState(game_init, game_update, game_exit);
 	CP_Engine_Run();
-	CP_System_SetWindowTitle("Surfers_Day");
+	
 	return 0;
 }
