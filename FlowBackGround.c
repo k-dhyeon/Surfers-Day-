@@ -4,7 +4,7 @@
 #include "Math.h"
 float scrollOffset = 0.0f;
 
-void FlowWater()
+void DrawWater()
 {
     // 이미지 크기
     float imageWidth = (float)CP_Image_GetWidth(SeaImage[0]);
@@ -27,4 +27,6 @@ void FlowWater()
         float drawX = GameData.LaneMin.x + i * imageWidth - scrollOffset;
         CP_Image_Draw(SeaImage[0], drawX, GameData.LaneMin.y, imageWidth, drawHeight, 255);
     }
+
+
 }

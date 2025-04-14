@@ -37,8 +37,8 @@ void game_update(void)
 	}
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
-	FlowWater();//TODO : 직관적인이름으로 변경
-	//	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
+	DrawWater();
+	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
 	RenderObjects();
 	UpdateKeyInput();
 	UpdateCharacterPosition();
@@ -75,20 +75,18 @@ void game_update(void)
 	}
 
 
-	if (GameData.Speed < 1000.f)
+	if (GameData.Speed < 3000.f)// update game speed
 	{
 		GameData.SpeedTimer += CP_System_GetDt();
-		if (GameData.SpeedTimer > 5.f)
+		if (GameData.SpeedTimer > 2.5f)
 		{
 			GameData.SpeedTimer = 0.f;
 			GameData.Speed *= 1.1f;
 		}
 	}
-	else
-	{
-		int a = 0;
-		a++;
-	}
+	
+	CharacterData.Energy -= CP_System_GetDt();
+
 	//TEST
 	char buffer[128] = { 0 };
 	if (CharacterData.bHasRecentlyJumped)
@@ -103,7 +101,7 @@ void game_update(void)
 	printf("%.2f\n", CharacterData.Energy);
 	//CP_Font_DrawText((CharacterData.Energy),0.f,0.f);
 	// check input, update simulation, render etc.
-	CharacterData.Score += CP_System_GetDt()*GameData.Speed;
+	CharacterData.Score += CP_System_GetDt()*GameData.Speed*0.1f;
 	char ScoreBuffer[128] = { 0 };
 	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);
 	CP_Font_DrawText(ScoreBuffer, 0.f, GameData.LaneMax.y);

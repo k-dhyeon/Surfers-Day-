@@ -63,7 +63,6 @@ void UpdateObstaclesPosition()
 	{
 		CharacterData.bHasRecentlyCollided = true;
 		CharacterData.CollisionTimer = 0.f;
-		CharacterData.Energy--;
 	}
 }
 
@@ -89,6 +88,7 @@ bool CheckObstaclesCollision()
 					ObstacleMaxY > CharacterMinY)//check AABB
 				{
 					BounceCollisionDirection(i);
+					CharacterData.Energy -= Obstacles[i].Score;
 					return true;
 				}
 			}
@@ -164,7 +164,7 @@ void RemoveObstacle(int RemoveIndex)
 	if (Obstacles[RemoveIndex].bIsValid)
 	{
 		Obstacles[RemoveIndex].bIsValid = false;
-		CharacterData.Score += Obstacles[RemoveIndex].Score * GameData.Speed;
+		CharacterData.Score += Obstacles[RemoveIndex].Score * GameData.Speed*0.001f;
 	}
 }
 
@@ -186,8 +186,8 @@ void RenderCharacter_Internal()
 		}
 	}
 	CP_Image_DrawSubImage(CharacterData.CharacterImage, GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y, CharacterData.CharaterDrawSize.x, CharacterData.CharaterDrawSize.y, 100.f * CharacterData.AnimationFrame, 0.f, 100.f * (CharacterData.AnimationFrame+1), 100.f, 255);
-//	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-//	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
 }
 
 void RenderObjects()

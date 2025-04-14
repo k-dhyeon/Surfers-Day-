@@ -11,7 +11,7 @@ FObstacleData Obstacles[MAX_OBSTACLES];
 
 void InitGameData()
 {
-	GameData.Speed = 50.f;
+	GameData.Speed = 200.f;
 	float WindowHeight = (float)CP_System_GetWindowHeight();
 	GameData.LaneMax = CP_Vector_Set((float)CP_System_GetWindowWidth(), WindowHeight * 0.85f);
 	GameData.LaneMin = CP_Vector_Set(0.f, WindowHeight/2.f);
@@ -28,7 +28,7 @@ void InitCharacterData()
 	CharacterData.CharacterCollisionSize = CP_Vector_Set(100.f,30.f);//TODO : Use Image and Set Collision Size
 	CharacterData.bHasRecentlyJumped = false;
 	CharacterData.JumpTimer = 0.f;
-	CharacterData.Energy = 3.f;
+	CharacterData.Energy = 200.f;
 	CharacterData.bHasRecentlyCollided = false;
 	CharacterData.CollisionTimer = 0.f;
 	CharacterData.Score = 0;

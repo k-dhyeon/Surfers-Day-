@@ -1,4 +1,4 @@
 #pragma once
 #include "AssetLib.h"
 
-void FlowWater();
+void DrawWater();
