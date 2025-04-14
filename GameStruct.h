@@ -23,6 +23,7 @@ typedef struct FCharacterData {
 	float Energy;
 	bool bHasRecentlyCollided;
 	float CollisionTimer;
+	double Score;
 }FCharacterData;
 
 typedef struct FObstacleData {
@@ -33,6 +34,7 @@ typedef struct FObstacleData {
 	CP_Vector ObstacleCollisionStartOffset;//from LeftTop
 
 	CP_Image ObstacleImage;
+	float Score;
 }FObstacleData;
 
 typedef struct FGameData {

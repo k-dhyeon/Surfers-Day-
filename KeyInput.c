@@ -55,7 +55,10 @@ void UpdateKeyInput()
 	}
 	//TODO : Submersion?
 	//TEST ONLY
-
+	if (CP_Input_KeyTriggered(KEY_1))//InstantDead
+	{
+		CharacterData.Energy = 0.f;
+	}
 
 }
 
@@ -145,3 +148,4 @@ void UpdateCharacterPosition()
 	}
 }
 
+	

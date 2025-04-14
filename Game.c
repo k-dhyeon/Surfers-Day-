@@ -84,6 +84,10 @@ void game_update(void)
 	printf("%.2f\n", CharacterData.Energy);
 	//CP_Font_DrawText((CharacterData.Energy),0.f,0.f);
 	// check input, update simulation, render etc.
+	CharacterData.Score += CP_System_GetDt()*GameData.Speed;
+	char ScoreBuffer[128] = { 0 };
+	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);
+	CP_Font_DrawText(ScoreBuffer, 0.f, GameData.LaneMax.y);
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function

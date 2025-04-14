@@ -79,10 +79,14 @@ bool CheckObstaclesCollision()
 		{
 			if (Obstacles[i].bIsValid)
 			{
-				if (Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x < CharacterMaxX &&
-					Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x + Obstacles[i].ObstacleCollisionSize.x>CharacterMinX &&
-					Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y < CharacterMaxY &&
-					Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y + Obstacles[i].ObstacleCollisionSize.y>CharacterMinY)//check AABB
+				float ObstacleMinX = Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x;
+				float ObstacleMaxX = Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x + Obstacles[i].ObstacleCollisionSize.x;
+				float ObstacleMinY = Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y;
+				float ObstacleMaxY = Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y + Obstacles[i].ObstacleCollisionSize.y;
+				if (ObstacleMinX < CharacterMaxX &&
+					ObstacleMaxX > CharacterMinX &&
+					ObstacleMinY < CharacterMaxY &&
+					ObstacleMaxY > CharacterMinY)//check AABB
 				{
 					BounceCollisionDirection(i);
 					return true;
@@ -160,6 +164,7 @@ void RemoveObstacle(int RemoveIndex)
 	if (Obstacles[RemoveIndex].bIsValid)
 	{
 		Obstacles[RemoveIndex].bIsValid = false;
+		CharacterData.Score += 100.f * GameData.Speed;
 	}
 }
 
@@ -173,7 +178,8 @@ void RenderObjects()
 			if (Obstacles[i].bIsValid)
 			{
 				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
-//				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
+				//CollisionDebug
+				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
 			}
 		}
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
@@ -197,8 +203,9 @@ void RenderObjects()
 			{
 				// 장애물 그리기
 				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
-//				CP_Settings_Fill(CP_Color_Create(255, 255, 0, 255));
-//				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y+Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
+				//CollisionDebug
+				CP_Settings_Fill(CP_Color_Create(255, 255, 0, 255));
+				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y+Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
 			}
 		}
 
@@ -239,12 +246,14 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleImageSize = TurtleData.ObstacleImageSize;
 		Obstacles[Index].ObstacleCollisionSize = TurtleData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = TurtleData.ObstacleCollisionStartOffset;
+		Obstacles[Index].Score = TurtleData.Score;
 		break;
 	case 1:
 		Obstacles[Index].ObstacleImage = BoxData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = BoxData.ObstacleImageSize;
 		Obstacles[Index].ObstacleCollisionSize = BoxData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = BoxData.ObstacleCollisionStartOffset;
+		Obstacles[Index].Score = BoxData.Score;
 		break;
 	default:
 		break;

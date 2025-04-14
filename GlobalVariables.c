@@ -15,6 +15,10 @@ void InitGameData()
 	float WindowHeight = (float)CP_System_GetWindowHeight();
 	GameData.LaneMax = CP_Vector_Set((float)CP_System_GetWindowWidth(), WindowHeight * 0.85f);
 	GameData.LaneMin = CP_Vector_Set(0.f, WindowHeight/2.f);
+	for (int i = 0; i < MAX_OBSTACLES; i++)
+	{
+		Obstacles[i].bIsValid = false;
+	}
 }
 
 void InitCharacterData()
@@ -26,6 +30,7 @@ void InitCharacterData()
 	CharacterData.Energy = 3.f;
 	CharacterData.bHasRecentlyCollided = false;
 	CharacterData.CollisionTimer = 0.f;
+	CharacterData.Score = 0;
 }
 
 void InitObstacles()
