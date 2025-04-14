@@ -1,5 +1,7 @@
 #pragma once
 
+extern float WindowCenterX;
+extern float WindowCenterY;
 void MainMenuInit(void);
 
 

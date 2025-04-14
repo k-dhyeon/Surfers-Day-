@@ -15,32 +15,39 @@ float QuitButtonPosY;
 void MainMenuInit(void)
 {
 	CP_System_SetWindowSize(1600, 900);
+	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	CP_Settings_RectMode(CP_POSITION_CORNER);
 	WindowCenterX = (float)CP_System_GetWindowWidth()/2.f;
 	WindowCenterY = (float)CP_System_GetWindowHeight()/2.f;
-	StartButtonPosX = WindowCenterX - (ButtonSizeX / 2.f);
+	StartButtonPosX = WindowCenterX - (ButtonSizeX / 2.f) ;
 	StartButtonPosY = WindowCenterY - (ButtonSizeY)-5.f;
 	QuitButtonPosX = WindowCenterX - (ButtonSizeX / 2.f);
 	QuitButtonPosY = WindowCenterY + (ButtonSizeY)+5.f;
+
+
 }
+
 
 void MainMenuUpdate(void)
 {
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 128, 255));
-	
+	CP_Settings_TextSize(38.f);
+
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
 	CP_Graphics_DrawRect(StartButtonPosX, StartButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+	
 	char buffer[12] = { 0 };
 	sprintf_s(buffer, 12, "Game Start");
-	CP_Font_DrawText(buffer, WindowCenterX, WindowCenterY - (ButtonSizeY / 2.f));
+	CP_Font_DrawText(buffer,StartButtonPosX+(ButtonSizeX /2.0f) , StartButtonPosY + (ButtonSizeY / 2.f));
 
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
 	CP_Graphics_DrawRect(QuitButtonPosX, QuitButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+
 	char buffer2[5] = { 0 };
 	sprintf_s(buffer2, 5, "Quit");
-	CP_Font_DrawText(buffer2, WindowCenterX - (ButtonSizeX / 2.f) + (ButtonSizeX/2.f), WindowCenterY + (ButtonSizeY * 1.5f));
+	CP_Font_DrawText(buffer2, QuitButtonPosX + (ButtonSizeX / 2.0f) , QuitButtonPosY + (ButtonSizeY / 2.f));
 	UpdateMainMenuKeyInput();
 }
 

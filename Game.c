@@ -7,6 +7,9 @@
 #include "FlowBackGround.h"
 #include "stdio.h"
 #include "MainMenu.h"
+#include "ScoreBorad.h"
+
+
 // use CP_Engine_SetNextGameState to specify this function as the initialization function
 // this function will be called once at the beginning of the program
 void game_init(void)
@@ -30,7 +33,7 @@ void game_update(void)
 {
 	if (CharacterData.Energy <= 0.f)
 	{
-		CP_Engine_SetNextGameState(MainMenuInit, MainMenuUpdate, MainMenuExit);
+		CP_Engine_SetNextGameState(ScoreBoradInit, ScoreBoradUpdate, ScoreBoradExit);
 	}
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
