@@ -8,7 +8,8 @@
 #include "stdio.h"
 #include "MainMenu.h"
 #include "ScoreBorad.h"
-
+#include "Item.h"
+#include "BigWave.h"
 
 // use CP_Engine_SetNextGameState to specify this function as the initialization function
 // this function will be called once at the beginning of the program
@@ -18,6 +19,8 @@ void game_init(void)
 	InitGameData();
 	InitCharacterData();
 	InitAsset();
+	InitItemData();
+	InitBigWaveData();
 	CP_Settings_ImageMode(CP_POSITION_CORNER);
 	CP_System_SetWindowTitle("Surfers_Day");
 	//Test
@@ -38,11 +41,15 @@ void game_update(void)
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
 	DrawWater();
-	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
+//	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
+	UpdateWave();
 	RenderObjects();
 	UpdateKeyInput();
 	UpdateCharacterPosition();
 	UpdateObstaclesPosition();
+	UpdateItemsPosition();
+	RenderBatteries();
+	CheckBatteriesCollision();
 	if (CharacterData.bHasRecentlyJumped)
 	{
 		//Debug

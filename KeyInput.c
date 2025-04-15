@@ -62,10 +62,6 @@ void UpdateKeyInput()
 
 }
 
-void CheckCollision()
-{
-	
-}
 
 
 bool CheckForwardLaneCollision()

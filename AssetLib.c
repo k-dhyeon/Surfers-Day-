@@ -1,12 +1,15 @@
 #include "AssetLib.h"
 
 
-CP_Image SeaImage[SEA_IMAGE_NUM];
+FSeaAnimationData SeaAnimationData;
 FObstacleData TurtleData;
 FObstacleData BoxData;
+
+FBatteryData BatteryData;
+
 void InitAsset()
 {
-	SeaImage[0] = CP_Image_Load("./Assets/SeaBase.png");
+	SeaAnimationData.SeaImage[0] = CP_Image_Load("./Assets/Sea.png");
 
 
 	TurtleData.ObstacleImage = CP_Image_Load("./Assets/Turtle.png");
@@ -20,4 +23,10 @@ void InitAsset()
 	BoxData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 20.f);
 	BoxData.ObstacleCollisionSize = CP_Vector_Set(100.f, 10.f);
 	BoxData.Score = 50.f;
+
+	BatteryData.BatteryImage = CP_Image_Load("./Assets/Battery.png");
+	BatteryData.BatteryImageSize = CP_Vector_Set(30.f, 30.f);
+	BatteryData.bIsValid = false;
+	BatteryData.Energy = 10.f;
 }
+

@@ -1,9 +1,13 @@
 #pragma once
 #include "cprocessing_common.h"
 #include "stdbool.h"
-typedef enum ECharacterState {
 
-	
+#define SEA_IMAGE_NUM 1
+#define WAVE_IMAGE_NUM 1
+
+typedef enum ECharacterState {
+	STANDING = 0,
+	RIDEWAVE = 1,
 }ECharacterState;
 
 typedef enum EObsticleType {
@@ -18,8 +22,7 @@ typedef struct FCharacterData {
 	int AnimationFrame;
 	CP_Image CharacterImage;
 	float AnimationTimer;
-	ECharacterState ChracterState;
-
+	ECharacterState CharacterState;
 	bool bHasRecentlyJumped;
 	float JumpTimer;
 	CP_Vector CharacterCollisionSize;
@@ -48,3 +51,28 @@ typedef struct FGameData {
 	//TODO : do it later
 	//
 }FGameData;
+
+typedef struct FBatteryData {
+	bool bIsValid;
+	CP_Vector BatteryPos;
+	CP_Vector BatteryImageSize;
+	CP_Image BatteryImage;
+	float Energy;
+}FBatteryData;
+
+typedef struct FSeaAnimationData {
+	CP_Image SeaImage[SEA_IMAGE_NUM];
+	float AnimationTimer;
+	int SeaIndex;
+}FSeaAnimationData;
+
+typedef struct FBigWaveData {
+	bool bIsValid;
+	bool bIsRiderable;
+	CP_Image WaveImage[WAVE_IMAGE_NUM];
+	CP_Vector WaveImageSize;
+	float AnimationTimer;
+	int WaveIndex;
+	float RiderableTime;
+	float WaveETA;
+}FBigWaveData;

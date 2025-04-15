@@ -9,7 +9,7 @@ extern bool bIsRightPressed;
 
 void UpdateKeyInput();
 
-void CheckCollision();
+
 
 
 bool CheckForwardLaneCollision();

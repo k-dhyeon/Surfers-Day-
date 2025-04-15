@@ -9,7 +9,7 @@ float LastSpawnDeltaTime = 0.f;
 float CurrentDelay = 0.f;
 float MinDelay = 0.3f;
 float MaxDelay = 3.f;
-bool bShouldGenerateCurrentDelay = false;
+
 
 float BounceAmount = 40.f;
 
@@ -36,14 +36,10 @@ void UpdateObstaclesPosition()
 	if (LastSpawnDeltaTime >= CurrentDelay)
 	{
 		AddObstacle();
-		bShouldGenerateCurrentDelay = true;
-	}
-	if (bShouldGenerateCurrentDelay)
-	{
 		CurrentDelay = CP_Random_RangeFloat(MinDelay, MaxDelay);
 		LastSpawnDeltaTime = 0.f;
-		bShouldGenerateCurrentDelay = false;
 	}
+	
 	for (int i = 0;i < MAX_OBSTACLES;i++)
 	{
 		if (Obstacles[i].bIsValid)
@@ -68,7 +64,7 @@ void UpdateObstaclesPosition()
 
 bool CheckObstaclesCollision()
 {
-	if (!CharacterData.bHasRecentlyJumped && !CharacterData.bHasRecentlyCollided)
+	if (!CharacterData.bHasRecentlyJumped && !CharacterData.bHasRecentlyCollided && CharacterData.CharacterState == STANDING)
 	{
 		float CharacterMinX = CharacterData.CharacterPos.x;
 		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x;

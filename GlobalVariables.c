@@ -1,13 +1,15 @@
 #pragma once
 #include "GlobalVariables.h"
 #include "cprocessing.h"
-
+#include "AssetLib.h"
 
 
 //Variables
 FGameData GameData;
 FCharacterData CharacterData;
 FObstacleData Obstacles[MAX_OBSTACLES];
+FBatteryData Batteries[MAX_BATTERIES];
+FBigWaveData BigWaveData;
 
 void InitGameData()
 {
@@ -44,4 +46,26 @@ void InitObstacles()
 	{
 		Obstacles[i].bIsValid = false;
 	}
+}
+
+void InitItemData()
+{
+	for (int i = 0; i < MAX_BATTERIES; i++)
+	{
+		Batteries[i].BatteryImage = BatteryData.BatteryImage;
+		Batteries[i].Energy = BatteryData.Energy;
+		Batteries[i].BatteryImageSize = BatteryData.BatteryImageSize;
+		Batteries[i].bIsValid = false;
+	}
+}
+
+void InitBigWaveData()
+{
+	BigWaveData.AnimationTimer = 0.f;
+	BigWaveData.WaveIndex = 0;
+	BigWaveData.bIsRiderable = false;
+	BigWaveData.bIsValid = false;
+	BigWaveData.WaveImageSize = CP_Vector_Set((float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight() / 5.f);
+	BigWaveData.WaveETA = CP_Random_RangeFloat(0.f,0.f);
+	BigWaveData.WaveImage[0] = CP_Image_Load("./Assets/Wave.png");
 }

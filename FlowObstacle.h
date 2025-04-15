@@ -6,7 +6,7 @@ extern float LastSpawnDeltaTime;
 extern float CurrentDelay;
 extern float MinDelay;
 extern float MaxDelay;
-extern bool bShouldGenerateCurrentDelay;
+
 
 
 
