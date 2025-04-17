@@ -53,6 +53,21 @@ void UpdateKeyInput()
 
 		}
 	}
+	if (CharacterData.bHasRecentlyJumped)
+	{
+		if (CP_Input_KeyTriggered(KEY_W))//Move Left
+		{
+		}
+		if (CP_Input_KeyTriggered(KEY_S))//Move Right
+		{
+		}
+		if (CP_Input_KeyTriggered(KEY_A))//Move Backward
+		{
+		}
+		if (CP_Input_KeyTriggered(KEY_D))//Move Forward
+		{
+		}
+	}
 	//TODO : Submersion?
 	//TEST ONLY
 	if (CP_Input_KeyTriggered(KEY_1))//InstantDead
@@ -125,7 +140,7 @@ void UpdateCharacterPosition()
 	{
 		if (CheckBackwardLaneCollision())
 		{
-			CharacterData.CharacterPos.x -= CP_System_GetDt() * MovementSpeed*2.f;
+			CharacterData.CharacterPos.x -= CP_System_GetDt() * MovementSpeed*4.f;
 		}
 	}
 	if (bIsLeftPressed && !bIsRightPressed)

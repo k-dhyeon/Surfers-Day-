@@ -10,6 +10,8 @@
 #include "ScoreBorad.h"
 #include "Item.h"
 #include "BigWave.h"
+#include "BGM.h"
+
 
 // use CP_Engine_SetNextGameState to specify this function as the initialization function
 // this function will be called once at the beginning of the program
@@ -23,6 +25,7 @@ void game_init(void)
 	InitBigWaveData();
 	CP_Settings_ImageMode(CP_POSITION_CORNER);
 	CP_System_SetWindowTitle("Surfers_Day");
+	PlayInGameBGM();
 	//Test
 	CP_Settings_RectMode(CP_POSITION_CORNER);
 	CP_Settings_TextSize(64);
@@ -34,10 +37,6 @@ void game_init(void)
 // this function will be called repeatedly every frame
 void game_update(void)
 {
-	if (CharacterData.Energy <= 0.f)
-	{
-		CP_Engine_SetNextGameState(ScoreBoradInit, ScoreBoradUpdate, ScoreBoradExit);
-	}
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
 	DrawWater();
@@ -94,6 +93,11 @@ void game_update(void)
 	
 	CharacterData.Energy -= CP_System_GetDt();
 
+	if (CharacterData.Energy <= 0.f)
+	{
+		CP_Engine_SetNextGameState(ScoreBoradInit, ScoreBoradUpdate, ScoreBoradExit);
+	}
+
 	//TEST
 	char buffer[128] = { 0 };
 	if (CharacterData.bHasRecentlyJumped)
@@ -112,6 +116,8 @@ void game_update(void)
 	char ScoreBuffer[128] = { 0 };
 	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);
 	CP_Font_DrawText(ScoreBuffer, 0.f, GameData.LaneMax.y);
+
+	
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
@@ -119,4 +125,5 @@ void game_update(void)
 void game_exit(void)
 {
 	// shut down the gamestate and cleanup any dynamic memory
+	StopInGameBGM();
 }

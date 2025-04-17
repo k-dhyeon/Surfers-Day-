@@ -48,10 +48,14 @@ void UpdateWave()
 			{
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;
+				if (BigWaveData.WaveIndex > 3.f)
+				{
+					BigWaveData.bIsRiderable = false;
+					CharacterData.CharacterState = STANDING;
+				}
 			}
 			
 		}
-		CheckRideWave();
 	}
 	else
 	{
@@ -61,6 +65,7 @@ void UpdateWave()
 			BeginWave();
 		}
 	}
+	CheckRideWave();
 }
 
 void RemoveWave()
@@ -78,5 +83,13 @@ void CheckRideWave()
 		{
 			CharacterData.CharacterState = RIDEWAVE;
 		}
+		else
+		{
+			CharacterData.CharacterState = STANDING;
+		}
+	}
+	else
+	{
+		CharacterData.CharacterState = STANDING;
 	}
 }
