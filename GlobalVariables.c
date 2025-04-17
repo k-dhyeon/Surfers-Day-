@@ -38,6 +38,11 @@ void InitCharacterData()
 	CharacterData.AnimationTimer = 0.f;
 	CharacterData.AnimationFrame = 0;
 	CharacterData.CharaterDrawSize = CP_Vector_Set(200.f,200.f);
+	CharacterData.ComboIndex = 0;
+	for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
+	{
+		CharacterData.ComboCommand[i] = '\0';
+	}
 }
 
 void InitObstacles()

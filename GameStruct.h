@@ -4,11 +4,16 @@
 
 #define SEA_IMAGE_NUM 1
 #define WAVE_IMAGE_NUM 1
+#define COMBO_COMMAND_LENGTH 5
 
 typedef enum ECharacterState {
 	STANDING = 0,
 	RIDEWAVE = 1,
 }ECharacterState;
+
+typedef enum ECharacterComboState {
+	
+}ECharacterComboState;
 
 typedef enum EObsticleType {
 	TURTLE = 0,
@@ -38,6 +43,10 @@ typedef struct FCharacterData {
 	bool bHasRecentlyCollided;
 	float CollisionTimer;
 	double Score;
+	//Combo
+	int ComboIndex;
+	char ComboCommand[COMBO_COMMAND_LENGTH];
+	ECharacterComboState ComboState;
 }FCharacterData;
 
 typedef struct FObstacleData {

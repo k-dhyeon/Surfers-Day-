@@ -1,7 +1,9 @@
 
+#include "KeyInput.h"
+
 #include "cprocessing.h"
 #include "GlobalVariables.h"
-#include "KeyInput.h"
+#include "ComboSystem.h"
 
 float MovementSpeed = 100.f;
 bool bIsForwardPressed = false;
@@ -50,23 +52,48 @@ void UpdateKeyInput()
 		if (CharacterData.JumpTimer == 0.f)
 		{
 			CharacterData.bHasRecentlyJumped = true;
-
+			CharacterData.ComboIndex = 0;
+			for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
+			{
+				CharacterData.ComboCommand[i] = '\0';
+			}
 		}
 	}
 	if (CharacterData.bHasRecentlyJumped)
 	{
 		if (CP_Input_KeyTriggered(KEY_W))//Move Left
 		{
+			if (CharacterData.ComboIndex < COMBO_COMMAND_LENGTH - 1)
+			{
+				CharacterData.ComboCommand[CharacterData.ComboIndex] = 'W';
+				CharacterData.ComboIndex++;
+			}
 		}
 		if (CP_Input_KeyTriggered(KEY_S))//Move Right
 		{
+			if (CharacterData.ComboIndex < COMBO_COMMAND_LENGTH - 1)
+			{
+				CharacterData.ComboCommand[CharacterData.ComboIndex] = 'S';
+				CharacterData.ComboIndex++;
+			}
 		}
 		if (CP_Input_KeyTriggered(KEY_A))//Move Backward
 		{
+			if (CharacterData.ComboIndex < COMBO_COMMAND_LENGTH - 1)
+			{
+				CharacterData.ComboCommand[CharacterData.ComboIndex] = 'A';
+				CharacterData.ComboIndex++;
+			}
 		}
 		if (CP_Input_KeyTriggered(KEY_D))//Move Forward
 		{
+			if (CharacterData.ComboIndex < COMBO_COMMAND_LENGTH - 1)
+			{
+				CharacterData.ComboCommand[CharacterData.ComboIndex] = 'D';
+				CharacterData.ComboIndex++;
+			}
 		}
+		CheckCombo();
 	}
 	//TODO : Submersion?
 	//TEST ONLY
