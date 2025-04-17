@@ -197,6 +197,7 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClCompile Include="AssetLib.c" />
     <ClCompile Include="BGM.c" />
     <ClCompile Include="BigWave.cpp" />
+    <ClCompile Include="energybar.c" />
     <ClCompile Include="FlowBackGround.c" />
     <ClCompile Include="FlowObstacle.c" />
     <ClCompile Include="Game.c" />
@@ -206,6 +207,7 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClInclude Include="AssetLib.h" />
     <ClInclude Include="BGM.h" />
     <ClInclude Include="BigWave.h" />
+    <ClInclude Include="energybar.h" />
     <ClInclude Include="FlowBackGround.h" />
     <ClInclude Include="FlowObstacle.h" />
     <ClInclude Include="Game.h" />
