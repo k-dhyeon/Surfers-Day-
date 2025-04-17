@@ -125,7 +125,7 @@ void UpdateCharacterPosition()
 	{
 		if (CheckBackwardLaneCollision())
 		{
-			CharacterData.CharacterPos.x -= CP_System_GetDt() * MovementSpeed*2.f;
+			CharacterData.CharacterPos.x -= CP_System_GetDt() * MovementSpeed*4.f;
 		}
 	}
 	if (bIsLeftPressed && !bIsRightPressed)
