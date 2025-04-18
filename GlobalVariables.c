@@ -38,6 +38,11 @@ void InitCharacterData()
 	CharacterData.AnimationTimer = 0.f;
 	CharacterData.AnimationFrame = 0;
 	CharacterData.CharaterDrawSize = CP_Vector_Set(200.f,200.f);
+	CharacterData.ComboIndex = 0;
+	for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
+	{
+		CharacterData.ComboCommand[i] = '\0';
+	}
 }
 
 void InitObstacles()
@@ -66,6 +71,6 @@ void InitBigWaveData()
 	BigWaveData.bIsRiderable = false;
 	BigWaveData.bIsValid = false;
 	BigWaveData.WaveImageSize = CP_Vector_Set((float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight() / 5.f);
-	BigWaveData.WaveETA = CP_Random_RangeFloat(0.f,0.f);
+	BigWaveData.WaveETA = CP_Random_RangeFloat(15.f,40.f);
 	BigWaveData.WaveImage[0] = CP_Image_Load("./Assets/Wave.png");
 }

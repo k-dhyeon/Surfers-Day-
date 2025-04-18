@@ -19,8 +19,8 @@ FBatteryData BatteryData;
 
 void InitAsset()
 {
-	InGameBGM = CP_Sound_LoadMusic("./Assets/BlueArchiveSymphony.mp3");
-
+	InGameBGM = CP_Sound_LoadMusic("./Assets/Ikoliks - Ride the Wave.mp3");
+	MainMenuBGM = CP_Sound_LoadMusic("./Assets/Raz Burg - Sunlight - Instrumental Version.mp3");
 	SeaAnimationData.SeaImage[0] = CP_Image_Load("./Assets/Sea.png");
 
 

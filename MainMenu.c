@@ -2,6 +2,7 @@
 #include "cprocessing.h"
 #include "stdio.h"
 #include "Game.h"
+#include "BGM.h"
 
 float WindowCenterX;
 float WindowCenterY;
@@ -11,6 +12,10 @@ float StartButtonPosX;
 float StartButtonPosY;
 float QuitButtonPosX;
 float QuitButtonPosY;
+float RankButtonPosX;
+float RankButtonPosY;
+
+
 
 void MainMenuInit(void)
 {
@@ -23,7 +28,9 @@ void MainMenuInit(void)
 	StartButtonPosY = WindowCenterY - (ButtonSizeY)-5.f;
 	QuitButtonPosX = WindowCenterX - (ButtonSizeX / 2.f);
 	QuitButtonPosY = WindowCenterY + (ButtonSizeY)+5.f;
-
+	RankButtonPosX = WindowCenterX - (ButtonSizeX / 2.f);
+	RankButtonPosY = WindowCenterY;
+	PlayMainMenuBGM();
 
 }
 
@@ -32,22 +39,25 @@ void MainMenuUpdate(void)
 {
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 128, 255));
 	CP_Settings_TextSize(38.f);
-
+	//StartButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
 	CP_Graphics_DrawRect(StartButtonPosX, StartButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	
-	char buffer[12] = { 0 };
-	sprintf_s(buffer, 12, "Game Start");
-	CP_Font_DrawText(buffer,StartButtonPosX+(ButtonSizeX /2.0f) , StartButtonPosY + (ButtonSizeY / 2.f));
-
+	CP_Font_DrawText("Game Start",StartButtonPosX+(ButtonSizeX /2.0f) , StartButtonPosY + (ButtonSizeY / 2.f));
+	//QuitButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
 	CP_Graphics_DrawRect(QuitButtonPosX, QuitButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 
-	char buffer2[5] = { 0 };
-	sprintf_s(buffer2, 5, "Quit");
-	CP_Font_DrawText(buffer2, QuitButtonPosX + (ButtonSizeX / 2.0f) , QuitButtonPosY + (ButtonSizeY / 2.f));
+	CP_Font_DrawText("Quit", QuitButtonPosX + (ButtonSizeX / 2.0f) , QuitButtonPosY + (ButtonSizeY / 2.f));
+	//RankButton
+	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
+	CP_Graphics_DrawRect(RankButtonPosX, RankButtonPosY, ButtonSizeX, ButtonSizeY);
+	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+
+	CP_Font_DrawText("Rank", RankButtonPosX + (ButtonSizeX / 2.0f), RankButtonPosY + (ButtonSizeY / 2.f));
+
 	UpdateMainMenuKeyInput();
 }
 
@@ -58,7 +68,7 @@ void MainMenuExit(void)
 
 void UpdateMainMenuKeyInput(void)
 {
-	if (CP_Input_MouseDown(MOUSE_BUTTON_LEFT))//Move Left
+	if (CP_Input_MouseDown(MOUSE_BUTTON_LEFT))
 	{
 		float MousePosX = CP_Input_GetMouseX();
 		float MousePosY = CP_Input_GetMouseY();
@@ -76,5 +86,14 @@ void UpdateMainMenuKeyInput(void)
 		{
 			CP_Engine_Terminate();
 		}
+		else if (MousePosX >= RankButtonPosX &&
+			MousePosX <= RankButtonPosX + ButtonSizeX &&
+			MousePosY >= RankButtonPosY &&
+			MousePosY <= RankButtonPosY + ButtonSizeY)
+		{
+			int a = 0;
+			a++;
+		}
+
 	}
 }
