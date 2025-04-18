@@ -91,7 +91,7 @@ void CheckBatteriesCollision()
 void SetBatteryByRandom(int Index)
 {
 	Batteries[Index].bIsValid = true;
-	float RandomX = CP_Random_RangeFloat(GameData.LaneMin.x, GameData.LaneMax.x - Batteries[Index].BatteryImageSize.x);
+	float RandomX = CP_Random_RangeFloat(GameData.LaneMin.x, (GameData.LaneMax.x)/2.f - Batteries[Index].BatteryImageSize.x);
 	Batteries[Index].BatteryPos = CP_Vector_Set(RandomX, GameData.LaneMax.y - GameData.LaneMin.y);
 }
 

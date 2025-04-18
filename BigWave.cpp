@@ -72,7 +72,7 @@ void RemoveWave()
 {
 	BigWaveData.bIsValid = false;
 	BigWaveData.bIsRiderable = false;
-	BigWaveData.WaveETA = CP_Random_RangeFloat(20.f, 40.f);
+	BigWaveData.WaveETA = CP_Random_RangeFloat(15.f, 40.f);
 }
 
 void CheckRideWave()

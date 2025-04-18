@@ -160,7 +160,7 @@ void UpdateCharacterPosition()
 	{
 		if (CheckForwardLaneCollision())
 		{
-			CharacterData.CharacterPos.x+= CP_System_GetDt()*MovementSpeed;
+			CharacterData.CharacterPos.x+= CP_System_GetDt()*MovementSpeed * 2.f;
 		}
 	}
 	if (!bIsForwardPressed && bIsBackwardPressed)
@@ -174,14 +174,14 @@ void UpdateCharacterPosition()
 	{
 		if (CheckLeftLaneCollision())
 		{
-			CharacterData.CharacterPos.y -= CP_System_GetDt() * MovementSpeed * 2.f;
+			CharacterData.CharacterPos.y -= CP_System_GetDt() * MovementSpeed * 2.5f;
 		}
 	}
 	if (!bIsLeftPressed && bIsRightPressed)
 	{
 		if (CheckRightLaneCollision())
 		{
-			CharacterData.CharacterPos.y += CP_System_GetDt() * MovementSpeed * 2.f;
+			CharacterData.CharacterPos.y += CP_System_GetDt() * MovementSpeed * 2.5f;
 		}
 	}
 }

@@ -24,7 +24,6 @@ void game_init(void)
 	InitItemData();
 	InitBigWaveData();
 	CP_Settings_ImageMode(CP_POSITION_CORNER);
-	CP_System_SetWindowTitle("Surfers_Day");
 	PlayInGameBGM();
 	//Test
 	CP_Settings_RectMode(CP_POSITION_CORNER);
@@ -90,7 +89,19 @@ void game_update(void)
 		if (GameData.SpeedTimer > 2.5f)
 		{
 			GameData.SpeedTimer = 0.f;
-			GameData.Speed *= 1.1f;
+			if (GameData.Speed <= 1100.f)
+			{
+				GameData.Speed *= 1.1f;
+			}
+			else if(GameData.Speed <= 1600.f)
+			{
+				GameData.Speed += 50.f;
+			}
+			else
+			{
+				int a = 0;
+				a++;
+			}
 		}
 	}
 	

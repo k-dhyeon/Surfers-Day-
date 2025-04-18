@@ -5,7 +5,7 @@
 //#include "AssetLib.h"
 //#include "FlowBackGround.h"
 //#include "stdio.h"
-#include "MainMenu.h"
+#include "IntroScene.h"
 
 
 
@@ -20,7 +20,7 @@
 int main(void)
 {
 
-	CP_Engine_SetNextGameState(MainMenuInit, MainMenuUpdate, MainMenuExit);
+	CP_Engine_SetNextGameState(Intro_init, Intro_update, Intro_exit);
 	//CP_Engine_SetNextGameState(game_init, game_update, game_exit);
 
 	CP_Engine_Run();
