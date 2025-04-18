@@ -12,6 +12,7 @@
 #include "BigWave.h"
 #include "BGM.h"
 #include "energybar.h"
+#include "drone.h"
 
 // use CP_Engine_SetNextGameState to specify this function as the initialization function
 // this function will be called once at the beginning of the program
@@ -26,6 +27,7 @@ void game_init(void)
 	CP_Settings_ImageMode(CP_POSITION_CORNER);
 	CP_System_SetWindowTitle("Surfers_Day");
 	PlayInGameBGM();
+	dronexy();
 	//Test
 	CP_Settings_RectMode(CP_POSITION_CORNER);
 	CP_Settings_TextSize(64);
@@ -50,7 +52,9 @@ void game_update(void)
 	RenderBatteries();
 	CheckBatteriesCollision();
 	
+	drone();
 	energybar();
+	
 
 	if (CharacterData.bHasRecentlyJumped)
 	{
@@ -120,7 +124,6 @@ void game_update(void)
 	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);
 	CP_Font_DrawText(ScoreBuffer, 0.f, GameData.LaneMax.y);
 
-	
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function
