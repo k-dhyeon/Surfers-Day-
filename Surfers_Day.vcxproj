@@ -206,7 +206,8 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClCompile Include="GlobalVariables.c" />
     <ClCompile Include="IntroScene.c" />
     <ClCompile Include="Item.c" />
-    <ClCompile Include="ScoreBorad.c" />
+    <ClCompile Include="RankMenu.c" />
+    <ClCompile Include="ScoreBoard.c" />
     <ClInclude Include="AssetLib.h" />
     <ClInclude Include="BGM.h" />
     <ClInclude Include="BigWave.h" />
@@ -225,7 +226,8 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyInput.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="ScoreBorad.h" />
+    <ClInclude Include="RankMenu.h" />
+    <ClInclude Include="ScoreBoard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

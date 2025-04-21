@@ -5,7 +5,7 @@
 #include <string.h>
 #include "Game.h"
 #include "GlobalVariables.h"
-#include "ScoreBorad.h"
+#include "ScoreBoard.h"
 
 #define MAX_ENTRIES 150
 #define FILENAME "leaderboard.sav"

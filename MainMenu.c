@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "Game.h"
 #include "BGM.h"
+#include "RankMenu.h"
 
 float WindowCenterX;
 float WindowCenterY;
@@ -15,10 +16,11 @@ float QuitButtonPosY;
 float RankButtonPosX;
 float RankButtonPosY;
 
-
+CP_Image BackGround;
 
 void MainMenuInit(void)
 {
+	BackGround = CP_Image_Load("./Assets/Background.png");
 	CP_System_SetWindowSize(1600, 900);
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	CP_Settings_RectMode(CP_POSITION_CORNER);
@@ -38,6 +40,7 @@ void MainMenuInit(void)
 void MainMenuUpdate(void)
 {
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 128, 255));
+	CP_Image_Draw(BackGround, 0,0, (float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight(),255);
 	CP_Settings_TextSize(38.f);
 	//StartButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
@@ -63,7 +66,7 @@ void MainMenuUpdate(void)
 
 void MainMenuExit(void)
 {
-
+	StopMainMenuBGM();
 }
 
 void UpdateMainMenuKeyInput(void)
@@ -91,8 +94,7 @@ void UpdateMainMenuKeyInput(void)
 			MousePosY >= RankButtonPosY &&
 			MousePosY <= RankButtonPosY + ButtonSizeY)
 		{
-			int a = 0;
-			a++;
+			CP_Engine_SetNextGameState(RankMenuInit, RankMenuUpdate, RankMenuExit);
 		}
 
 	}

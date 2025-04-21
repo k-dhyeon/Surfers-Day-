@@ -33,7 +33,10 @@ void UpdateWave()
 			if (BigWaveData.WaveIndex > 5)
 			{
 				RemoveWave();
-				CharacterData.CharacterState = STANDING;
+				if (CharacterData.CharacterState == WAVING)
+				{
+					SetCharacterState(ENDWAVE);
+				}
 
 			}
 			//DEBUG
@@ -51,7 +54,10 @@ void UpdateWave()
 				if (BigWaveData.WaveIndex > 3.f)
 				{
 					BigWaveData.bIsRiderable = false;
-					CharacterData.CharacterState = STANDING;
+					if (CharacterData.CharacterState == WAVING)
+					{
+						SetCharacterState(ENDWAVE);
+					}
 				}
 			}
 			
@@ -81,15 +87,24 @@ void CheckRideWave()
 	{
 		if (CharacterData.CharacterPos.y <= 0.f)
 		{
-			CharacterData.CharacterState = RIDEWAVE;
+			if (CharacterData.CharacterState == STANDING && BigWaveData.bIsRiderable)
+			{
+				SetCharacterState(STARTWAVE);
+			}
 		}
 		else
 		{
-			CharacterData.CharacterState = STANDING;
+			if (CharacterData.CharacterState == WAVING)
+			{
+				SetCharacterState(ENDWAVE);
+			}
 		}
 	}
 	else
 	{
-		CharacterData.CharacterState = STANDING;
+		if (CharacterData.CharacterState == WAVING)
+		{
+			SetCharacterState(ENDWAVE);
+		}
 	}
 }

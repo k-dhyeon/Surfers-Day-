@@ -7,7 +7,7 @@
 #include "FlowBackGround.h"
 #include "stdio.h"
 #include "MainMenu.h"
-#include "ScoreBorad.h"
+#include "ScoreBoard.h"
 #include "Item.h"
 #include "BigWave.h"
 #include "BGM.h"
@@ -55,16 +55,16 @@ void game_update(void)
 	energybar();
 	
 
-	if (CharacterData.bHasRecentlyJumped)
+	if (CharacterData.CharacterState == JUMPDOWN)
 	{
 		//Debug
 		CP_Settings_Fill(CP_Color_Create(128, 128, 128, 128));
 		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
 		CharacterData.JumpTimer += CP_System_GetDt();
-		if (CharacterData.JumpTimer > 1.5f)
-		{
-			CharacterData.bHasRecentlyJumped = false;
-		}
+		//if (CharacterData.JumpTimer > 1.5f)
+		//{
+		//	SetCharacterState(STANDING);
+		//}
 	}
 	if (CharacterData.JumpTimer != 0.f)//TODO : nearly 0
 	{
@@ -74,14 +74,14 @@ void game_update(void)
 			CharacterData.JumpTimer = 0.f;
 		}
 	}
-	if (CharacterData.bHasRecentlyCollided)
+	if (CharacterData.CharacterState == COLLISION)
 	{
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 128));
 		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
 		CharacterData.CollisionTimer += CP_System_GetDt();
 		if (CharacterData.CollisionTimer > 3.f)
 		{
-			CharacterData.bHasRecentlyCollided = false;
+			SetCharacterState(STANDING);
 			CharacterData.CollisionTimer = 0.f;
 		}
 	}
@@ -103,8 +103,7 @@ void game_update(void)
 			}
 			else
 			{
-				int a = 0;
-				a++;
+				//TESTONLY
 			}
 		}
 	}
@@ -118,7 +117,7 @@ void game_update(void)
 
 	//TEST
 	char buffer[128] = { 0 };
-	if (CharacterData.bHasRecentlyJumped)
+	if (CharacterData.CharacterState == JUMPUP || CharacterData.CharacterState == JUMPDOWN)
 	{
 		sprintf_s(buffer, 128, "Jumped Reset Timer : %f", CharacterData.JumpTimer);
 	}

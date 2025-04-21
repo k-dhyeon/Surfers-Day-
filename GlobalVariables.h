@@ -18,6 +18,8 @@ extern FBatteryData Batteries[];
 
 extern FBigWaveData BigWaveData;
 
+extern float InitGameSpeed;
+
 void InitGameData();
 
 void InitCharacterData();
@@ -27,3 +29,5 @@ void InitObstacles();
 void InitItemData();
 
 void InitBigWaveData();
+
+void SetCharacterState(ECharacterState NewState);

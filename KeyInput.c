@@ -13,7 +13,14 @@ bool bIsRightPressed=false;
 
 void UpdateKeyInput()
 {
-
+	if (CharacterData.CharacterState == STARTWAVE || CharacterData.CharacterState == ENDWAVE)
+	{
+		bIsLeftPressed = false;
+		bIsRightPressed = false;
+		bIsForwardPressed = false;
+		bIsBackwardPressed = false;
+		return;
+	}
 	if (CP_Input_KeyDown(KEY_W))//Move Left
 	{
 		bIsLeftPressed = true;
@@ -51,7 +58,7 @@ void UpdateKeyInput()
 	{
 		if (CharacterData.JumpTimer == 0.f)
 		{
-			CharacterData.bHasRecentlyJumped = true;
+			SetCharacterState(JUMPUP);
 			CharacterData.ComboIndex = 0;
 			for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
 			{
@@ -59,7 +66,7 @@ void UpdateKeyInput()
 			}
 		}
 	}
-	if (CharacterData.bHasRecentlyJumped)
+	if (CharacterData.CharacterState == JUMPUP || CharacterData.CharacterState == JUMPDOWN)
 	{
 		if (CP_Input_KeyTriggered(KEY_W))//Move Left
 		{

@@ -36,7 +36,7 @@ void UpdateObstaclesPosition()
 	if (LastSpawnDeltaTime >= CurrentDelay)
 	{
 		AddObstacle();
-		CurrentDelay = CP_Random_RangeFloat(MinDelay, MaxDelay);
+		CurrentDelay = CP_Random_RangeFloat(MinDelay, GameData.Speed>1000 ? MaxDelay/2.f: MaxDelay);
 		LastSpawnDeltaTime = 0.f;
 	}
 	
@@ -57,14 +57,15 @@ void UpdateObstaclesPosition()
 	}
 	if (CheckObstaclesCollision())
 	{
-		CharacterData.bHasRecentlyCollided = true;
+		SetCharacterState(COLLISION);
 		CharacterData.CollisionTimer = 0.f;
+		GameData.Speed = InitGameSpeed + (GameData.Speed - InitGameSpeed)/2.f;
 	}
 }
 
 bool CheckObstaclesCollision()
 {
-	if (!CharacterData.bHasRecentlyJumped && !CharacterData.bHasRecentlyCollided && CharacterData.CharacterState == STANDING)
+	if (CharacterData.CharacterState == STANDING)
 	{
 		float CharacterMinX = CharacterData.CharacterPos.x;
 		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x;
@@ -168,12 +169,39 @@ void RenderCharacter_Internal()
 {
 	//RenderCharacter
 	CharacterData.AnimationTimer += CP_System_GetDt();
-	if (CharacterData.AnimationTimer > 0.3f)
+	if (CharacterData.AnimationTimer > 0.5f)
 	{
-		if (CharacterData.AnimationFrame == 6)
+		if (CharacterData.AnimationFrame == CharacterData.AnimationMaxFrame)
 		{
-			CharacterData.AnimationFrame = 0;
-			CharacterData.AnimationTimer = 0.f;
+			if (CharacterData.CharacterState == JUMPUP)
+			{
+				SetCharacterState(JUMPDOWN);
+			}
+			else if (CharacterData.CharacterState == COMBO1)
+			{
+				SetCharacterState(JUMPDOWN);
+			}
+			else if (CharacterData.CharacterState == COMBO2)
+			{
+				SetCharacterState(JUMPDOWN);
+			}
+			else if (CharacterData.CharacterState == JUMPDOWN)
+			{
+				SetCharacterState(STANDING);
+			}
+			else if (CharacterData.CharacterState == STARTWAVE)
+			{
+				SetCharacterState(WAVING);
+			}
+			else if (CharacterData.CharacterState == ENDWAVE)
+			{
+				SetCharacterState(STANDING);
+			}
+			else
+			{
+				CharacterData.AnimationFrame = 0;
+				CharacterData.AnimationTimer = 0.f;
+			}
 		}
 		else
 		{
@@ -181,14 +209,23 @@ void RenderCharacter_Internal()
 			CharacterData.AnimationTimer = 0.f;
 		}
 	}
-	CP_Image_DrawSubImage(CharacterData.CharacterImage, GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y, CharacterData.CharaterDrawSize.x, CharacterData.CharaterDrawSize.y, 100.f * CharacterData.AnimationFrame, 0.f, 100.f * (CharacterData.AnimationFrame+1), 100.f, 255);
+	CP_Image_DrawSubImage(CharacterData.CharacterImage,
+		GameData.LaneMin.x + CharacterData.CharacterPos.x,
+		GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y,
+		CharacterData.CharaterDrawSize.x,
+		CharacterData.CharaterDrawSize.y,
+		100.f * CharacterData.AnimationFrame,
+		100.f * CharacterData.CharacterState,
+		100.f * (CharacterData.AnimationFrame+1),
+		100.f * (CharacterData.CharacterState + 1),
+		255);
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
 }
 
 void RenderObjects()
 {
-	if (CharacterData.bHasRecentlyCollided || CharacterData.bHasRecentlyJumped)
+	if (CharacterData.CharacterState == COLLISION || CharacterData.CharacterState == JUMPUP || CharacterData.CharacterState == JUMPDOWN)
 	{
 		CP_Settings_Fill(CP_Color_Create(255, 255, 0, 255));
 		for (int i = 0;i < MAX_OBSTACLES; i++)
@@ -328,10 +365,18 @@ void SetObstacleByRandom(int Index)
 	default:
 		break;
 	}
-	
-	float RandomY = CP_Random_RangeFloat(0.f, GameData.LaneMax.y - GameData.LaneMin.y - Obstacles[Index].ObstacleImageSize.y);
-	Obstacles[Index].ObstaclePos = CP_Vector_Set(GameData.LaneMax.x, RandomY);
+	if (CP_Random_RangeInt(0,4) < 1)//20%
+	{
+		float CharacterPosCenterY = CharacterData.CharacterPos.y + CharacterData.CharacterCollisionSize.y/2.f;
+		CharacterPosCenterY -= Obstacles[Index].ObstacleCollisionSize.y/2.f;
+		CharacterPosCenterY -= Obstacles[Index].ObstacleCollisionStartOffset.y;
+		Obstacles[Index].ObstaclePos = CP_Vector_Set(GameData.LaneMax.x, CharacterPosCenterY);
+	}
+	else
+	{
+		float RandomY = CP_Random_RangeFloat(-Obstacles[Index].ObstacleCollisionStartOffset.y, GameData.LaneMax.y - GameData.LaneMin.y - Obstacles[Index].ObstacleCollisionSize.y - Obstacles[Index].ObstacleCollisionStartOffset.y);
+		Obstacles[Index].ObstaclePos = CP_Vector_Set(GameData.LaneMax.x, RandomY);
+	}
 	SortObstacles();
 }
-
 

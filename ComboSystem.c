@@ -15,7 +15,18 @@ void CheckCombo()
 	{
 		if (strstr(CharacterData.ComboCommand, ComboArr[i]) != NULL)
 		{
-			//TODO : COMBO
+			switch (i)
+			{
+			case 0 :
+				CharacterData.CharacterState = COMBO1;
+				break;
+			case 1:
+				CharacterData.CharacterState = COMBO2;
+				break;
+			default:
+				break;
+			}
+			
 			for (int j = 0; j < COMBO_COMMAND_LENGTH; j++)
 			{
 				CharacterData.ComboCommand[j] = '\0';

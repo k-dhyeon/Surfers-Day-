@@ -7,8 +7,15 @@
 #define COMBO_COMMAND_LENGTH 5
 
 typedef enum ECharacterState {
-	STANDING = 0,
-	RIDEWAVE = 1,
+	STANDING = 0,		//Image num 2
+	JUMPUP = 1,			//Image num 2
+	JUMPDOWN = 2,		//Image num 2
+	COLLISION = 3,		//Image num 2
+	STARTWAVE = 4,		//Image num 2
+	WAVING = 5,			//Image num 2
+	ENDWAVE = 6,		//Image num 2
+	COMBO1 = 7,			//Image num 2
+	COMBO2 = 8,			//Image num 2
 }ECharacterState;
 
 typedef enum ECharacterComboState {
@@ -33,14 +40,13 @@ typedef struct FCharacterData {
 	CP_Vector CharacterPos;
 	CP_Vector CharaterDrawSize;
 	int AnimationFrame;
+	int AnimationMaxFrame;
 	CP_Image CharacterImage;
 	float AnimationTimer;
 	ECharacterState CharacterState;
-	bool bHasRecentlyJumped;
 	float JumpTimer;
 	CP_Vector CharacterCollisionSize;
 	float Energy;
-	bool bHasRecentlyCollided;
 	float CollisionTimer;
 	double Score;
 	//Combo
