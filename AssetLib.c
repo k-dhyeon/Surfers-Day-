@@ -21,8 +21,14 @@ void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/Ikoliks - Ride the Wave.mp3");
 	MainMenuBGM = CP_Sound_LoadMusic("./Assets/Raz Burg - Sunlight - Instrumental Version.mp3");
-	SeaAnimationData.SeaImage[0] = CP_Image_Load("./Assets/Sea.png");
+	
+	SFXBatteryRecharge = CP_Sound_Load("./Assets/GetBatterySFX.mp3");
+	SFXJump = CP_Sound_Load("./Assets/JumpSFX.mp3");
+	SFXCollision = CP_Sound_Load("./Assets/Collision.mp3");
+	SFXCombo = CP_Sound_Load("./Assets/ComboSFX.mp3");
 
+	SeaAnimationData.SeaImage[0] = CP_Image_Load("./Assets/Sea.png");
+	
 
 	TurtleData.ObstacleImage = CP_Image_Load("./Assets/Turtle.png");
 	TurtleData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);

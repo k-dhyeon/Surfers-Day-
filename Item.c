@@ -1,6 +1,6 @@
 #include "Item.h"
 #include "cprocessing.h"
-
+#include "BGM.h"
 
 float LastSpawnBatteryDeltaTime = 0.f;
 float CurrentBatterySpawnDelay = 0.f;
@@ -62,7 +62,7 @@ void RemoveBattery(int RemoveIndex)
 void CheckBatteriesCollision()
 {
 	float CharacterMinX = CharacterData.CharacterPos.x;
-	float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x;
+	float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x;
 	float CharacterMinY = CharacterData.CharacterPos.y;
 	float CharacterMaxY = CharacterMinY + CharacterData.CharacterCollisionSize.y;
 	for (int i = 0;i < MAX_BATTERIES;i++)
@@ -81,6 +81,7 @@ void CheckBatteriesCollision()
 				RemoveBattery(i);
 				CharacterData.Score += Batteries[i].Energy;
 				CharacterData.Energy += Batteries[i].Energy;
+				PlaySFXBatteryRecharge();
 			}
 		}
 	}

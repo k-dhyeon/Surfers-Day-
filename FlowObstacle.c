@@ -4,6 +4,7 @@
 #include "Math.h"
 #include "stdlib.h"
 #include "AssetLib.h"
+#include "BGM.h"
 
 float LastSpawnDeltaTime = 0.f;
 float CurrentDelay = 0.f;
@@ -58,6 +59,7 @@ void UpdateObstaclesPosition()
 	if (CheckObstaclesCollision())
 	{
 		SetCharacterState(COLLISION);
+		PlaySFXCollision();
 		CharacterData.CollisionTimer = 0.f;
 		GameData.Speed = InitGameSpeed + (GameData.Speed - InitGameSpeed)/2.f;
 	}
@@ -67,8 +69,8 @@ bool CheckObstaclesCollision()
 {
 	if (CharacterData.CharacterState == STANDING)
 	{
-		float CharacterMinX = CharacterData.CharacterPos.x;
-		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x;
+		float CharacterMinX = CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x;
+		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x;
 		float CharacterMinY = CharacterData.CharacterPos.y;
 		float CharacterMaxY = CharacterMinY + CharacterData.CharacterCollisionSize.y;
 		for (int i = 0;i < MAX_OBSTACLES;i++)
@@ -96,21 +98,21 @@ bool CheckObstaclesCollision()
 
 void BounceCollisionDirection(int Index)
 {
-	float CharacterCenterX = CharacterData.CharacterPos.x + CharacterData.CharacterCollisionSize.x;
+	float CharacterCenterX = CharacterData.CharacterPos.x + CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x;
 	float CharacterCenterY = CharacterData.CharacterPos.y + CharacterData.CharacterCollisionSize.y;
 	float ObstacleCenterX = Obstacles[Index].ObstaclePos.x + Obstacles[Index].ObstacleCollisionSize.x;
 	float ObstacleCenterY = Obstacles[Index].ObstaclePos.y + Obstacles[Index].ObstacleCollisionSize.y;
 	float DeltaX = CharacterCenterX - ObstacleCenterX;
 	float DeltaY = CharacterCenterY - ObstacleCenterY;
-	float intersectX = (CharacterData.CharacterCollisionSize.x + Obstacles[Index].ObstacleCollisionSize.x) / 2 - fabsf(DeltaX);
+	float intersectX = (CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x + Obstacles[Index].ObstacleCollisionSize.x) / 2 - fabsf(DeltaX);
 	float intersectY = (CharacterData.CharacterCollisionSize.y + Obstacles[Index].ObstacleCollisionSize.y) / 2 - fabsf(DeltaY);
 	if (intersectX < intersectY)
 	{
 		if (DeltaX > 0)
 		{
-			if (CharacterData.CharacterPos.x + BounceAmount > GameData.LaneMax.x - CharacterData.CharacterCollisionSize.x)
+			if (CharacterData.CharacterPos.x + BounceAmount > GameData.LaneMax.x - CharacterData.CharacterCollisionSize.x - CharacterData.CharacterCollisionOffset.x)
 			{
-				CharacterData.CharacterPos.x = GameData.LaneMax.x - CharacterData.CharacterCollisionSize.x;
+				CharacterData.CharacterPos.x = GameData.LaneMax.x - CharacterData.CharacterCollisionSize.x - CharacterData.CharacterCollisionOffset.x;
 			}
 			else
 			{
@@ -219,8 +221,8 @@ void RenderCharacter_Internal()
 		100.f * (CharacterData.AnimationFrame+1),
 		100.f * (CharacterData.CharacterState + 1),
 		255);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 100));
+	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
 }
 
 void RenderObjects()

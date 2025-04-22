@@ -4,6 +4,7 @@
 #include "cprocessing.h"
 #include "GlobalVariables.h"
 #include "ComboSystem.h"
+#include "BGM.h"
 
 float MovementSpeed = 100.f;
 bool bIsForwardPressed = false;
@@ -56,13 +57,17 @@ void UpdateKeyInput()
 
 	if (CP_Input_KeyTriggered(KEY_SPACE))//Jump?
 	{
-		if (CharacterData.JumpTimer == 0.f)
+		if (CharacterData.CharacterState != WAVING && CharacterData.CharacterState != STARTWAVE && CharacterData.CharacterState != ENDWAVE)
 		{
-			SetCharacterState(JUMPUP);
-			CharacterData.ComboIndex = 0;
-			for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
+			if (CharacterData.JumpTimer == 0.f)
 			{
-				CharacterData.ComboCommand[i] = '\0';
+				PlaySFXJump();
+				SetCharacterState(JUMPUP);
+				CharacterData.ComboIndex = 0;
+				for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
+				{
+					CharacterData.ComboCommand[i] = '\0';
+				}
 			}
 		}
 	}
@@ -115,7 +120,7 @@ void UpdateKeyInput()
 
 bool CheckForwardLaneCollision()
 {
-	if (CharacterData.CharacterPos.x + CharacterData.CharacterCollisionSize.x < GameData.LaneMax.x)
+	if (CharacterData.CharacterPos.x + CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x < GameData.LaneMax.x)
 	{
 		return true;
 	}

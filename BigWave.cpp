@@ -7,18 +7,19 @@ void BeginWave()
 	BigWaveData.AnimationTimer = 0.f;
 	BigWaveData.WaveIndex = 0;
 	BigWaveData.RiderableTime = CP_Random_RangeFloat(10.f,20.f);
+	BigWaveData.WaveMaxIndex = 7;
 }
 
 void UpdateWave()
 {
 	if (BigWaveData.bIsValid)
 	{
-		float ImageSizeX = (float)CP_Image_GetWidth(BigWaveData.WaveImage[0]);
-		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage[0]);
+		float ImageSizeX = (float)CP_Image_GetWidth(BigWaveData.WaveImage);
+		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage);
 		BigWaveData.AnimationTimer += CP_System_GetDt();
 		if (!BigWaveData.bIsRiderable)
 		{
-			CP_Image_DrawSubImage(BigWaveData.WaveImage[0], 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / 6 * BigWaveData.WaveIndex, 0, ImageSizeX / 6 * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
+			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
 			
 			
 			if (BigWaveData.AnimationTimer > 5.f)
@@ -26,11 +27,11 @@ void UpdateWave()
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;
 			}
-			if (BigWaveData.WaveIndex > 1 && BigWaveData.WaveIndex < 4)
+			if (BigWaveData.WaveIndex >= BigWaveData.WaveRiderableStartIndex && BigWaveData.WaveIndex <= BigWaveData.WaveRiderableEndIndex)
 			{
 				BigWaveData.bIsRiderable = true;
 			}
-			if (BigWaveData.WaveIndex > 5)
+			if (BigWaveData.WaveIndex > BigWaveData.WaveMaxIndex)
 			{
 				RemoveWave();
 				if (CharacterData.CharacterState == WAVING)
@@ -45,13 +46,13 @@ void UpdateWave()
 		}
 		else
 		{
-			CP_Image_DrawSubImage(BigWaveData.WaveImage[0], 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / 6 * BigWaveData.WaveIndex, 0, ImageSizeX / 6 * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
+			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
 			
 			if (BigWaveData.AnimationTimer > 5.f)
 			{
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;
-				if (BigWaveData.WaveIndex > 3.f)
+				if (BigWaveData.WaveIndex > BigWaveData.WaveRiderableEndIndex)
 				{
 					BigWaveData.bIsRiderable = false;
 					if (CharacterData.CharacterState == WAVING)

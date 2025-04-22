@@ -3,7 +3,6 @@
 #include "stdbool.h"
 
 #define SEA_IMAGE_NUM 1
-#define WAVE_IMAGE_NUM 1
 #define COMBO_COMMAND_LENGTH 5
 
 typedef enum ECharacterState {
@@ -45,6 +44,7 @@ typedef struct FCharacterData {
 	float AnimationTimer;
 	ECharacterState CharacterState;
 	float JumpTimer;
+	CP_Vector CharacterCollisionOffset;
 	CP_Vector CharacterCollisionSize;
 	float Energy;
 	float CollisionTimer;
@@ -53,6 +53,7 @@ typedef struct FCharacterData {
 	int ComboIndex;
 	char ComboCommand[COMBO_COMMAND_LENGTH];
 	ECharacterComboState ComboState;
+	CP_Vector HandOffset;
 }FCharacterData;
 
 typedef struct FObstacleData {
@@ -92,10 +93,13 @@ typedef struct FSeaAnimationData {
 typedef struct FBigWaveData {
 	bool bIsValid;
 	bool bIsRiderable;
-	CP_Image WaveImage[WAVE_IMAGE_NUM];
+	CP_Image WaveImage;
 	CP_Vector WaveImageSize;
 	float AnimationTimer;
 	int WaveIndex;
+	int WaveMaxIndex;
+	int WaveRiderableStartIndex;
+	int WaveRiderableEndIndex;
 	float RiderableTime;
 	float WaveETA;
 }FBigWaveData;
