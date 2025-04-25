@@ -1,6 +1,8 @@
 #include "BigWave.h"
 #include "cprocessing.h"
 #include "stdio.h"
+
+float AnimationNextTime = 2.f;
 void BeginWave()
 {
 	BigWaveData.bIsValid = true;
@@ -16,12 +18,13 @@ void UpdateWave()
 		float ImageSizeX = (float)CP_Image_GetWidth(BigWaveData.WaveImage);
 		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage);
 		BigWaveData.AnimationTimer += CP_System_GetDt();
+		float DrawOffsetY = BigWaveData.WaveIndex < BigWaveData.WaveMaxIndex / 2 ? BigWaveData.WaveImageSize.y/4.f * (AnimationNextTime - BigWaveData.AnimationTimer) / AnimationNextTime : BigWaveData.WaveImageSize.y / 4.f * (BigWaveData.AnimationTimer)/ AnimationNextTime;
 		if (!BigWaveData.bIsRiderable)
 		{
-			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
+			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y + DrawOffsetY, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
 			
 			
-			if (BigWaveData.AnimationTimer > 1.f)
+			if (BigWaveData.AnimationTimer > AnimationNextTime)
 			{
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;
@@ -45,9 +48,9 @@ void UpdateWave()
 		}
 		else
 		{
-			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
+			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y + DrawOffsetY, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
 			
-			if (BigWaveData.AnimationTimer > 1.f)
+			if (BigWaveData.AnimationTimer > AnimationNextTime)
 			{
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;

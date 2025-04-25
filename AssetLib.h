@@ -5,13 +5,14 @@
 
 
 #define OBSTACLE_NUM 10
+#define MAX_SEAGULL_NUM 5
 extern FSeaAnimationData SeaAnimationData;
 
 extern FFarBackGroundImageAnimationData SkyAnimationData;
 
-extern FFarBackGroundImageAnimationData BridgeAnimationData;
-extern FFarBackGroundImageAnimationData CityAnimationData;
+extern FFarBackGroundImageAnimationData FarBackgroundAnimationData;
 
+extern FFarBackGroundImageAnimationData SeaGullAnimationData[];
 
 extern FObstacleData TurtleData;
 extern FObstacleData BoxData;

@@ -171,7 +171,7 @@ void RenderCharacter_Internal()
 {
 	//RenderCharacter
 	CharacterData.AnimationTimer += CP_System_GetDt();
-	if (CharacterData.AnimationTimer > 0.5f)
+	if (CharacterData.AnimationTimer > 0.3f)
 	{
 		if (CharacterData.AnimationFrame == CharacterData.AnimationMaxFrame)
 		{
@@ -211,15 +211,16 @@ void RenderCharacter_Internal()
 			CharacterData.AnimationTimer = 0.f;
 		}
 	}
+	float CharacterDrawRatio = 0.8f + 0.2f * (CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y));
 	CP_Image_DrawSubImage(CharacterData.CharacterImage,
-		GameData.LaneMin.x + CharacterData.CharacterPos.x,
-		GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y,
-		CharacterData.CharaterDrawSize.x,
-		CharacterData.CharaterDrawSize.y,
-		100.f * CharacterData.AnimationFrame ,//+ 1,
-		100.f * CharacterData.CharacterState ,//+ 1,
-		100.f * (CharacterData.AnimationFrame+1),// - 1,
-		100.f * (CharacterData.CharacterState + 1),// - 1,
+		GameData.LaneMin.x + CharacterData.CharacterPos.x + (CharacterData.CharaterDrawSize.x * (1 - CharacterDrawRatio) /2.f),
+		GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y + (CharacterData.CharaterDrawSize.y * (1 - CharacterDrawRatio)),
+		CharacterData.CharaterDrawSize.x * CharacterDrawRatio,
+		CharacterData.CharaterDrawSize.y * CharacterDrawRatio,
+		100.f * CharacterData.AnimationFrame + 1,
+		100.f * CharacterData.CharacterState + 1,
+		100.f * (CharacterData.AnimationFrame+1) - 1,
+		100.f * (CharacterData.CharacterState + 1) - 1,
 		255);
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 100));
 	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);

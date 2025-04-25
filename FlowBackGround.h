@@ -3,8 +3,8 @@
 
 void DrawWater();
 
-void DraawSkyBackGround();
+void DrawSkyBackGround();
 
 void DrawFarBackGround();
-
+void DrawBackGroundSeaGull();
 void DrawNearBackGround();

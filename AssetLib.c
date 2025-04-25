@@ -1,12 +1,15 @@
 #include "AssetLib.h"
 #include "BGM.h"
+#include "GlobalVariables.h"
+
 
 FSeaAnimationData SeaAnimationData;
 
 FFarBackGroundImageAnimationData SkyAnimationData;
 
-FFarBackGroundImageAnimationData BridgeAnimationData;
-FFarBackGroundImageAnimationData CityAnimationData;
+FFarBackGroundImageAnimationData FarBackgroundAnimationData;
+
+FFarBackGroundImageAnimationData SeaGullAnimationData[MAX_SEAGULL_NUM];
 
 FObstacleData TurtleData;
 FObstacleData BoxData;
@@ -35,7 +38,23 @@ void InitAsset()
 	SFXCombo = CP_Sound_Load("./Assets/ComboSFX.mp3");
 
 	SeaAnimationData.SeaImage = CP_Image_Load("./Assets/Sea.png");
-	BridgeAnimationData.Image = CP_Image_Load("./Assets/LandScape.png");
+
+	SkyAnimationData.Image = CP_Image_Load("./Assets/Sky.png");
+	SkyAnimationData.Position = CP_Vector_Set(0.f, 0.f);
+
+	FarBackgroundAnimationData.Image = CP_Image_Load("./Assets/LandScape.png");
+	FarBackgroundAnimationData.Position = CP_Vector_Set((float)CP_System_GetWindowWidth(), GameData.LaneMin.y - (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image) * 10.f);
+
+	for (int i = 0;i < MAX_SEAGULL_NUM; i++)
+	{
+		SeaGullAnimationData[i].Image = CP_Image_Load("./Assets/SeaGull.png");
+		SeaGullAnimationData[i].Timer = CP_Random_RangeFloat(0.f,2.f);
+		SeaGullAnimationData[i].Index = CP_Random_RangeInt(0,4);
+		SeaGullAnimationData[i].Position.x = CP_Random_RangeFloat((float)CP_System_GetWindowWidth(), CP_System_GetWindowWidth() + 1600.f);
+		SeaGullAnimationData[i].Position.y = CP_Random_RangeFloat(100.f, CP_System_GetWindowHeight() / 2.f - 150.f);
+		SeaGullAnimationData[i].PlayRatio = CP_Random_RangeFloat(0.4f, 2.f);
+	}
+	
 
 	TurtleData.ObstacleImage = CP_Image_Load("./Assets/Turtle.png");
 	TurtleData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);

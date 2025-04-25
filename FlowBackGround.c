@@ -58,32 +58,63 @@ void DrawWater()
 }
 */
 
-void DraawSkyBackGround()
+void DrawSkyBackGround()
 {
-    
+    SkyAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed / 60.f;
+    float imageWidth = (float)CP_Image_GetWidth(SkyAnimationData.Image);
+    float imageHeight = (float)CP_Image_GetHeight(SkyAnimationData.Image);
+    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
+    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
+    if (SkyAnimationData.Position.x < -imageWidth)
+    {
+        SkyAnimationData.Position.x = (float)CP_System_GetWindowWidth();
+    }
 }
 void DrawFarBackGround()
 {
-    BridgeAnimationData.AnimationTimer += CP_System_GetDt();
-    if (BridgeAnimationData.AnimationTimer > 0.3f)
-    {
-        if (BridgeAnimationData.Index == 1)
-        {
-            BridgeAnimationData.Index = 0;
-            BridgeAnimationData.AnimationTimer = 0.f;
-        }
-        else
-        {
-            BridgeAnimationData.Index++;
-            BridgeAnimationData.AnimationTimer = 0.f;
-        }
-    }
-    //float imageWidth = (float)CP_Image_GetWidth(BridgeAnimationData.Image);
-    float imageHeight = (float)CP_Image_GetHeight(BridgeAnimationData.Image);
-    CP_Image_Draw(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, 255);
+    FarBackgroundAnimationData.Position.x -= CP_System_GetDt()*GameData.Speed/30.f;
+    float imageWidth = (float)CP_Image_GetWidth(FarBackgroundAnimationData.Image) * 10.f;
+    float imageHeight = (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image) * 10.f;
+    CP_Image_Draw(FarBackgroundAnimationData.Image, FarBackgroundAnimationData.Position.x, FarBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
     //CP_Image_DrawSubImage(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, (imageWidth / 2.f) * SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f) * (SeaAnimationData.SeaIndex + 1), imageHeight, 255);
  
+    if (FarBackgroundAnimationData.Position.x < -imageWidth)
+    {
+        FarBackgroundAnimationData.Position.x = (float)CP_System_GetWindowWidth();
+    }
+}
 
+void DrawBackGroundSeaGull()
+{
+    for (int i = 0; i < MAX_SEAGULL_NUM; i++)
+    {
+        SeaGullAnimationData[i].Timer += CP_System_GetDt()* SeaGullAnimationData[i].PlayRatio;
+        SeaGullAnimationData[i].Position.x -= CP_System_GetDt() * GameData.Speed / 5.f * SeaGullAnimationData[i].PlayRatio;
+        float imageWidth = (float)CP_Image_GetWidth(SeaGullAnimationData[i].Image) / 5.f;
+        float imageHeight = (float)CP_Image_GetHeight(SeaGullAnimationData[i].Image);
+        CP_Image_DrawSubImage(SeaGullAnimationData[i].Image, SeaGullAnimationData[i].Position.x, SeaGullAnimationData[i].Position.y, imageWidth, imageHeight, imageWidth * SeaGullAnimationData[i].Index, 0.f, imageWidth * (SeaGullAnimationData[i].Index + 1), imageHeight, 255);
+
+        if (SeaGullAnimationData[i].Timer > 1.f)
+        {
+            if (SeaGullAnimationData[i].Index == 4)
+            {
+                SeaGullAnimationData[i].Index = 0;
+            }
+            else
+            {
+                SeaGullAnimationData[i].Index++;
+            }
+            SeaGullAnimationData[i].Timer = 0.f;
+        }
+
+        if (SeaGullAnimationData[i].Position.x < -imageWidth)
+        {
+            SeaGullAnimationData[i].Position.x = CP_Random_RangeFloat((float)CP_System_GetWindowWidth(), CP_System_GetWindowWidth() + 1600.f);
+            SeaGullAnimationData[i].Position.y = CP_Random_RangeFloat(100.f, CP_System_GetWindowHeight()/2.f - 150.f);
+            SeaGullAnimationData[i].PlayRatio = CP_Random_RangeFloat(0.4f, 2.f);
+        }
+    }
+   
 }
 
 void DrawNearBackGround()

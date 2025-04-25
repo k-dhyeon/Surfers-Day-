@@ -40,10 +40,13 @@ void game_update(void)
 {
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
+	DrawSkyBackGround();
 	DrawFarBackGround();
+	DrawBackGroundSeaGull();
+	UpdateWave();
 	DrawWater();
 //	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
-	UpdateWave();
+	
 	RenderObjects();
 	UpdateKeyInput();
 	UpdateCharacterPosition();

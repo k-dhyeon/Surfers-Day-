@@ -91,8 +91,10 @@ typedef struct FSeaAnimationData {
 
 typedef struct FFarBackGroundImageAnimationData {
 	CP_Image Image;
-	float AnimationTimer;
+	CP_Vector Position;//TopLeft
+	float Timer;
 	int Index;
+	float PlayRatio;
 }FFarBackGroundImageAnimationData;
 
 typedef struct FBigWaveData {

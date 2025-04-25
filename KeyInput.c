@@ -67,7 +67,7 @@ void UpdateKeyInput()
 
 	if (CP_Input_KeyTriggered(KEY_SPACE))//Jump?
 	{
-		if (CharacterData.CharacterState != WAVING && CharacterData.CharacterState != STARTWAVE && CharacterData.CharacterState != ENDWAVE)
+		if (CharacterData.CharacterState == STANDING)
 		{
 			if (CharacterData.JumpTimer == 0.f)
 			{
@@ -123,7 +123,6 @@ void UpdateKeyInput()
 	{
 		CharacterData.Energy = 0.f;
 	}
-
 }
 
 

@@ -5,14 +5,13 @@
 #include "stdlib.h"
 
 #define PI 3.14159265
-#define SCREEN_WIDTH dronePosx + 50
-#define SCREEN_HEIGHT dronePosy
+
 
 float Angle = 0.f;
 float Radius = 5.f;
 float dronePosx;
 float dronePosy;
-
+float DraneSizeAlpha;
 float DroneOffsetX = 0.f;
 float DroneOffsetY = 0.f;
 float DronePositionYtoXMaxOffset = 100.f;
@@ -34,10 +33,10 @@ void drone()
 {
     float DeltaDronePosX = targetPosition.x - CharacterData.CharacterPos.x;
     float DeltaDronePosY = targetPosition.y - CharacterData.CharacterPos.y;
-    float Alpha = (CharacterData.CharacterPos.y) / (GameData.LaneMax.y - GameData.LaneMin.y);
+    DraneSizeAlpha = (CharacterData.CharacterPos.y) / (GameData.LaneMax.y - GameData.LaneMin.y);
 
 	dronePosx = CharacterData.CharacterPos.x + DeltaDronePosX + 570.f;
-    dronePosx += DronePositionYtoXMaxOffset * -Alpha;
+    dronePosx += DronePositionYtoXMaxOffset * -DraneSizeAlpha;
 	dronePosy = CharacterData.CharacterPos.y + DeltaDronePosY + 30.f;
 	dronePosy *= 2.f;
     if (dronePosy > CP_System_GetWindowHeight())
@@ -69,7 +68,7 @@ void drone()
     dronePosy += DroneOffsetY + jitterCurrentY;
 
 	CP_Settings_Fill(CP_Color_Create(128, 128, 128, 255));
-	CP_Graphics_DrawCircle(dronePosx, dronePosy, 180 * (0.8f + (1.0f - 0.8f)*Alpha));
+	CP_Graphics_DrawCircle(dronePosx, dronePosy, 180 * (0.8f + (1.0f - 0.8f)* DraneSizeAlpha));
 
 	//CP_Graphics_DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y, dronePosx, dronePosy);
     DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y, dronePosx, dronePosy);
