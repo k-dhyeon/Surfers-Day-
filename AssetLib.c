@@ -3,6 +3,11 @@
 
 FSeaAnimationData SeaAnimationData;
 
+FFarBackGroundImageAnimationData SkyAnimationData;
+
+FFarBackGroundImageAnimationData BridgeAnimationData;
+FFarBackGroundImageAnimationData CityAnimationData;
+
 FObstacleData TurtleData;
 FObstacleData BoxData;
 FObstacleData BallData;
@@ -17,6 +22,8 @@ FObstacleData JellyfishData;
 
 FBatteryData BatteryData;
 
+
+
 void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/Ikoliks - Ride the Wave.mp3");
@@ -27,8 +34,8 @@ void InitAsset()
 	SFXCollision = CP_Sound_Load("./Assets/Collision.mp3");
 	SFXCombo = CP_Sound_Load("./Assets/ComboSFX.mp3");
 
-	SeaAnimationData.SeaImage[0] = CP_Image_Load("./Assets/Sea.png");
-	
+	SeaAnimationData.SeaImage = CP_Image_Load("./Assets/Sea.png");
+	BridgeAnimationData.Image = CP_Image_Load("./Assets/LandScape.png");
 
 	TurtleData.ObstacleImage = CP_Image_Load("./Assets/Turtle.png");
 	TurtleData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);

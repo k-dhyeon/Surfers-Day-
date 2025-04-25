@@ -63,3 +63,4 @@
 
 ## 🎮 플레이영상
 Ver1 : https://drive.google.com/file/d/1atfNGIcIlqd8Jy7Qgr21sX1Wj9roK3hx/view?usp=drive_link
+Ver2 : https://drive.google.com/file/d/1ULQEi_y4rcQSU3kg7tTr4mnKUckkaFfO/view?usp=drive_link

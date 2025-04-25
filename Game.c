@@ -26,7 +26,7 @@ void game_init(void)
 	InitBigWaveData();
 	CP_Settings_ImageMode(CP_POSITION_CORNER);
 	PlayInGameBGM();
-	dronexy();
+	InitKeyInput();
 	//Test
 	CP_Settings_RectMode(CP_POSITION_CORNER);
 	CP_Settings_TextSize(64);
@@ -40,6 +40,7 @@ void game_update(void)
 {
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
+	DrawFarBackGround();
 	DrawWater();
 //	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
 	UpdateWave();

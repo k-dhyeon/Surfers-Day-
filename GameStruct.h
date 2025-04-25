@@ -2,7 +2,6 @@
 #include "cprocessing_common.h"
 #include "stdbool.h"
 
-#define SEA_IMAGE_NUM 1
 #define COMBO_COMMAND_LENGTH 5
 
 typedef enum ECharacterState {
@@ -85,10 +84,16 @@ typedef struct FBatteryData {
 }FBatteryData;
 
 typedef struct FSeaAnimationData {
-	CP_Image SeaImage[SEA_IMAGE_NUM];
+	CP_Image SeaImage;
 	float AnimationTimer;
 	int SeaIndex;
 }FSeaAnimationData;
+
+typedef struct FFarBackGroundImageAnimationData {
+	CP_Image Image;
+	float AnimationTimer;
+	int Index;
+}FFarBackGroundImageAnimationData;
 
 typedef struct FBigWaveData {
 	bool bIsValid;
@@ -100,7 +105,6 @@ typedef struct FBigWaveData {
 	int WaveMaxIndex;
 	int WaveRiderableStartIndex;
 	int WaveRiderableEndIndex;
-	float RiderableTime;
 	float WaveETA;
 }FBigWaveData;
 

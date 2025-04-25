@@ -38,9 +38,9 @@ void InitCharacterData()
 	CharacterData.CharacterImage = CP_Image_Load("./Assets/Character.png");
 	CharacterData.AnimationTimer = 0.f;
 	CharacterData.AnimationFrame = 0;
-	CharacterData.CharaterDrawSize = CP_Vector_Set(200.f,210.f);
+	CharacterData.CharaterDrawSize = CP_Vector_Set(204.f,210.f);
 	CharacterData.ComboIndex = 0;
-	CharacterData.HandOffset = CP_Vector_Set(200.f,-80.f);
+	CharacterData.HandOffset = CP_Vector_Set(200.f,-130.f);
 	SetCharacterState(STANDING);
 	for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
 	{
@@ -77,7 +77,7 @@ void InitBigWaveData()
 	BigWaveData.WaveETA = CP_Random_RangeFloat(0.f,0.f);
 	BigWaveData.WaveImage = CP_Image_Load("./Assets/Wave.png");
 	BigWaveData.WaveRiderableStartIndex = 2;
-	BigWaveData.WaveRiderableEndIndex = 4;
+	BigWaveData.WaveRiderableEndIndex = 5;
 }
 
 void SetCharacterState(ECharacterState NewState)

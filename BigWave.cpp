@@ -6,8 +6,7 @@ void BeginWave()
 	BigWaveData.bIsValid = true;
 	BigWaveData.AnimationTimer = 0.f;
 	BigWaveData.WaveIndex = 0;
-	BigWaveData.RiderableTime = CP_Random_RangeFloat(10.f,20.f);
-	BigWaveData.WaveMaxIndex = 7;
+	BigWaveData.WaveMaxIndex = 8;
 }
 
 void UpdateWave()
@@ -22,7 +21,7 @@ void UpdateWave()
 			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
 			
 			
-			if (BigWaveData.AnimationTimer > 5.f)
+			if (BigWaveData.AnimationTimer > 1.f)
 			{
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;
@@ -48,7 +47,7 @@ void UpdateWave()
 		{
 			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
 			
-			if (BigWaveData.AnimationTimer > 5.f)
+			if (BigWaveData.AnimationTimer > 1.f)
 			{
 				BigWaveData.WaveIndex++;
 				BigWaveData.AnimationTimer = 0.f;
@@ -79,7 +78,7 @@ void RemoveWave()
 {
 	BigWaveData.bIsValid = false;
 	BigWaveData.bIsRiderable = false;
-	BigWaveData.WaveETA = CP_Random_RangeFloat(15.f, 40.f);
+	BigWaveData.WaveETA = CP_Random_RangeFloat(10.f, 20.f);
 }
 
 void CheckRideWave()

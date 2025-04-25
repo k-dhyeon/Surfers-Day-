@@ -2,4 +2,3 @@
 
 void drone();
 extern float dronePosx;
-void dronexy();

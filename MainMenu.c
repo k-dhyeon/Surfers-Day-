@@ -16,11 +16,11 @@ float QuitButtonPosY;
 float RankButtonPosX;
 float RankButtonPosY;
 
-CP_Image BackGround;
+CP_Image MainMenuBackground;
 
 void MainMenuInit(void)
 {
-	BackGround = CP_Image_Load("./Assets/Background.png");
+	MainMenuBackground = CP_Image_Load("./Assets/MainMenuBackground.png");
 	CP_System_SetWindowSize(1600, 900);
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
 	CP_Settings_RectMode(CP_POSITION_CORNER);
@@ -40,7 +40,7 @@ void MainMenuInit(void)
 void MainMenuUpdate(void)
 {
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 128, 255));
-	CP_Image_Draw(BackGround, 0,0, (float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight(),255);
+	CP_Image_Draw(MainMenuBackground, 0,0, (float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight(),255);
 	CP_Settings_TextSize(38.f);
 	//StartButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));

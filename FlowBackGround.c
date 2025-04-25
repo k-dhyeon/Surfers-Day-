@@ -9,7 +9,7 @@ void DrawWater()
     SeaAnimationData.AnimationTimer += CP_System_GetDt();
     if (SeaAnimationData.AnimationTimer > 0.3f)
     {
-        if (SeaAnimationData.SeaIndex == 2)
+        if (SeaAnimationData.SeaIndex == 1)
         {
             SeaAnimationData.SeaIndex = 0;
             SeaAnimationData.AnimationTimer = 0.f;
@@ -20,10 +20,13 @@ void DrawWater()
             SeaAnimationData.AnimationTimer = 0.f;
         }
     }
-    float imageWidth = (float)CP_Image_GetWidth(SeaAnimationData.SeaImage[0]);
-    float imageHeight = (float)CP_Image_GetHeight(SeaAnimationData.SeaImage[0]);
-    CP_Image_DrawSubImage(SeaAnimationData.SeaImage[0], GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y, (imageWidth / 3.f)* SeaAnimationData.SeaIndex, 0.f, (imageWidth / 3.f)* (SeaAnimationData.SeaIndex+1), imageHeight, 255);
+    float imageWidth = (float)CP_Image_GetWidth(SeaAnimationData.SeaImage);
+    float imageHeight = (float)CP_Image_GetHeight(SeaAnimationData.SeaImage);
+    CP_Image_DrawSubImage(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y, (imageWidth / 2.f)* SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f)* (SeaAnimationData.SeaIndex+1), imageHeight, 255);
+    //TEST
+    //CP_Image_Draw(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y,255 );
 }
+
 /*
 void DrawWater()
 {
@@ -54,3 +57,36 @@ void DrawWater()
 
 }
 */
+
+void DraawSkyBackGround()
+{
+    
+}
+void DrawFarBackGround()
+{
+    BridgeAnimationData.AnimationTimer += CP_System_GetDt();
+    if (BridgeAnimationData.AnimationTimer > 0.3f)
+    {
+        if (BridgeAnimationData.Index == 1)
+        {
+            BridgeAnimationData.Index = 0;
+            BridgeAnimationData.AnimationTimer = 0.f;
+        }
+        else
+        {
+            BridgeAnimationData.Index++;
+            BridgeAnimationData.AnimationTimer = 0.f;
+        }
+    }
+    //float imageWidth = (float)CP_Image_GetWidth(BridgeAnimationData.Image);
+    float imageHeight = (float)CP_Image_GetHeight(BridgeAnimationData.Image);
+    CP_Image_Draw(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, 255);
+    //CP_Image_DrawSubImage(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, (imageWidth / 2.f) * SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f) * (SeaAnimationData.SeaIndex + 1), imageHeight, 255);
+ 
+
+}
+
+void DrawNearBackGround()
+{
+
+}

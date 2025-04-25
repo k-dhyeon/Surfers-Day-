@@ -7,6 +7,12 @@
 #define OBSTACLE_NUM 10
 extern FSeaAnimationData SeaAnimationData;
 
+extern FFarBackGroundImageAnimationData SkyAnimationData;
+
+extern FFarBackGroundImageAnimationData BridgeAnimationData;
+extern FFarBackGroundImageAnimationData CityAnimationData;
+
+
 extern FObstacleData TurtleData;
 extern FObstacleData BoxData;
 extern FObstacleData BallData;

@@ -216,10 +216,10 @@ void RenderCharacter_Internal()
 		GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y,
 		CharacterData.CharaterDrawSize.x,
 		CharacterData.CharaterDrawSize.y,
-		100.f * CharacterData.AnimationFrame,
-		100.f * CharacterData.CharacterState,
-		100.f * (CharacterData.AnimationFrame+1),
-		100.f * (CharacterData.CharacterState + 1),
+		100.f * CharacterData.AnimationFrame ,//+ 1,
+		100.f * CharacterData.CharacterState ,//+ 1,
+		100.f * (CharacterData.AnimationFrame+1),// - 1,
+		100.f * (CharacterData.CharacterState + 1),// - 1,
 		255);
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 100));
 	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);

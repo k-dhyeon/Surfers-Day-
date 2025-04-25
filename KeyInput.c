@@ -12,6 +12,16 @@ bool bIsBackwardPressed = false;
 bool bIsLeftPressed = false;
 bool bIsRightPressed=false;
 
+float movementDelayTimer = 0.0f;
+float movementDelayDuration = 0.2f; // 0.2초 지연
+CP_Vector targetPosition;
+int initialized = 0;
+
+void InitKeyInput()
+{
+	initialized = 0;
+}
+
 void UpdateKeyInput()
 {
 	if (CharacterData.CharacterState == STARTWAVE || CharacterData.CharacterState == ENDWAVE)
@@ -166,36 +176,98 @@ bool CheckRightLaneCollision()
 	}
 }
 
+//void UpdateCharacterPosition()
+//{
+//	if (bIsForwardPressed && !bIsBackwardPressed)
+//	{
+//		if (CheckForwardLaneCollision())
+//		{
+//			CharacterData.CharacterPos.x += CP_System_GetDt() * MovementSpeed * 2.f;
+//		}
+//	}
+//	if (!bIsForwardPressed && bIsBackwardPressed)
+//	{
+//		if (CheckBackwardLaneCollision())
+//		{
+//			CharacterData.CharacterPos.x -= CP_System_GetDt() * MovementSpeed * 4.f;
+//		}
+//	}
+//	if (bIsLeftPressed && !bIsRightPressed)
+//	{
+//		if (CheckLeftLaneCollision())
+//		{
+//			CharacterData.CharacterPos.y -= CP_System_GetDt() * MovementSpeed * 2.5f;
+//		}
+//	}
+//	if (!bIsLeftPressed && bIsRightPressed)
+//	{
+//		if (CheckRightLaneCollision())
+//		{
+//			CharacterData.CharacterPos.y += CP_System_GetDt() * MovementSpeed * 2.5f;
+//		}
+//	}
+//}
+
 void UpdateCharacterPosition()
 {
+	float dt = CP_System_GetDt();
+	float moveAmount = dt * MovementSpeed;
+
+	// 최초 1회 현재 위치를 목표 위치로 초기화
+	if (!initialized) {
+		targetPosition = CharacterData.CharacterPos;
+		initialized = 1;
+	}
+
+	// 누적 목표 위치 계산
 	if (bIsForwardPressed && !bIsBackwardPressed)
 	{
+		if (targetPosition.x > GameData.LaneMax.x)
+		{
+			targetPosition.x = GameData.LaneMax.x;
+		}
 		if (CheckForwardLaneCollision())
 		{
-			CharacterData.CharacterPos.x+= CP_System_GetDt()*MovementSpeed * 2.f;
+			targetPosition.x += moveAmount * 2.f;
+			
 		}
 	}
 	if (!bIsForwardPressed && bIsBackwardPressed)
 	{
+		if (targetPosition.x < GameData.LaneMin.x)
+		{
+			targetPosition.x = GameData.LaneMin.x;
+		}
 		if (CheckBackwardLaneCollision())
 		{
-			CharacterData.CharacterPos.x -= CP_System_GetDt() * MovementSpeed*4.f;
+			targetPosition.x -= moveAmount * 4.f;
 		}
 	}
 	if (bIsLeftPressed && !bIsRightPressed)
 	{
+		if (targetPosition.y < 0.f)
+		{
+			targetPosition.y = 0.f;
+		}
 		if (CheckLeftLaneCollision())
 		{
-			CharacterData.CharacterPos.y -= CP_System_GetDt() * MovementSpeed * 2.5f;
-		}
+			targetPosition.y -= moveAmount * 2.5f;
+		}	
 	}
 	if (!bIsLeftPressed && bIsRightPressed)
 	{
+		if (targetPosition.y > GameData.LaneMax.y - GameData.LaneMin.y - CharacterData.CharacterCollisionSize.y)
+		{
+			targetPosition.y = GameData.LaneMax.y - GameData.LaneMin.y - CharacterData.CharacterCollisionSize.y;
+		}
 		if (CheckRightLaneCollision())
 		{
-			CharacterData.CharacterPos.y += CP_System_GetDt() * MovementSpeed * 2.5f;
+			targetPosition.y += moveAmount * 2.5f;
 		}
 	}
-}
 
-	
+	// 목표 위치로 부드럽게 이동 (보간 방식)
+	float smoothFactor = 8.0f; // 클수록 빠르게 목표로 접근
+	CharacterData.CharacterPos.x += (targetPosition.x - CharacterData.CharacterPos.x) * smoothFactor * dt;
+	CharacterData.CharacterPos.y += (targetPosition.y - CharacterData.CharacterPos.y) * smoothFactor * dt;
+}
