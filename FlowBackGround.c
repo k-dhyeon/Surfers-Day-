@@ -65,6 +65,7 @@ void DrawSkyBackGround()
     float imageHeight = (float)CP_Image_GetHeight(SkyAnimationData.Image);
     CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
     CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
+    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x - imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
     if (SkyAnimationData.Position.x < -imageWidth)
     {
         SkyAnimationData.Position.x = (float)CP_System_GetWindowWidth();
@@ -73,8 +74,8 @@ void DrawSkyBackGround()
 void DrawFarBackGround()
 {
     FarBackgroundAnimationData.Position.x -= CP_System_GetDt()*GameData.Speed/30.f;
-    float imageWidth = (float)CP_Image_GetWidth(FarBackgroundAnimationData.Image) * 10.f;
-    float imageHeight = (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image) * 10.f;
+    float imageWidth = (float)CP_Image_GetWidth(FarBackgroundAnimationData.Image);
+    float imageHeight = (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image);
     CP_Image_Draw(FarBackgroundAnimationData.Image, FarBackgroundAnimationData.Position.x, FarBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
     //CP_Image_DrawSubImage(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, (imageWidth / 2.f) * SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f) * (SeaAnimationData.SeaIndex + 1), imageHeight, 255);
  
@@ -119,5 +120,16 @@ void DrawBackGroundSeaGull()
 
 void DrawNearBackGround()
 {
+    NearBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed*1.1f;
+    float imageWidth = (float)CP_Image_GetWidth(NearBackgroundAnimationData.Image);
+    float imageHeight = (float)CP_Image_GetHeight(NearBackgroundAnimationData.Image);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x - imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
+    //CP_Image_DrawSubImage(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, (imageWidth / 2.f) * SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f) * (SeaAnimationData.SeaIndex + 1), imageHeight, 255);
 
+    if (NearBackgroundAnimationData.Position.x < -imageWidth)
+    {
+        NearBackgroundAnimationData.Position.x = (float)CP_System_GetWindowWidth();
+    }
 }

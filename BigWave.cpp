@@ -18,6 +18,10 @@ void UpdateWave()
 		float ImageSizeX = (float)CP_Image_GetWidth(BigWaveData.WaveImage);
 		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage);
 		BigWaveData.AnimationTimer += CP_System_GetDt();
+		if (CharacterData.CharacterState == WAVING)
+		{
+			CharacterData.Score += CP_System_GetDt() * GameData.Speed*0.2f;
+		}
 		float DrawOffsetY = BigWaveData.WaveIndex < BigWaveData.WaveMaxIndex / 2 ? BigWaveData.WaveImageSize.y/4.f * (AnimationNextTime - BigWaveData.AnimationTimer) / AnimationNextTime : BigWaveData.WaveImageSize.y / 4.f * (BigWaveData.AnimationTimer)/ AnimationNextTime;
 		if (!BigWaveData.bIsRiderable)
 		{

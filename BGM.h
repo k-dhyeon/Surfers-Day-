@@ -9,6 +9,7 @@ extern CP_Sound SFXBatteryRecharge;
 extern CP_Sound SFXJump;
 extern CP_Sound SFXCollision;
 extern CP_Sound SFXCombo;
+extern CP_Sound SFXGameOver;
 
 void PlayMainMenuBGM();
 
@@ -22,3 +23,4 @@ void PlaySFXBatteryRecharge();
 void PlaySFXJump();
 void PlaySFXCollision();
 void PlaySFXCombo();
+void PlaySFXGameOver();

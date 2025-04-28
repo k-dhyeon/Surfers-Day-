@@ -13,12 +13,14 @@
 #include "BGM.h"
 #include "energybar.h"
 #include "drone.h"
+#include "CameraShake.h"
 
 // use CP_Engine_SetNextGameState to specify this function as the initialization function
 // this function will be called once at the beginning of the program
 void game_init(void)
 {
 	CP_System_SetWindowSize(1600, 900);
+	InitShake();
 	InitGameData();
 	InitCharacterData();
 	InitAsset();
@@ -38,6 +40,7 @@ void game_init(void)
 // this function will be called repeatedly every frame
 void game_update(void)
 {
+	UpdateShake();
 	CP_Graphics_ClearBackground(CP_Color_Create(128, 128, 255, 255));
 	CP_Settings_Fill(CP_Color_Create(0, 0, 255, 255));
 	DrawSkyBackGround();
@@ -52,11 +55,14 @@ void game_update(void)
 	UpdateCharacterPosition();
 	UpdateObstaclesPosition();
 	UpdateItemsPosition();
+	DrawNearBackGround();
 	RenderBatteries();
-	CheckBatteriesCollision();
+	RenderSpeedItems();
+	CheckItemsCollision();
 	
 	drone();
 	energybar();
+	
 	
 
 	if (CharacterData.CharacterState == JUMPDOWN)
@@ -83,7 +89,7 @@ void game_update(void)
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 128));
 		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
 		CharacterData.CollisionTimer += CP_System_GetDt();
-		if (CharacterData.CollisionTimer > 3.f)
+		if (CharacterData.CollisionTimer > 1.5f)
 		{
 			SetCharacterState(STANDING);
 			CharacterData.CollisionTimer = 0.f;
@@ -120,19 +126,6 @@ void game_update(void)
 	}
 
 	//TEST
-	char buffer[128] = { 0 };
-	if (CharacterData.CharacterState == JUMPUP || CharacterData.CharacterState == JUMPDOWN)
-	{
-		sprintf_s(buffer, 128, "Jumped Reset Timer : %f", CharacterData.JumpTimer);
-	}
-	else
-	{
-		sprintf_s(buffer, 128, "Not Jumped Reset Timer : %f", CharacterData.JumpTimer);
-	}
-	CP_Font_DrawText(buffer, 0.f, 0.f);
-	printf("%.2f\n", CharacterData.Energy);
-	//CP_Font_DrawText((CharacterData.Energy),0.f,0.f);
-	// check input, update simulation, render etc.
 	CharacterData.Score += CP_System_GetDt()*GameData.Speed*0.1f;
 	char ScoreBuffer[128] = { 0 };
 	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);

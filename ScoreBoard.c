@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "GlobalVariables.h"
 #include "ScoreBoard.h"
+#include "BGM.h"
 
 #define MAX_ENTRIES 150
 #define FILENAME "leaderboard.sav"
@@ -50,7 +51,7 @@ void ScoreBoradInit(void)
 	loadData(SaveDatas);
 	CurrentPlayerIndex = FindScoreRank();
 	SaveDatas[149].Score = CharacterData.Score;
-
+	PlaySFXGameOver();
 }
 
 void ScoreBoradUpdate(void)

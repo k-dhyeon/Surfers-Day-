@@ -8,8 +8,16 @@ void UpdateItemsPosition();
 
 void RemoveBattery(int RemoveIndex);
 
-void CheckBatteriesCollision();
+void CheckItemsCollision();
 
 void SetBatteryByRandom(int Index);
 
 void RenderBatteries();
+
+void RenderSpeedItems();
+
+void SpawnSpeedItem();
+
+void RemoveAddSpeedItem();
+
+void RemoveReduceSpeedItem();

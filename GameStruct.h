@@ -83,6 +83,14 @@ typedef struct FBatteryData {
 	float Energy;
 }FBatteryData;
 
+typedef struct FSpeedItemData {
+	bool bIsValid;
+	CP_Vector ItemPos;
+	CP_Vector ItemImageSize;
+	CP_Image ItemImage;
+	float GameSpeedMultiplier;
+}FSpeedItemData;
+
 typedef struct FSeaAnimationData {
 	CP_Image SeaImage;
 	float AnimationTimer;

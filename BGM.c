@@ -8,6 +8,7 @@ CP_Sound SFXBatteryRecharge;
 CP_Sound SFXJump;
 CP_Sound SFXCollision;
 CP_Sound SFXCombo;
+CP_Sound SFXGameOver;
 
 void PlayMainMenuBGM()
 {
@@ -41,7 +42,7 @@ void PlaySFXJump()
 
 void PlaySFXCollision()
 {
-	CP_Sound_PlayAdvanced(SFXCollision, 1.0, 1.0, FALSE, CP_SOUND_GROUP_SFX);
+	CP_Sound_PlayAdvanced(SFXCollision, 5.0, 1.0, FALSE, CP_SOUND_GROUP_SFX);
 }
 
 void PlaySFXCombo()
@@ -49,3 +50,7 @@ void PlaySFXCombo()
 	CP_Sound_PlayAdvanced(SFXCombo, 1.0, 1.0, FALSE, CP_SOUND_GROUP_SFX);
 }
 
+void PlaySFXGameOver()
+{
+	CP_Sound_PlayAdvanced(SFXGameOver, 4.f, 1.0f, FALSE, CP_SOUND_GROUP_SFX);
+}

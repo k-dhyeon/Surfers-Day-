@@ -11,6 +11,7 @@ extern FSeaAnimationData SeaAnimationData;
 extern FFarBackGroundImageAnimationData SkyAnimationData;
 
 extern FFarBackGroundImageAnimationData FarBackgroundAnimationData;
+FFarBackGroundImageAnimationData NearBackgroundAnimationData;
 
 extern FFarBackGroundImageAnimationData SeaGullAnimationData[];
 

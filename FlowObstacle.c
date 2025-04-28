@@ -5,6 +5,7 @@
 #include "stdlib.h"
 #include "AssetLib.h"
 #include "BGM.h"
+#include "CameraShake.h"
 
 float LastSpawnDeltaTime = 0.f;
 float CurrentDelay = 0.f;
@@ -61,7 +62,8 @@ void UpdateObstaclesPosition()
 		SetCharacterState(COLLISION);
 		PlaySFXCollision();
 		CharacterData.CollisionTimer = 0.f;
-		GameData.Speed = InitGameSpeed + (GameData.Speed - InitGameSpeed)/2.f;
+		GameData.Speed = InitGameSpeed + (GameData.Speed - InitGameSpeed) / 2.f;
+		StartShake(0.25f, 1.0f, 3.f);
 	}
 }
 

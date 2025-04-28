@@ -15,6 +15,8 @@ extern FCharacterData CharacterData;
 extern FObstacleData Obstacles[];
 
 extern FBatteryData Batteries[];
+extern FSpeedItemData AddSpeedItem;
+extern FSpeedItemData ReduceSpeedItem;
 
 extern FBigWaveData BigWaveData;
 

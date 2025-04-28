@@ -9,6 +9,8 @@ FGameData GameData;
 FCharacterData CharacterData;
 FObstacleData Obstacles[MAX_OBSTACLES];
 FBatteryData Batteries[MAX_BATTERIES];
+FSpeedItemData AddSpeedItem;
+FSpeedItemData ReduceSpeedItem;
 FBigWaveData BigWaveData;
 
 float InitGameSpeed = 200.f;
@@ -65,6 +67,16 @@ void InitItemData()
 		Batteries[i].BatteryImageSize = BatteryData.BatteryImageSize;
 		Batteries[i].bIsValid = false;
 	}
+	AddSpeedItem.bIsValid = false;
+	AddSpeedItem.GameSpeedMultiplier = 1.3f;
+	AddSpeedItem.ItemImage = CP_Image_Load("./Assets/FastItem.png");
+	AddSpeedItem.ItemImageSize = CP_Vector_Set(50.f, 50.f);
+	AddSpeedItem.ItemPos = CP_Vector_Set(CP_Random_RangeFloat(GameData.LaneMax.x/2.f, GameData.LaneMax.x), GameData.LaneMax.y - GameData.LaneMin.y);
+	ReduceSpeedItem.bIsValid = false;
+	ReduceSpeedItem.GameSpeedMultiplier = 0.7f;
+	ReduceSpeedItem.ItemImage = CP_Image_Load("./Assets/SlowItem.png");
+	ReduceSpeedItem.ItemImageSize = CP_Vector_Set(50.f,50.f);
+	ReduceSpeedItem.ItemPos = CP_Vector_Set(CP_Random_RangeFloat(GameData.LaneMax.x / 2.f, GameData.LaneMax.x), GameData.LaneMax.y - GameData.LaneMin.y);
 }
 
 void InitBigWaveData()
@@ -74,7 +86,7 @@ void InitBigWaveData()
 	BigWaveData.bIsRiderable = false;
 	BigWaveData.bIsValid = false;
 	BigWaveData.WaveImageSize = CP_Vector_Set((float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight() / 5.f);
-	BigWaveData.WaveETA = CP_Random_RangeFloat(0.f, 0.f);//(5.f,15.f);
+	BigWaveData.WaveETA = CP_Random_RangeFloat(5.f,15.f);
 	BigWaveData.WaveImage = CP_Image_Load("./Assets/Wave.png");
 	BigWaveData.WaveRiderableStartIndex = 2;
 	BigWaveData.WaveRiderableEndIndex = 5;

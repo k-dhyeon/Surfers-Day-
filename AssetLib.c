@@ -8,6 +8,7 @@ FSeaAnimationData SeaAnimationData;
 FFarBackGroundImageAnimationData SkyAnimationData;
 
 FFarBackGroundImageAnimationData FarBackgroundAnimationData;
+FFarBackGroundImageAnimationData NearBackgroundAnimationData;
 
 FFarBackGroundImageAnimationData SeaGullAnimationData[MAX_SEAGULL_NUM];
 
@@ -29,13 +30,14 @@ FBatteryData BatteryData;
 
 void InitAsset()
 {
-	InGameBGM = CP_Sound_LoadMusic("./Assets/Ikoliks - Ride the Wave.mp3");
+	InGameBGM = CP_Sound_LoadMusic("./Assets/game_to_dance.mp3");
 	MainMenuBGM = CP_Sound_LoadMusic("./Assets/Raz Burg - Sunlight - Instrumental Version.mp3");
 	
 	SFXBatteryRecharge = CP_Sound_Load("./Assets/GetBatterySFX.mp3");
 	SFXJump = CP_Sound_Load("./Assets/JumpSFX.mp3");
-	SFXCollision = CP_Sound_Load("./Assets/Collision.mp3");
+	SFXCollision = CP_Sound_Load("./Assets/CollisionSFX.mp3");
 	SFXCombo = CP_Sound_Load("./Assets/ComboSFX.mp3");
+	SFXGameOver = CP_Sound_Load("./Assets/GameOver.mp3");
 
 	SeaAnimationData.SeaImage = CP_Image_Load("./Assets/Sea.png");
 
@@ -43,7 +45,10 @@ void InitAsset()
 	SkyAnimationData.Position = CP_Vector_Set(0.f, 0.f);
 
 	FarBackgroundAnimationData.Image = CP_Image_Load("./Assets/LandScape.png");
-	FarBackgroundAnimationData.Position = CP_Vector_Set((float)CP_System_GetWindowWidth(), GameData.LaneMin.y - (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image) * 10.f);
+	FarBackgroundAnimationData.Position = CP_Vector_Set((float)CP_System_GetWindowWidth(), GameData.LaneMin.y - (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image));
+
+	NearBackgroundAnimationData.Image = CP_Image_Load("./Assets/NearDistance.png");
+	NearBackgroundAnimationData.Position = CP_Vector_Set(0.f, GameData.LaneMax.y);
 
 	for (int i = 0;i < MAX_SEAGULL_NUM; i++)
 	{
