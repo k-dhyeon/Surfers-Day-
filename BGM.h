@@ -10,6 +10,7 @@ extern CP_Sound SFXJump;
 extern CP_Sound SFXCollision;
 extern CP_Sound SFXCombo;
 extern CP_Sound SFXGameOver;
+extern CP_Sound SFXMedal;
 
 void PlayMainMenuBGM();
 
@@ -24,3 +25,4 @@ void PlaySFXJump();
 void PlaySFXCollision();
 void PlaySFXCombo();
 void PlaySFXGameOver();
+void PlaySFXMedal();

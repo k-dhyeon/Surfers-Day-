@@ -53,6 +53,8 @@ typedef struct FCharacterData {
 	char ComboCommand[COMBO_COMMAND_LENGTH];
 	ECharacterComboState ComboState;
 	CP_Vector HandOffset;
+	bool bEndWaveInvincible;
+	float EndWaveInvincibleTimer;
 }FCharacterData;
 
 typedef struct FObstacleData {
@@ -90,6 +92,15 @@ typedef struct FSpeedItemData {
 	CP_Image ItemImage;
 	float GameSpeedMultiplier;
 }FSpeedItemData;
+
+typedef struct FMedalItemData {
+	bool bIsValid;
+	CP_Vector ItemPos;
+	CP_Vector ItemImageSize;
+	CP_Image ItemImage;
+	float Score;
+}FMedalItemData;
+
 
 typedef struct FSeaAnimationData {
 	CP_Image SeaImage;

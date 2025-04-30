@@ -48,8 +48,8 @@ void game_update(void)
 	DrawBackGroundSeaGull();
 	UpdateWave();
 	DrawWater();
-//	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
-	
+	//	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
+
 	RenderObjects();
 	UpdateKeyInput();
 	UpdateCharacterPosition();
@@ -58,12 +58,21 @@ void game_update(void)
 	DrawNearBackGround();
 	RenderBatteries();
 	RenderSpeedItems();
+	RenderMedal();
 	CheckItemsCollision();
-	
+
+	if (BigWaveData.WaveIndex >= BigWaveData.WaveRiderableStartIndex + 1 && BigWaveData.WaveIndex <= BigWaveData.WaveRiderableEndIndex - 1)
+	{
+		float AnimationNextTime = 2.f;
+		float DrawOffsetY = BigWaveData.WaveIndex < BigWaveData.WaveMaxIndex / 2 ? BigWaveData.WaveImageSize.y / 4.f * (AnimationNextTime - BigWaveData.AnimationTimer) / AnimationNextTime : BigWaveData.WaveImageSize.y / 4.f * (BigWaveData.AnimationTimer) / AnimationNextTime;
+
+		CP_Image_Draw(WaveTop, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y + DrawOffsetY, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, 150);
+	}
+
 	drone();
 	energybar();
-	
-	
+
+
 
 	if (CharacterData.CharacterState == JUMPDOWN)
 	{
@@ -95,7 +104,15 @@ void game_update(void)
 			CharacterData.CollisionTimer = 0.f;
 		}
 	}
-
+	if (CharacterData.bEndWaveInvincible)
+	{
+		CharacterData.EndWaveInvincibleTimer += CP_System_GetDt();
+		if (CharacterData.EndWaveInvincibleTimer > 0.5f)
+		{
+			CharacterData.bEndWaveInvincible = false;
+			CharacterData.EndWaveInvincibleTimer = 0.f;
+		}
+	}
 
 	if (GameData.Speed < 3000.f)// update game speed
 	{

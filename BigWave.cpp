@@ -1,7 +1,9 @@
 #include "BigWave.h"
 #include "cprocessing.h"
 #include "stdio.h"
+#include "Item.h"
 
+float LastWavingGameSpeed = 0.f;
 float AnimationNextTime = 2.f;
 void BeginWave()
 {
@@ -18,6 +20,7 @@ void UpdateWave()
 		float ImageSizeX = (float)CP_Image_GetWidth(BigWaveData.WaveImage);
 		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage);
 		BigWaveData.AnimationTimer += CP_System_GetDt();
+
 		if (CharacterData.CharacterState == WAVING)
 		{
 			CharacterData.Score += CP_System_GetDt() * GameData.Speed*0.2f;
@@ -43,6 +46,7 @@ void UpdateWave()
 				if (CharacterData.CharacterState == WAVING)
 				{
 					SetCharacterState(ENDWAVE);
+					GameData.Speed = LastWavingGameSpeed;
 				}
 
 			}
@@ -53,7 +57,12 @@ void UpdateWave()
 		else
 		{
 			CP_Image_DrawSubImage(BigWaveData.WaveImage, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y + DrawOffsetY, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, ImageSizeX / BigWaveData.WaveMaxIndex * BigWaveData.WaveIndex, 0, ImageSizeX / BigWaveData.WaveMaxIndex * (BigWaveData.WaveIndex + 1), ImageSizeY, 255);
-			
+
+			if (!MedalItem.bIsValid)
+			{
+				SpawnMedal();
+			}
+
 			if (BigWaveData.AnimationTimer > AnimationNextTime)
 			{
 				BigWaveData.WaveIndex++;
@@ -64,6 +73,7 @@ void UpdateWave()
 					if (CharacterData.CharacterState == WAVING)
 					{
 						SetCharacterState(ENDWAVE);
+						GameData.Speed = LastWavingGameSpeed;
 					}
 				}
 			}
@@ -97,6 +107,8 @@ void CheckRideWave()
 			if (CharacterData.CharacterState == STANDING && BigWaveData.bIsRiderable)
 			{
 				SetCharacterState(STARTWAVE);
+				LastWavingGameSpeed = GameData.Speed;
+				GameData.Speed *= 2.f;
 			}
 		}
 		else
@@ -104,6 +116,7 @@ void CheckRideWave()
 			if (CharacterData.CharacterState == WAVING)
 			{
 				SetCharacterState(ENDWAVE);
+				GameData.Speed = LastWavingGameSpeed;
 			}
 		}
 	}
@@ -112,6 +125,7 @@ void CheckRideWave()
 		if (CharacterData.CharacterState == WAVING)
 		{
 			SetCharacterState(ENDWAVE);
+			GameData.Speed = LastWavingGameSpeed;
 		}
 	}
 }

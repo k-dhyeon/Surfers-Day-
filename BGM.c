@@ -9,6 +9,7 @@ CP_Sound SFXJump;
 CP_Sound SFXCollision;
 CP_Sound SFXCombo;
 CP_Sound SFXGameOver;
+CP_Sound SFXMedal;
 
 void PlayMainMenuBGM()
 {
@@ -53,4 +54,9 @@ void PlaySFXCombo()
 void PlaySFXGameOver()
 {
 	CP_Sound_PlayAdvanced(SFXGameOver, 4.f, 1.0f, FALSE, CP_SOUND_GROUP_SFX);
+}
+
+void PlaySFXMedal()
+{
+	CP_Sound_PlayAdvanced(SFXMedal, 1.f, 1.0f, FALSE, CP_SOUND_GROUP_SFX);
 }

@@ -21,3 +21,9 @@ void SpawnSpeedItem();
 void RemoveAddSpeedItem();
 
 void RemoveReduceSpeedItem();
+
+void SpawnMedal();
+
+void RemoveMedal();
+
+void RenderMedal();

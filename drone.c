@@ -3,7 +3,7 @@
 #include "KeyInput.h"
 #include "math.h"
 #include "stdlib.h"
-
+#include "AssetLib.h"
 #define PI 3.14159265
 
 
@@ -33,12 +33,19 @@ void drone()
 {
     float DeltaDronePosX = targetPosition.x - CharacterData.CharacterPos.x;
     float DeltaDronePosY = targetPosition.y - CharacterData.CharacterPos.y;
+
     DraneSizeAlpha = (CharacterData.CharacterPos.y) / (GameData.LaneMax.y - GameData.LaneMin.y);
 
 	dronePosx = CharacterData.CharacterPos.x + DeltaDronePosX + 570.f;
     dronePosx += DronePositionYtoXMaxOffset * -DraneSizeAlpha;
 	dronePosy = CharacterData.CharacterPos.y + DeltaDronePosY + 30.f;
 	dronePosy *= 2.f;
+
+    if (CharacterData.CharacterState == WAVING)
+    {
+        dronePosx = CharacterData.CharacterPos.x - 100.f;
+        dronePosy = GameData.LaneMin.y - 100.f;
+    }
     if (dronePosy > CP_System_GetWindowHeight())
     {
         dronePosy = (float)CP_System_GetWindowHeight();
@@ -68,10 +75,14 @@ void drone()
     dronePosy += DroneOffsetY + jitterCurrentY;
 
 	CP_Settings_Fill(CP_Color_Create(128, 128, 128, 255));
-	CP_Graphics_DrawCircle(dronePosx, dronePosy, 180 * (0.8f + (1.0f - 0.8f)* DraneSizeAlpha));
-
+    float DroneWidth = (float)CP_Image_GetWidth(DroneImage) * 2.f;
+    float DroneHeight = (float)CP_Image_GetHeight(DroneImage) * 2.f;
+    CP_Image_Draw(DroneImage, dronePosx - DroneWidth/2.f, dronePosy - DroneHeight/2.f, DroneWidth, DroneHeight, 255);
+//    CP_Image_DrawSubImage(DroneImage, dronePosx - DroneWidth / 2.f, dronePosy - DroneHeight / 2.f, DroneWidth, DroneHeight, 255);
 	//CP_Graphics_DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y, dronePosx, dronePosy);
-    DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y, dronePosx, dronePosy);
+    float CharacterDrawRatio = 0.8f + 0.2f * (CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y));
+    float HandOffsetDelta = (CharacterData.HandOffset.x - CharacterData.HandOffset.x * 0.8f)/2.f;
+    DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x - HandOffsetDelta * (1 - CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y)), GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y * CharacterDrawRatio, dronePosx, dronePosy);
 }
 
 void DrawLine(float CharacterX, float CharacterY, float DroneX, float DroneY)

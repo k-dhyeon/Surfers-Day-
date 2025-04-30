@@ -38,7 +38,17 @@ void UpdateObstaclesPosition()
 	if (LastSpawnDeltaTime >= CurrentDelay)
 	{
 		AddObstacle();
-		CurrentDelay = CP_Random_RangeFloat(MinDelay, GameData.Speed>1000 ? MaxDelay/2.f: MaxDelay);
+		float RelativeMaxDelayByGameSpeed = 0.f;
+		if (GameData.Speed > 1000)
+		{
+			RelativeMaxDelayByGameSpeed = MaxDelay / 5.f;
+		}
+		else
+		{
+			RelativeMaxDelayByGameSpeed = MaxDelay*0.8f;
+		}
+		//RelativeMaxDelayByGameSpeed = MinDelay;
+		CurrentDelay = CP_Random_RangeFloat(MinDelay, RelativeMaxDelayByGameSpeed);
 		LastSpawnDeltaTime = 0.f;
 	}
 	
@@ -69,7 +79,7 @@ void UpdateObstaclesPosition()
 
 bool CheckObstaclesCollision()
 {
-	if (CharacterData.CharacterState == STANDING)
+	if (CharacterData.CharacterState == STANDING && !CharacterData.bEndWaveInvincible)
 	{
 		float CharacterMinX = CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x;
 		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x;
@@ -90,6 +100,10 @@ bool CheckObstaclesCollision()
 				{
 					BounceCollisionDirection(i);
 					CharacterData.Energy -= Obstacles[i].Score;
+					if (CharacterData.Energy < 0.f)
+					{
+						CharacterData.Energy = 0.f;
+					}
 					return true;
 				}
 			}
@@ -200,6 +214,7 @@ void RenderCharacter_Internal()
 			else if (CharacterData.CharacterState == ENDWAVE)
 			{
 				SetCharacterState(STANDING);
+				CharacterData.bEndWaveInvincible = true;
 			}
 			else
 			{
@@ -214,6 +229,10 @@ void RenderCharacter_Internal()
 		}
 	}
 	float CharacterDrawRatio = 0.8f + 0.2f * (CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y));
+	if(CharacterData.CharacterState == WAVING)
+	{
+		CharacterDrawRatio = 0.7f;
+	}
 	CP_Image_DrawSubImage(CharacterData.CharacterImage,
 		GameData.LaneMin.x + CharacterData.CharacterPos.x + (CharacterData.CharaterDrawSize.x * (1 - CharacterDrawRatio) /2.f),
 		GameData.LaneMin.y + CharacterData.CharacterPos.y - CharacterData.CharaterDrawSize.y + CharacterData.CharacterCollisionSize.y + (CharacterData.CharaterDrawSize.y * (1 - CharacterDrawRatio)),

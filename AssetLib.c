@@ -26,6 +26,14 @@ FObstacleData JellyfishData;
 
 FBatteryData BatteryData;
 
+CP_Image WaveTop;
+
+CP_Image LowBattery;
+CP_Image HalfBattery;
+CP_Image HighBattery;
+CP_Image MaxBattery;
+
+CP_Image DroneImage;
 
 
 void InitAsset()
@@ -38,6 +46,7 @@ void InitAsset()
 	SFXCollision = CP_Sound_Load("./Assets/CollisionSFX.mp3");
 	SFXCombo = CP_Sound_Load("./Assets/ComboSFX.mp3");
 	SFXGameOver = CP_Sound_Load("./Assets/GameOver.mp3");
+	SFXMedal = CP_Sound_Load("./Assets/MedalSFX.mp3");
 
 	SeaAnimationData.SeaImage = CP_Image_Load("./Assets/Sea.png");
 
@@ -47,8 +56,10 @@ void InitAsset()
 	FarBackgroundAnimationData.Image = CP_Image_Load("./Assets/LandScape.png");
 	FarBackgroundAnimationData.Position = CP_Vector_Set((float)CP_System_GetWindowWidth(), GameData.LaneMin.y - (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image));
 
-	NearBackgroundAnimationData.Image = CP_Image_Load("./Assets/NearDistance.png");
+	NearBackgroundAnimationData.Image = CP_Image_Load("./Assets/BreakWater.png");
 	NearBackgroundAnimationData.Position = CP_Vector_Set(0.f, GameData.LaneMax.y);
+
+	WaveTop = CP_Image_Load("./Assets/BreakingWave.png");
 
 	for (int i = 0;i < MAX_SEAGULL_NUM; i++)
 	{
@@ -125,5 +136,12 @@ void InitAsset()
 	BatteryData.BatteryImageSize = CP_Vector_Set(30.f, 30.f);
 	BatteryData.bIsValid = false;
 	BatteryData.Energy = 10.f;
+
+	LowBattery = CP_Image_Load("./Assets/25Battery.png");
+	HalfBattery = CP_Image_Load("./Assets/50Battery.png");
+	HighBattery = CP_Image_Load("./Assets/75Battery.png");
+	MaxBattery = CP_Image_Load("./Assets/100Battery.png");
+
+	DroneImage = CP_Image_Load("./Assets/Drone.png");
 }
 

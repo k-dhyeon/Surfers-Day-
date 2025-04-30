@@ -123,6 +123,13 @@ void DrawNearBackGround()
     NearBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed*1.1f;
     float imageWidth = (float)CP_Image_GetWidth(NearBackgroundAnimationData.Image);
     float imageHeight = (float)CP_Image_GetHeight(NearBackgroundAnimationData.Image);
+    //CP_Image Sand = CP_Image_Load("./Assets/NearDistance.png");
+    //float SandWidth = (float)CP_Image_GetWidth(Sand);
+    //float SandHeight = (float)CP_Image_GetHeight(Sand);
+    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x + SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x - SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+
     CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
     CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
     CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x - imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);

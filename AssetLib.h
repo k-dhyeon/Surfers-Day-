@@ -28,4 +28,13 @@ extern FObstacleData JellyfishData;
 
 extern FBatteryData BatteryData;
 
+extern CP_Image WaveTop;
+
+extern CP_Image LowBattery;
+extern CP_Image HalfBattery;
+extern CP_Image HighBattery;
+extern CP_Image MaxBattery;
+
+extern CP_Image DroneImage;
+
 void InitAsset();

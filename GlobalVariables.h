@@ -17,7 +17,7 @@ extern FObstacleData Obstacles[];
 extern FBatteryData Batteries[];
 extern FSpeedItemData AddSpeedItem;
 extern FSpeedItemData ReduceSpeedItem;
-
+extern FMedalItemData MedalItem;
 extern FBigWaveData BigWaveData;
 
 extern float InitGameSpeed;

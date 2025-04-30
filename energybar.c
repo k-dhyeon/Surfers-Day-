@@ -16,10 +16,10 @@ void energybar()
 	//CharacterData.CharaterDrawSize = CP_Vector_Set(200.f,200.f);
 	// 이 코드가 에너지 바 그리는 코드다
 	//CP_Image_Load("./Assets/drone.png");
-	EnergyOffsetX = 180 * (0.8f + (1.0f - 0.8f) * DraneSizeAlpha)/2.f;
-	energyPosx = dronePosx;
-	energyPosy = dronePosy;
-	float Ratio = (0.8f + (1.0f - 0.8f) * DraneSizeAlpha) / 2.f;
+	EnergyOffsetX = 0.f;//180 * (0.8f + (1.0f - 0.8f) * DraneSizeAlpha)/2.f;
+	energyPosx = 0.f;//dronePosx;
+	energyPosy = 0.f;//dronePosy;
+	float Ratio = 1.f;//(0.8f + (1.0f - 0.8f) * DraneSizeAlpha) / 2.f;
 	
 	CP_Settings_Fill(CP_Color_Create(205, 92, 92, 255)); //붉은
 	CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy - EnergyOffsetY, 200.f* Ratio, 20.f);
