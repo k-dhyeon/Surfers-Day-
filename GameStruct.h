@@ -14,6 +14,7 @@ typedef enum ECharacterState {
 	ENDWAVE = 6,		//Image num 2
 	COMBO1 = 7,			//Image num 2
 	COMBO2 = 8,			//Image num 2
+	HEIGHESTWAVE = 9,
 }ECharacterState;
 
 typedef enum ECharacterComboState {

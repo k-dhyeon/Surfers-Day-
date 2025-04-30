@@ -22,6 +22,8 @@ extern FBigWaveData BigWaveData;
 
 extern float InitGameSpeed;
 
+extern bool bDebugMode;
+
 void InitGameData();
 
 void InitCharacterData();

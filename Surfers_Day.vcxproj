@@ -196,7 +196,7 @@ xcopy "$(ProjectDir)Assets\*" "$(OutDir)Assets\" /s /r /y /q</Command>
   <ItemGroup>
     <ClCompile Include="AssetLib.c" />
     <ClCompile Include="BGM.c" />
-    <ClCompile Include="BigWave.cpp" />
+    <ClCompile Include="BigWave.c" />
     <ClCompile Include="CameraShake.c" />
     <ClCompile Include="drone.c" />
     <ClCompile Include="ComboSystem.c" />

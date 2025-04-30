@@ -33,6 +33,7 @@ void game_init(void)
 	CP_Settings_RectMode(CP_POSITION_CORNER);
 	CP_Settings_TextSize(64);
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_LEFT, CP_TEXT_ALIGN_V_TOP);
+	CP_System_SetFrameRate(120);
 	// initialize variables and CProcessing settings for this gamestate
 }
 
@@ -50,16 +51,17 @@ void game_update(void)
 	DrawWater();
 	//	CP_Graphics_DrawRect(GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x-GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y);
 
-	RenderObjects();
+
 	UpdateKeyInput();
 	UpdateCharacterPosition();
 	UpdateObstaclesPosition();
 	UpdateItemsPosition();
+	CheckItemsCollision();
 	DrawNearBackGround();
+	RenderObjects();
 	RenderBatteries();
 	RenderSpeedItems();
 	RenderMedal();
-	CheckItemsCollision();
 
 	if (BigWaveData.WaveIndex >= BigWaveData.WaveRiderableStartIndex + 1 && BigWaveData.WaveIndex <= BigWaveData.WaveRiderableEndIndex - 1)
 	{
@@ -76,14 +78,7 @@ void game_update(void)
 
 	if (CharacterData.CharacterState == JUMPDOWN)
 	{
-		//Debug
-		CP_Settings_Fill(CP_Color_Create(128, 128, 128, 128));
-		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
 		CharacterData.JumpTimer += CP_System_GetDt();
-		//if (CharacterData.JumpTimer > 1.5f)
-		//{
-		//	SetCharacterState(STANDING);
-		//}
 	}
 	if (CharacterData.JumpTimer != 0.f)//TODO : nearly 0
 	{
@@ -95,8 +90,6 @@ void game_update(void)
 	}
 	if (CharacterData.CharacterState == COLLISION)
 	{
-		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 128));
-		CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, 40.f, 20.f);
 		CharacterData.CollisionTimer += CP_System_GetDt();
 		if (CharacterData.CollisionTimer > 1.5f)
 		{
@@ -113,7 +106,7 @@ void game_update(void)
 			CharacterData.EndWaveInvincibleTimer = 0.f;
 		}
 	}
-
+	
 	if (GameData.Speed < 3000.f)// update game speed
 	{
 		GameData.SpeedTimer += CP_System_GetDt();
@@ -145,9 +138,14 @@ void game_update(void)
 	//TEST
 	CharacterData.Score += CP_System_GetDt()*GameData.Speed*0.1f;
 	char ScoreBuffer[128] = { 0 };
-	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);
+	sprintf_s(ScoreBuffer, 128, "Score : %10.2f\n%.6f", CharacterData.Score, CP_System_GetDt());
 	CP_Font_DrawText(ScoreBuffer, 0.f, GameData.LaneMax.y);
 
+
+	if (CP_System_GetDt() > 0.016 * 2)
+	{
+		printf("delayed");
+	}
 }
 
 // use CP_Engine_SetNextGameState to specify this function as the exit function

@@ -63,7 +63,6 @@ void UpdateObstaclesPosition()
 			else
 			{
 				Obstacles[i].ObstaclePos.x -= GameData.Speed*CP_System_GetDt();
-				
 			}
 		}
 	}
@@ -82,9 +81,14 @@ bool CheckObstaclesCollision()
 	if (CharacterData.CharacterState == STANDING && !CharacterData.bEndWaveInvincible)
 	{
 		float CharacterMinX = CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x;
-		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x + CharacterData.CharacterCollisionOffset.x;
-		float CharacterMinY = CharacterData.CharacterPos.y;
+		float CharacterMaxX = CharacterMinX + CharacterData.CharacterCollisionSize.x;
+		float CharacterMinY = CharacterData.CharacterPos.y + CharacterData.CharacterCollisionOffset.y;
 		float CharacterMaxY = CharacterMinY + CharacterData.CharacterCollisionSize.y;
+		if (bDebugMode)
+		{
+			CP_Settings_Fill(CP_Color_Create(0, 0, 0, 100));
+			CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterMinX, GameData.LaneMin.y + CharacterMinY, CharacterMaxX - CharacterMinX, CharacterMaxY - CharacterMinY);
+		}
 		for (int i = 0;i < MAX_OBSTACLES;i++)
 		{
 			if (Obstacles[i].bIsValid)
@@ -229,7 +233,7 @@ void RenderCharacter_Internal()
 		}
 	}
 	float CharacterDrawRatio = 0.8f + 0.2f * (CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y));
-	if(CharacterData.CharacterState == WAVING)
+	if(CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 	{
 		CharacterDrawRatio = 0.7f;
 	}
@@ -243,22 +247,23 @@ void RenderCharacter_Internal()
 		100.f * (CharacterData.AnimationFrame+1) - 1,
 		100.f * (CharacterData.CharacterState + 1) - 1,
 		255);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 100));
-	CP_Graphics_DrawRect(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.CharacterCollisionOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y, CharacterData.CharacterCollisionSize.x, CharacterData.CharacterCollisionSize.y);
 }
 
 void RenderObjects()
 {
 	if (CharacterData.CharacterState == COLLISION || CharacterData.CharacterState == JUMPUP || CharacterData.CharacterState == JUMPDOWN)
 	{
-		CP_Settings_Fill(CP_Color_Create(255, 255, 0, 255));
+		CP_Settings_Fill(CP_Color_Create(255, 255, 0, 100));
 		for (int i = 0;i < MAX_OBSTACLES; i++)
 		{
 			if (Obstacles[i].bIsValid)
 			{
 				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
 				//CollisionDebug
-				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
+				if (bDebugMode)
+				{
+					CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
+				}
 			}
 		}
 		RenderCharacter_Internal();
@@ -278,11 +283,15 @@ void RenderObjects()
 			if (Obstacles[i].bIsValid)
 			{
 				// 장애물 그리기
-				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
+				CP_Image_Draw(Obstacles[i].ObstacleImage, floorf(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x), GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
 				//CollisionDebug
-				CP_Settings_Fill(CP_Color_Create(255, 255, 0, 255));
-				CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y+Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
+				if (bDebugMode)
+				{
+					CP_Settings_Fill(CP_Color_Create(255, 255, 0,100));
+					CP_Graphics_DrawRect(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x + Obstacles[i].ObstacleCollisionStartOffset.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y + Obstacles[i].ObstacleCollisionStartOffset.y, Obstacles[i].ObstacleCollisionSize.x + Obstacles[i].ObstacleCollisionStartOffset.x, Obstacles[i].ObstacleCollisionSize.y);
+				}
 			}
+
 		}
 
 		// 만약 캐릭터가 가장 아래쪽일 경우 (아직 안 그려졌다면)

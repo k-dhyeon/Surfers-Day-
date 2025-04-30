@@ -16,6 +16,9 @@ FBigWaveData BigWaveData;
 
 float InitGameSpeed = 200.f;
 
+//Debug only, Set false when release
+bool bDebugMode = false;
+
 void InitGameData()
 {
 	GameData.Speed = InitGameSpeed;
@@ -32,8 +35,8 @@ void InitGameData()
 void InitCharacterData()
 {
 	CharacterData.CharacterPos = CP_Vector_Set((GameData.LaneMax.x-GameData.LaneMin.x)/5.f,(GameData.LaneMax.y-GameData.LaneMin.y)/2.f);
-	CharacterData.CharacterCollisionSize = CP_Vector_Set(180.f,60.f);//TODO : Use Image and Set Collision Size
-	CharacterData.CharacterCollisionOffset = CP_Vector_Set(10.f, 0.f);
+	CharacterData.CharacterCollisionSize = CP_Vector_Set(90.f,40.f);//TODO : Use Image and Set Collision Size
+	CharacterData.CharacterCollisionOffset = CP_Vector_Set(55.f, -10.f);
 	CharacterData.JumpTimer = 0.f;
 	CharacterData.Energy = 200.f;
 	CharacterData.CollisionTimer = 0.f;
@@ -110,19 +113,19 @@ void SetCharacterState(ECharacterState NewState)
 			CharacterData.AnimationMaxFrame = 1;
 			break;
 		case JUMPUP :
-			CharacterData.AnimationMaxFrame = 1;
+			CharacterData.AnimationMaxFrame = 2;
 			break;
 		case JUMPDOWN :
-			CharacterData.AnimationMaxFrame = 1;
+			CharacterData.AnimationMaxFrame = 2;
 			break;
 		case COLLISION : 
 			CharacterData.AnimationMaxFrame = 2;
 			break;
 		case STARTWAVE :
-			CharacterData.AnimationMaxFrame = 1;
+			CharacterData.AnimationMaxFrame = 2;
 			break;
 		case WAVING : 
-			CharacterData.AnimationMaxFrame = 2;
+			CharacterData.AnimationMaxFrame = 1;
 			break;
 		case ENDWAVE : 
 			CharacterData.AnimationMaxFrame = 1;
@@ -131,6 +134,9 @@ void SetCharacterState(ECharacterState NewState)
 			CharacterData.AnimationMaxFrame = 2;
 			break;
 		case COMBO2 : 
+			CharacterData.AnimationMaxFrame = 2;
+			break;
+		case HEIGHESTWAVE:
 			CharacterData.AnimationMaxFrame = 2;
 			break;
 		default:

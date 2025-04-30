@@ -21,9 +21,23 @@ void UpdateWave()
 		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage);
 		BigWaveData.AnimationTimer += CP_System_GetDt();
 
-		if (CharacterData.CharacterState == WAVING)
+		if (CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 		{
 			CharacterData.Score += CP_System_GetDt() * GameData.Speed*0.2f;
+		}
+		if (BigWaveData.WaveIndex > BigWaveData.WaveRiderableStartIndex && BigWaveData.WaveIndex < BigWaveData.WaveRiderableEndIndex)
+		{
+			if (CharacterData.CharacterState == WAVING) 
+			{
+				SetCharacterState(HEIGHESTWAVE);
+			}
+		}
+		else
+		{
+			if (CharacterData.CharacterState == HEIGHESTWAVE)
+			{
+				SetCharacterState(WAVING);
+			}
 		}
 		float DrawOffsetY = BigWaveData.WaveIndex < BigWaveData.WaveMaxIndex / 2 ? BigWaveData.WaveImageSize.y/4.f * (AnimationNextTime - BigWaveData.AnimationTimer) / AnimationNextTime : BigWaveData.WaveImageSize.y / 4.f * (BigWaveData.AnimationTimer)/ AnimationNextTime;
 		if (!BigWaveData.bIsRiderable)
