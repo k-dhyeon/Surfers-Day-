@@ -27,10 +27,27 @@ float jitterInterval = 0.5f;
 void DrawLine(float CharacterX, float CharacterY, float DroneX, float DroneY);
 CP_Vector LerpVector(CP_Vector V1, CP_Vector V2, float Alpha);
 
+float AnimationTime = 0.f;
+int AnimationIndex = 0;
+
 
 
 void drone()
 {
+    AnimationTime += CP_System_GetDt();
+    if (AnimationTime > 0.3f)
+    {
+        if (AnimationIndex == 1)
+        {
+            AnimationIndex--;
+        }
+        else
+        {
+            AnimationIndex++;
+        }
+        AnimationTime = 0.f;
+        
+    }
     float DeltaDronePosX = targetPosition.x - CharacterData.CharacterPos.x;
     float DeltaDronePosY = targetPosition.y - CharacterData.CharacterPos.y;
 
@@ -75,10 +92,10 @@ void drone()
     dronePosy += DroneOffsetY + jitterCurrentY;
 
 	CP_Settings_Fill(CP_Color_Create(128, 128, 128, 255));
-    float DroneWidth = (float)CP_Image_GetWidth(DroneImage) * 2.f;
+    float DroneWidth = (float)CP_Image_GetWidth(DroneImage);// *2.f;
     float DroneHeight = (float)CP_Image_GetHeight(DroneImage) * 2.f;
-    CP_Image_Draw(DroneImage, dronePosx - DroneWidth/2.f, dronePosy - DroneHeight/2.f, DroneWidth, DroneHeight, 255);
-//    CP_Image_DrawSubImage(DroneImage, dronePosx - DroneWidth / 2.f, dronePosy - DroneHeight / 2.f, DroneWidth, DroneHeight, 255);
+    //CP_Image_Draw(DroneImage, dronePosx - DroneWidth/2.f, dronePosy - DroneHeight/2.f, DroneWidth, DroneHeight, 255);
+    CP_Image_DrawSubImage(DroneImage, dronePosx - DroneWidth / 2.f, dronePosy - DroneHeight / 2.f, DroneWidth, DroneHeight, 100.f* AnimationIndex,0.f,100.f * (AnimationIndex + 1),100.f, 255);
 	//CP_Graphics_DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x, GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y, dronePosx, dronePosy);
     float CharacterDrawRatio = 0.8f + 0.2f * (CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y));
     float HandOffsetDelta = (CharacterData.HandOffset.x - CharacterData.HandOffset.x * 0.8f)/2.f;
@@ -100,7 +117,7 @@ void DrawLine(float CharacterX, float CharacterY, float DroneX, float DroneY)
         bTargetPositive = false;
     }
     else if (bIsBackwardPressed && 120.f >= curveDepth)
-    {
+    {     
         bTargetPositive = true;
     }
     if (bTargetPositive)

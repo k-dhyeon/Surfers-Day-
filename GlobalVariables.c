@@ -32,7 +32,7 @@ void InitGameData()
 void InitCharacterData()
 {
 	CharacterData.CharacterPos = CP_Vector_Set((GameData.LaneMax.x-GameData.LaneMin.x)/5.f,(GameData.LaneMax.y-GameData.LaneMin.y)/2.f);
-	CharacterData.CharacterCollisionSize = CP_Vector_Set(180.f,25.f);//TODO : Use Image and Set Collision Size
+	CharacterData.CharacterCollisionSize = CP_Vector_Set(180.f,60.f);//TODO : Use Image and Set Collision Size
 	CharacterData.CharacterCollisionOffset = CP_Vector_Set(10.f, 0.f);
 	CharacterData.JumpTimer = 0.f;
 	CharacterData.Energy = 200.f;
@@ -122,7 +122,7 @@ void SetCharacterState(ECharacterState NewState)
 			CharacterData.AnimationMaxFrame = 1;
 			break;
 		case WAVING : 
-			CharacterData.AnimationMaxFrame = 1;
+			CharacterData.AnimationMaxFrame = 2;
 			break;
 		case ENDWAVE : 
 			CharacterData.AnimationMaxFrame = 1;
