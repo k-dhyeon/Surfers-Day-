@@ -34,20 +34,28 @@ int AnimationIndex = 0;
 
 void drone()
 {
-    AnimationTime += CP_System_GetDt();
-    if (AnimationTime > 0.3f)
+    if (CharacterData.Energy > 100.f)
     {
-        if (AnimationIndex == 1)
-        {
-            AnimationIndex--;
-        }
-        else
-        {
-            AnimationIndex++;
-        }
         AnimationTime = 0.f;
-        
+        AnimationIndex = 0;
     }
+    else
+    {
+        AnimationTime += CP_System_GetDt();
+        if (AnimationTime > 0.3f)
+        {
+            if (AnimationIndex == 1)
+            {
+                AnimationIndex--;
+            }
+            else
+            {
+                AnimationIndex++;
+            }
+            AnimationTime = 0.f;
+        }
+    }
+    
     float DeltaDronePosX = targetPosition.x - CharacterData.CharacterPos.x;
     float DeltaDronePosY = targetPosition.y - CharacterData.CharacterPos.y;
 
@@ -58,11 +66,11 @@ void drone()
 	dronePosy = CharacterData.CharacterPos.y + DeltaDronePosY + 30.f;
 	dronePosy *= 2.f;
 
-    if (CharacterData.CharacterState == WAVING)
-    {
-        dronePosx = CharacterData.CharacterPos.x - 100.f;
-        dronePosy = GameData.LaneMin.y - 100.f;
-    }
+    //if (CharacterData.CharacterState == WAVING)
+    //{
+    //    dronePosx = CharacterData.CharacterPos.x - 100.f;
+    //    dronePosy = GameData.LaneMin.y - 100.f;
+    //}
     if (dronePosy > CP_System_GetWindowHeight())
     {
         dronePosy = (float)CP_System_GetWindowHeight();

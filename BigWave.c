@@ -57,7 +57,7 @@ void UpdateWave()
 			if (BigWaveData.WaveIndex > BigWaveData.WaveMaxIndex)
 			{
 				RemoveWave();
-				if (CharacterData.CharacterState == WAVING)
+				if (CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 				{
 					SetCharacterState(ENDWAVE);
 					GameData.Speed = LastWavingGameSpeed;
@@ -84,7 +84,7 @@ void UpdateWave()
 				if (BigWaveData.WaveIndex > BigWaveData.WaveRiderableEndIndex)
 				{
 					BigWaveData.bIsRiderable = false;
-					if (CharacterData.CharacterState == WAVING)
+					if (CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 					{
 						SetCharacterState(ENDWAVE);
 						GameData.Speed = LastWavingGameSpeed;
@@ -127,7 +127,7 @@ void CheckRideWave()
 		}
 		else
 		{
-			if (CharacterData.CharacterState == WAVING)
+			if (CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 			{
 				SetCharacterState(ENDWAVE);
 				GameData.Speed = LastWavingGameSpeed;
@@ -136,7 +136,7 @@ void CheckRideWave()
 	}
 	else
 	{
-		if (CharacterData.CharacterState == WAVING)
+		if (CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 		{
 			SetCharacterState(ENDWAVE);
 			GameData.Speed = LastWavingGameSpeed;

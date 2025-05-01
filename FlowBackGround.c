@@ -60,16 +60,20 @@ void DrawWater()
 
 void DrawSkyBackGround()
 {
-    SkyAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed / 60.f;
+    // 시간에 따라 위치 이동
+    SkyAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed/60.f;
+
     float imageWidth = (float)CP_Image_GetWidth(SkyAnimationData.Image);
     float imageHeight = (float)CP_Image_GetHeight(SkyAnimationData.Image);
+
+    // 위치가 이미지 너비보다 왼쪽으로 벗어났다면 0으로 되돌림
+    if (SkyAnimationData.Position.x <= -imageWidth)
+    {
+        SkyAnimationData.Position.x += imageWidth;
+    }
     CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
     CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
-    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x - imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
-    if (SkyAnimationData.Position.x < -imageWidth)
-    {
-        SkyAnimationData.Position.x = (float)CP_System_GetWindowWidth();
-    }
+    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth*2, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
 }
 void DrawFarBackGround()
 {
@@ -120,23 +124,32 @@ void DrawBackGroundSeaGull()
 
 void DrawNearBackGround()
 {
-    NearBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed*1.1f;
+    CP_Image Sand = CP_Image_Load("./Assets/NearDistance.png");
+    float SandWidth = (float)CP_Image_GetWidth(Sand);
+    float SandHeight = (float)CP_Image_GetHeight(Sand);
+    CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+    CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x + SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+    CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x - SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+
+    // 더 빠르게 이동 (1.1배속)
+    NearBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed * 1.1f;
+
     float imageWidth = (float)CP_Image_GetWidth(NearBackgroundAnimationData.Image);
     float imageHeight = (float)CP_Image_GetHeight(NearBackgroundAnimationData.Image);
-    //CP_Image Sand = CP_Image_Load("./Assets/NearDistance.png");
-    //float SandWidth = (float)CP_Image_GetWidth(Sand);
-    //float SandHeight = (float)CP_Image_GetHeight(Sand);
-    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
-    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x + SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
-    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x - SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
 
+    // 이미지가 왼쪽 끝까지 갔을 경우, 자연스럽게 이어지도록 보정
+    if (NearBackgroundAnimationData.Position.x <= -imageWidth)
+    {
+        NearBackgroundAnimationData.Position.x += imageWidth;
+    }
+
+    // 두 장 이어 그리기
     CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
     CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
-    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x - imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
-    //CP_Image_DrawSubImage(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, (imageWidth / 2.f) * SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f) * (SeaAnimationData.SeaIndex + 1), imageHeight, 255);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth*2, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
 
-    if (NearBackgroundAnimationData.Position.x < -imageWidth)
-    {
-        NearBackgroundAnimationData.Position.x = (float)CP_System_GetWindowWidth();
-    }
+   
+
+    
+    //CP_Image_DrawSubImage(BridgeAnimationData.Image, 0.f, GameData.LaneMin.y - imageHeight, GameData.LaneMax.x, imageHeight, (imageWidth / 2.f) * SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f) * (SeaAnimationData.SeaIndex + 1), imageHeight, 255);
 }
