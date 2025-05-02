@@ -61,19 +61,19 @@ void DrawWater()
 void DrawSkyBackGround()
 {
     // 시간에 따라 위치 이동
-    SkyAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed/60.f;
+ //   SkyAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed/60.f;
 
-    float imageWidth = (float)CP_Image_GetWidth(SkyAnimationData.Image);
-    float imageHeight = (float)CP_Image_GetHeight(SkyAnimationData.Image);
+    float imageWidth = (float)CP_System_GetWindowWidth();//(float)CP_Image_GetWidth(SkyAnimationData.Image);
+    float imageHeight = (float)CP_System_GetWindowHeight()/2.f;//(float)CP_Image_GetHeight(SkyAnimationData.Image);
 
     // 위치가 이미지 너비보다 왼쪽으로 벗어났다면 0으로 되돌림
-    if (SkyAnimationData.Position.x <= -imageWidth)
-    {
-        SkyAnimationData.Position.x += imageWidth;
-    }
+    //if (SkyAnimationData.Position.x <= -imageWidth)
+    //{
+    //    SkyAnimationData.Position.x += imageWidth;
+    //}
     CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
-    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
-    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth*2, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
+//    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
+//    CP_Image_Draw(SkyAnimationData.Image, SkyAnimationData.Position.x + imageWidth*2, SkyAnimationData.Position.y, imageWidth, imageHeight, 255);
 }
 void DrawFarBackGround()
 {

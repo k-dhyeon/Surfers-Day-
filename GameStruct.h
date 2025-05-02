@@ -25,13 +25,15 @@ typedef enum EObsticleType {
 	TURTLE = 0,
 	BOX = 1,
 	Ball = 2,
-	Dolpin = 3,
+	Dolphin = 3,
 	Camera = 4,
 	Icecream = 5,
 	Starfish = 6,
 	Tube = 7,
 	Crab = 8,
 	Jellyfish = 9,
+	Shark = 10,
+	Reef = 11,
 }EObsticleType;
 
 

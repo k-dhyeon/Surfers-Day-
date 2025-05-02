@@ -15,14 +15,16 @@ FFarBackGroundImageAnimationData SeaGullAnimationData[MAX_SEAGULL_NUM];
 FObstacleData TurtleData;
 FObstacleData BoxData;
 FObstacleData BallData;
-FObstacleData DolpinData;
+FObstacleData DolphinData;
 FObstacleData CameraData;
 FObstacleData IcecreamData;
 FObstacleData StarFishData;
 FObstacleData TubeData;
 FObstacleData CrabData;
 FObstacleData JellyfishData;
-
+FObstacleData SharkData;
+FObstacleData ReefData;
+FObstacleData DrumData;
 
 FBatteryData BatteryData;
 
@@ -90,11 +92,11 @@ void InitAsset()
 	BallData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	BallData.Score = 50.f;
 
-	DolpinData.ObstacleImage = CP_Image_Load("./Assets/Dolpin.png");
-	DolpinData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
-	DolpinData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
-	DolpinData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
-	DolpinData.Score = 50.f;
+	DolphinData.ObstacleImage = CP_Image_Load("./Assets/Dolphin.png");
+	DolphinData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
+	DolphinData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
+	DolphinData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	DolphinData.Score = 50.f;
 
 	CameraData.ObstacleImage = CP_Image_Load("./Assets/Camera.png");
 	CameraData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
@@ -131,6 +133,25 @@ void InitAsset()
 	JellyfishData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
 	JellyfishData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	JellyfishData.Score = 50.f;
+
+	SharkData.ObstacleImage = CP_Image_Load("./Assets/Shark.png");
+	SharkData.ObstacleImageSize = CP_Vector_Set(100.f, 60.f);
+	SharkData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
+	SharkData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	SharkData.Score = 50.f;
+
+	ReefData.ObstacleImage = CP_Image_Load("./Assets/Reef.png");
+	ReefData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
+	ReefData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
+	ReefData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	ReefData.Score = 50.f;
+
+	DrumData.ObstacleImage = CP_Image_Load("./Assets/Drum.png");
+	DrumData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
+	DrumData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
+	DrumData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	DrumData.Score = 50.f;
+
 
 	BatteryData.BatteryImage = CP_Image_Load("./Assets/Battery.png");
 	BatteryData.BatteryImageSize = CP_Vector_Set(30.f, 30.f);

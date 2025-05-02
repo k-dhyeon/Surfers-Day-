@@ -321,7 +321,7 @@ int CompareByYPos(const void* a, const void* b) {
 
 void SetObstacleByRandom(int Index)
 {
-	unsigned int RandomNum = CP_Random_GetInt();
+	unsigned int RandomNum =  CP_Random_GetInt();
 	Obstacles[Index].bIsValid = true;
 	switch (RandomNum % OBSTACLE_NUM)
 	{
@@ -347,11 +347,11 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].Score = BallData.Score;
 		break;
 	case 3:
-		Obstacles[Index].ObstacleImage = DolpinData.ObstacleImage;
-		Obstacles[Index].ObstacleImageSize = DolpinData.ObstacleImageSize;
-		Obstacles[Index].ObstacleCollisionSize = DolpinData.ObstacleCollisionSize;
-		Obstacles[Index].ObstacleCollisionStartOffset = DolpinData.ObstacleCollisionStartOffset;
-		Obstacles[Index].Score = DolpinData.Score;
+		Obstacles[Index].ObstacleImage = DolphinData.ObstacleImage;
+		Obstacles[Index].ObstacleImageSize = DolphinData.ObstacleImageSize;
+		Obstacles[Index].ObstacleCollisionSize = DolphinData.ObstacleCollisionSize;
+		Obstacles[Index].ObstacleCollisionStartOffset = DolphinData.ObstacleCollisionStartOffset;
+		Obstacles[Index].Score = DolphinData.Score;
 		break;
 	case 4:
 		Obstacles[Index].ObstacleImage = CameraData.ObstacleImage;
@@ -394,6 +394,27 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = JellyfishData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = JellyfishData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = JellyfishData.Score;
+		break;
+	case 10:
+		Obstacles[Index].ObstacleImage = SharkData.ObstacleImage;
+		Obstacles[Index].ObstacleImageSize = SharkData.ObstacleImageSize;
+		Obstacles[Index].ObstacleCollisionSize = SharkData.ObstacleCollisionSize;
+		Obstacles[Index].ObstacleCollisionStartOffset = SharkData.ObstacleCollisionStartOffset;
+		Obstacles[Index].Score = SharkData.Score;
+		break;
+	case 11:
+		Obstacles[Index].ObstacleImage = ReefData.ObstacleImage;
+		Obstacles[Index].ObstacleImageSize = ReefData.ObstacleImageSize;
+		Obstacles[Index].ObstacleCollisionSize = ReefData.ObstacleCollisionSize;
+		Obstacles[Index].ObstacleCollisionStartOffset = ReefData.ObstacleCollisionStartOffset;
+		Obstacles[Index].Score = ReefData.Score;
+		break;
+	case 12:
+		Obstacles[Index].ObstacleImage = DrumData.ObstacleImage;
+		Obstacles[Index].ObstacleImageSize = DrumData.ObstacleImageSize;
+		Obstacles[Index].ObstacleCollisionSize = DrumData.ObstacleCollisionSize;
+		Obstacles[Index].ObstacleCollisionStartOffset = DrumData.ObstacleCollisionStartOffset;
+		Obstacles[Index].Score = DrumData.Score;
 		break;
 	default:
 		break;

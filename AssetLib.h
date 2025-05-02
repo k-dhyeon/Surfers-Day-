@@ -4,7 +4,7 @@
 #include "GameStruct.h"
 
 
-#define OBSTACLE_NUM 10
+#define OBSTACLE_NUM 13
 #define MAX_SEAGULL_NUM 5
 extern FSeaAnimationData SeaAnimationData;
 
@@ -18,13 +18,16 @@ extern FFarBackGroundImageAnimationData SeaGullAnimationData[];
 extern FObstacleData TurtleData;
 extern FObstacleData BoxData;
 extern FObstacleData BallData;
-extern FObstacleData DolpinData;
+extern FObstacleData DolphinData;
 extern FObstacleData CameraData;
 extern FObstacleData IcecreamData;
 extern FObstacleData StarFishData;
 extern FObstacleData TubeData;
 extern FObstacleData CrabData;
 extern FObstacleData JellyfishData;
+extern FObstacleData SharkData;
+extern FObstacleData ReefData;
+extern FObstacleData DrumData;
 
 extern FBatteryData BatteryData;
 

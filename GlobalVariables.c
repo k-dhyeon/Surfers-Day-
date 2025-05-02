@@ -46,7 +46,7 @@ void InitCharacterData()
 	CharacterData.AnimationFrame = 0;
 	CharacterData.CharaterDrawSize = CP_Vector_Set(200.f,200.f);
 	CharacterData.ComboIndex = 0;
-	CharacterData.HandOffset = CP_Vector_Set(200.f,-120.f);
+	CharacterData.HandOffset = CP_Vector_Set(200.f,-100.f);
 	SetCharacterState(STANDING);
 	for (int i = 0; i < COMBO_COMMAND_LENGTH;i++)
 	{
@@ -84,7 +84,7 @@ void InitItemData()
 	ReduceSpeedItem.ItemImageSize = CP_Vector_Set(50.f,50.f);
 	ReduceSpeedItem.ItemPos = CP_Vector_Set(CP_Random_RangeFloat(GameData.LaneMax.x / 2.f, GameData.LaneMax.x), GameData.LaneMax.y - GameData.LaneMin.y);
 	MedalItem.bIsValid = false;
-	MedalItem.ItemImage = CP_Image_Load("./Assets/Medal.png");
+	MedalItem.ItemImage = CP_Image_Load("./Assets/Trophy.png");
 	MedalItem.ItemImageSize = CP_Vector_Set(50.f, 50.f);
 	MedalItem.Score = 100.f;
 }
