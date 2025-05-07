@@ -66,20 +66,20 @@ void RankMenuUpdate()
 	CP_Graphics_DrawRect(PrevButtonPosX, PrevButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText("PREV", PrevButtonPosX + 50.f, PrevButtonPosY + 25.f);
+	CP_Font_DrawText("PREV", PrevButtonPosX + 75.f, PrevButtonPosY + 25.f);
 
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	CP_Graphics_DrawRect(NextButtonPosX, NextButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText("NEXT", NextButtonPosX + 50.f, NextButtonPosY + 25.f);
+	CP_Font_DrawText("NEXT", NextButtonPosX + 75.f, NextButtonPosY + 25.f);
 
 
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	CP_Graphics_DrawRect(RankMenuReturnToMainButtonPosX, RankMenuReturnToMainButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText("MAIN", RankMenuReturnToMainButtonPosX + 50.f, RankMenuReturnToMainButtonPosY + 25.f);
+	CP_Font_DrawText("MAIN", RankMenuReturnToMainButtonPosX + 75.f, RankMenuReturnToMainButtonPosY + 25.f);
 
 	UpdateRankMenuKeyInput();
 }

@@ -321,7 +321,7 @@ int CompareByYPos(const void* a, const void* b) {
 
 void SetObstacleByRandom(int Index)
 {
-	unsigned int RandomNum =  CP_Random_GetInt();
+	unsigned int RandomNum = CP_Random_GetInt();
 	Obstacles[Index].bIsValid = true;
 	switch (RandomNum % OBSTACLE_NUM)
 	{
@@ -331,14 +331,14 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = TurtleData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = TurtleData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = TurtleData.Score;
-		break;
+//		break;
 	case 1:
 		Obstacles[Index].ObstacleImage = BoxData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = BoxData.ObstacleImageSize;
 		Obstacles[Index].ObstacleCollisionSize = BoxData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = BoxData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = BoxData.Score;
-		break;
+//		break;
 	case 2:
 		Obstacles[Index].ObstacleImage = BallData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = BallData.ObstacleImageSize;
@@ -359,14 +359,14 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = CameraData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = CameraData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = CameraData.Score;
-		break;
+//		break;
 	case 5:
 		Obstacles[Index].ObstacleImage = IcecreamData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = IcecreamData.ObstacleImageSize;
 		Obstacles[Index].ObstacleCollisionSize = IcecreamData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = IcecreamData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = IcecreamData.Score;
-		break;
+//		break;
 	case 6:
 		Obstacles[Index].ObstacleImage = StarFishData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = StarFishData.ObstacleImageSize;

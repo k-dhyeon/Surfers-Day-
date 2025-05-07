@@ -148,6 +148,14 @@ void UpdateScoreBoardKeyInput(void)
 		}
 		
 	}
+	if (CP_Input_KeyDown(KEY_ENTER))
+	{
+		CP_Engine_SetNextGameState(game_init, game_update, game_exit);
+	}
+	if (CP_Input_KeyDown(KEY_ESCAPE))
+	{
+		CP_Engine_SetNextGameState(MainMenuInit, MainMenuUpdate, MainMenuExit);
+	}
 }
 
 

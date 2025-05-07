@@ -37,7 +37,8 @@ CP_Image MaxBattery;
 
 CP_Image DroneImage;
 
-
+CP_Image Sand;
+CP_Image Bridge;
 void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/game_to_dance.mp3");
@@ -56,7 +57,7 @@ void InitAsset()
 	SkyAnimationData.Position = CP_Vector_Set(0.f, 0.f);
 
 	FarBackgroundAnimationData.Image = CP_Image_Load("./Assets/LandScape.png");
-	FarBackgroundAnimationData.Position = CP_Vector_Set((float)CP_System_GetWindowWidth(), GameData.LaneMin.y - (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image));
+	FarBackgroundAnimationData.Position = CP_Vector_Set(0.f/*(float)CP_System_GetWindowWidth()*/, GameData.LaneMin.y - (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image));
 
 	NearBackgroundAnimationData.Image = CP_Image_Load("./Assets/BreakWater.png");
 	NearBackgroundAnimationData.Position = CP_Vector_Set(0.f, GameData.LaneMax.y);
@@ -67,12 +68,13 @@ void InitAsset()
 	{
 		SeaGullAnimationData[i].Image = CP_Image_Load("./Assets/SeaGull.png");
 		SeaGullAnimationData[i].Timer = CP_Random_RangeFloat(0.f,2.f);
-		SeaGullAnimationData[i].Index = CP_Random_RangeInt(0,4);
+		SeaGullAnimationData[i].Index = CP_Random_RangeInt(0,1);
 		SeaGullAnimationData[i].Position.x = CP_Random_RangeFloat((float)CP_System_GetWindowWidth(), CP_System_GetWindowWidth() + 1600.f);
 		SeaGullAnimationData[i].Position.y = CP_Random_RangeFloat(100.f, CP_System_GetWindowHeight() / 2.f - 150.f);
 		SeaGullAnimationData[i].PlayRatio = CP_Random_RangeFloat(0.4f, 2.f);
 	}
-	
+	Sand = CP_Image_Load("./Assets/NearDistance.png");
+	Bridge = CP_Image_Load("./Assets/Bridge.png");
 
 	TurtleData.ObstacleImage = CP_Image_Load("./Assets/Turtle.png");
 	TurtleData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
@@ -93,9 +95,9 @@ void InitAsset()
 	BallData.Score = 50.f;
 
 	DolphinData.ObstacleImage = CP_Image_Load("./Assets/Dolphin.png");
-	DolphinData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
-	DolphinData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
-	DolphinData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	DolphinData.ObstacleImageSize = CP_Vector_Set(200.f, 120.f);
+	DolphinData.ObstacleCollisionStartOffset = CP_Vector_Set(30.f, 50.f);
+	DolphinData.ObstacleCollisionSize = CP_Vector_Set(80.f, 40.f);
 	DolphinData.Score = 50.f;
 
 	CameraData.ObstacleImage = CP_Image_Load("./Assets/Camera.png");
@@ -135,21 +137,21 @@ void InitAsset()
 	JellyfishData.Score = 50.f;
 
 	SharkData.ObstacleImage = CP_Image_Load("./Assets/Shark.png");
-	SharkData.ObstacleImageSize = CP_Vector_Set(100.f, 60.f);
-	SharkData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
-	SharkData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	SharkData.ObstacleImageSize = CP_Vector_Set(150.f, 90.f);
+	SharkData.ObstacleCollisionStartOffset = CP_Vector_Set(30.f, 40.f);
+	SharkData.ObstacleCollisionSize = CP_Vector_Set(60.f, 30.f);
 	SharkData.Score = 50.f;
 
 	ReefData.ObstacleImage = CP_Image_Load("./Assets/Reef.png");
-	ReefData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
-	ReefData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
-	ReefData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	ReefData.ObstacleImageSize = CP_Vector_Set(100.f, 60.f);
+	ReefData.ObstacleCollisionStartOffset = CP_Vector_Set(30.f, 20.f);
+	ReefData.ObstacleCollisionSize = CP_Vector_Set(20.f, 40.f);
 	ReefData.Score = 50.f;
 
 	DrumData.ObstacleImage = CP_Image_Load("./Assets/Drum.png");
-	DrumData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
-	DrumData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
-	DrumData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
+	DrumData.ObstacleImageSize = CP_Vector_Set(200.f, 120.f);
+	DrumData.ObstacleCollisionStartOffset = CP_Vector_Set(40.f, 40.f);
+	DrumData.ObstacleCollisionSize = CP_Vector_Set(80.f, 40.f);
 	DrumData.Score = 50.f;
 
 

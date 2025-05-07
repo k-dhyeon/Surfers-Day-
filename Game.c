@@ -61,7 +61,7 @@ void game_update(void)
 	RenderObjects();
 	RenderBatteries();
 	RenderSpeedItems();
-	RenderMedal();
+	
 
 	if (BigWaveData.WaveIndex >= BigWaveData.WaveRiderableStartIndex + 1 && BigWaveData.WaveIndex <= BigWaveData.WaveRiderableEndIndex - 1)
 	{
@@ -70,7 +70,7 @@ void game_update(void)
 
 		CP_Image_Draw(WaveTop, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y + DrawOffsetY, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, 150);
 	}
-
+	RenderMedal();
 	drone();
 	energybar();
 
@@ -136,11 +136,6 @@ void game_update(void)
 	}
 
 	//TEST
-	CharacterData.Score += CP_System_GetDt()*GameData.Speed*0.1f;
-	char ScoreBuffer[128] = { 0 };
-	sprintf_s(ScoreBuffer, 128, "Score : %10.2f\n%.6f", CharacterData.Score, CP_System_GetDt());
-	CP_Font_DrawText(ScoreBuffer, 0.f, GameData.LaneMax.y);
-
 
 	if (CP_System_GetDt() > 0.016 * 2)
 	{

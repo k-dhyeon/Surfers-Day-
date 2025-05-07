@@ -39,5 +39,7 @@ extern CP_Image HighBattery;
 extern CP_Image MaxBattery;
 
 extern CP_Image DroneImage;
+extern CP_Image Sand;
+extern CP_Image Bridge;
 
 void InitAsset();

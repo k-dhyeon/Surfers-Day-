@@ -77,7 +77,7 @@ void DrawSkyBackGround()
 }
 void DrawFarBackGround()
 {
-    FarBackgroundAnimationData.Position.x -= CP_System_GetDt()*GameData.Speed/30.f;
+ /*   FarBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed / 30.f;
     float imageWidth = (float)CP_Image_GetWidth(FarBackgroundAnimationData.Image);
     float imageHeight = (float)CP_Image_GetHeight(FarBackgroundAnimationData.Image);
     CP_Image_Draw(FarBackgroundAnimationData.Image, FarBackgroundAnimationData.Position.x, FarBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
@@ -87,6 +87,20 @@ void DrawFarBackGround()
     {
         FarBackgroundAnimationData.Position.x = (float)CP_System_GetWindowWidth();
     }
+ */
+    FarBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed / 30.f;
+    // 이미지가 왼쪽 끝까지 갔을 경우, 자연스럽게 이어지도록 보정
+    
+    float BridgeWidth = (float)CP_Image_GetWidth(Bridge)*3.f;
+    float BridgeHeight = (float)CP_Image_GetHeight(Bridge) * 3.f;
+    if (FarBackgroundAnimationData.Position.x <= -BridgeWidth)
+    {
+        FarBackgroundAnimationData.Position.x += BridgeWidth;
+    }
+    float DrawHeight = FarBackgroundAnimationData.Position.y - 40.f;
+    CP_Image_Draw(Bridge, FarBackgroundAnimationData.Position.x, DrawHeight, BridgeWidth, BridgeHeight, 255);
+    CP_Image_Draw(Bridge, FarBackgroundAnimationData.Position.x + BridgeWidth, DrawHeight, BridgeWidth, BridgeHeight, 255);
+    CP_Image_Draw(Bridge, FarBackgroundAnimationData.Position.x + BridgeWidth *2.f, DrawHeight, BridgeWidth, BridgeHeight, 255);
 }
 
 void DrawBackGroundSeaGull()
@@ -95,13 +109,13 @@ void DrawBackGroundSeaGull()
     {
         SeaGullAnimationData[i].Timer += CP_System_GetDt()* SeaGullAnimationData[i].PlayRatio;
         SeaGullAnimationData[i].Position.x -= CP_System_GetDt() * GameData.Speed / 5.f * SeaGullAnimationData[i].PlayRatio;
-        float imageWidth = (float)CP_Image_GetWidth(SeaGullAnimationData[i].Image) / 5.f;
+        float imageWidth = (float)CP_Image_GetWidth(SeaGullAnimationData[i].Image) / 2.f;
         float imageHeight = (float)CP_Image_GetHeight(SeaGullAnimationData[i].Image);
-        CP_Image_DrawSubImage(SeaGullAnimationData[i].Image, SeaGullAnimationData[i].Position.x, SeaGullAnimationData[i].Position.y, imageWidth, imageHeight, imageWidth * SeaGullAnimationData[i].Index, 0.f, imageWidth * (SeaGullAnimationData[i].Index + 1), imageHeight, 255);
+        CP_Image_DrawSubImage(SeaGullAnimationData[i].Image, SeaGullAnimationData[i].Position.x, SeaGullAnimationData[i].Position.y, imageWidth*2.f, imageHeight*2.f, imageWidth * SeaGullAnimationData[i].Index, 0.f, imageWidth * (SeaGullAnimationData[i].Index + 1), imageHeight, 255);
 
         if (SeaGullAnimationData[i].Timer > 1.f)
         {
-            if (SeaGullAnimationData[i].Index == 4)
+            if (SeaGullAnimationData[i].Index == 1)
             {
                 SeaGullAnimationData[i].Index = 0;
             }
@@ -124,7 +138,7 @@ void DrawBackGroundSeaGull()
 
 void DrawNearBackGround()
 {
-    CP_Image Sand = CP_Image_Load("./Assets/NearDistance.png");
+    
     float SandWidth = (float)CP_Image_GetWidth(Sand);
     float SandHeight = (float)CP_Image_GetHeight(Sand);
     CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
