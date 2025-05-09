@@ -22,7 +22,7 @@ void DrawWater()
     }
     float imageWidth = (float)CP_Image_GetWidth(SeaAnimationData.SeaImage);
     float imageHeight = (float)CP_Image_GetHeight(SeaAnimationData.SeaImage);
-    CP_Image_DrawSubImage(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y, (imageWidth / 2.f)* SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f)* (SeaAnimationData.SeaIndex+1), imageHeight, 255);
+    CP_Image_DrawSubImage(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y + 40.f, (imageWidth / 2.f)* SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f)* (SeaAnimationData.SeaIndex+1), imageHeight, 255);
     //TEST
     //CP_Image_Draw(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y,255 );
 }
@@ -111,7 +111,7 @@ void DrawBackGroundSeaGull()
         SeaGullAnimationData[i].Position.x -= CP_System_GetDt() * GameData.Speed / 5.f * SeaGullAnimationData[i].PlayRatio;
         float imageWidth = (float)CP_Image_GetWidth(SeaGullAnimationData[i].Image) / 2.f;
         float imageHeight = (float)CP_Image_GetHeight(SeaGullAnimationData[i].Image);
-        CP_Image_DrawSubImage(SeaGullAnimationData[i].Image, SeaGullAnimationData[i].Position.x, SeaGullAnimationData[i].Position.y, imageWidth*2.f, imageHeight*2.f, imageWidth * SeaGullAnimationData[i].Index, 0.f, imageWidth * (SeaGullAnimationData[i].Index + 1), imageHeight, 255);
+        CP_Image_DrawSubImage(SeaGullAnimationData[i].Image, SeaGullAnimationData[i].Position.x, SeaGullAnimationData[i].Position.y, imageWidth* SeaGullAnimationData[i].PlayRatio, imageHeight* SeaGullAnimationData[i].PlayRatio, imageWidth * SeaGullAnimationData[i].Index, 0.f, imageWidth * (SeaGullAnimationData[i].Index + 1), imageHeight, 255);
 
         if (SeaGullAnimationData[i].Timer > 1.f)
         {
@@ -139,11 +139,11 @@ void DrawBackGroundSeaGull()
 void DrawNearBackGround()
 {
     
-    float SandWidth = (float)CP_Image_GetWidth(Sand);
-    float SandHeight = (float)CP_Image_GetHeight(Sand);
-    CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
-    CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x + SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
-    CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x - SandWidth, NearBackgroundAnimationData.Position.y, SandWidth, SandHeight, 255);
+    //float SandWidth = (float)CP_Image_GetWidth(Sand);
+    //float SandHeight = (float)CP_Image_GetHeight(Sand);
+    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y - 100.f, SandWidth, SandHeight, 255);
+    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x + SandWidth, NearBackgroundAnimationData.Position.y - 100.f, SandWidth, SandHeight, 255);
+    //CP_Image_Draw(Sand, NearBackgroundAnimationData.Position.x - SandWidth, NearBackgroundAnimationData.Position.y - 100.f, SandWidth, SandHeight, 255);
 
     // 더 빠르게 이동 (1.1배속)
     NearBackgroundAnimationData.Position.x -= CP_System_GetDt() * GameData.Speed * 1.1f;
@@ -158,9 +158,9 @@ void DrawNearBackGround()
     }
 
     // 두 장 이어 그리기
-    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
-    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
-    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth*2, NearBackgroundAnimationData.Position.y, imageWidth, imageHeight, 255);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x, NearBackgroundAnimationData.Position.y - 40.f, imageWidth, imageHeight, 255);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth, NearBackgroundAnimationData.Position.y - 40.f, imageWidth, imageHeight, 255);
+    CP_Image_Draw(NearBackgroundAnimationData.Image, NearBackgroundAnimationData.Position.x + imageWidth*2, NearBackgroundAnimationData.Position.y - 40.f, imageWidth, imageHeight, 255);
 
    
 

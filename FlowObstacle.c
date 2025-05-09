@@ -62,7 +62,7 @@ void UpdateObstaclesPosition()
 			}
 			else
 			{
-				Obstacles[i].ObstaclePos.x -= GameData.Speed*CP_System_GetDt();
+				Obstacles[i].ObstaclePos.x -= GameData.Speed*CP_System_GetDt() * Obstacles[i].SpeedMultiplier;
 			}
 		}
 	}
@@ -110,6 +110,25 @@ bool CheckObstaclesCollision()
 					}
 					return true;
 				}
+			}
+		}
+		if (WhaleData.bIsValid)
+		{
+			float ObstacleMinX = WhaleData.ObstaclePos.x + WhaleData.ObstacleCollisionStartOffset.x;
+			float ObstacleMaxX = WhaleData.ObstaclePos.x + WhaleData.ObstacleCollisionStartOffset.x + WhaleData.ObstacleCollisionSize.x;
+			float ObstacleMinY = WhaleData.ObstaclePos.y + WhaleData.ObstacleCollisionStartOffset.y - GameData.LaneMin.y;
+			float ObstacleMaxY = WhaleData.ObstaclePos.y + WhaleData.ObstacleCollisionStartOffset.y + WhaleData.ObstacleCollisionSize.y;
+			if (ObstacleMinX < CharacterMaxX &&
+				ObstacleMaxX > CharacterMinX &&
+				ObstacleMinY < CharacterMaxY &&
+				ObstacleMaxY > CharacterMinY)//check AABB
+			{
+				CharacterData.Energy -= WhaleData.Score/10.f;
+				if (CharacterData.Energy < 0.f)
+				{
+					CharacterData.Energy = 0.f;
+				}
+				return true;
 			}
 		}
 	}
@@ -258,7 +277,7 @@ void RenderObjects()
 		{
 			if (Obstacles[i].bIsValid)
 			{
-				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
+				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x*Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, 255);
 				//CollisionDebug
 				if (bDebugMode)
 				{
@@ -283,7 +302,7 @@ void RenderObjects()
 			if (Obstacles[i].bIsValid)
 			{
 				// 장애물 그리기
-				CP_Image_Draw(Obstacles[i].ObstacleImage, floorf(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x), GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x, Obstacles[i].ObstacleImageSize.y, 255);
+				CP_Image_Draw(Obstacles[i].ObstacleImage, floorf(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x), GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x * Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, 255);
 				//CollisionDebug
 				if (bDebugMode)
 				{
@@ -419,6 +438,8 @@ void SetObstacleByRandom(int Index)
 	default:
 		break;
 	}
+	Obstacles[Index].SizeMultiplier = CP_Random_RangeFloat(1.f,1.5f);
+	Obstacles[Index].SpeedMultiplier = CP_Random_RangeFloat(0.5f, 1.5f);
 	if (CP_Random_RangeInt(0,4) < 1)//20%
 	{
 		float CharacterPosCenterY = CharacterData.CharacterPos.y + CharacterData.CharacterCollisionSize.y/2.f;
@@ -428,7 +449,7 @@ void SetObstacleByRandom(int Index)
 	}
 	else
 	{
-		float RandomY = CP_Random_RangeFloat(-Obstacles[Index].ObstacleCollisionStartOffset.y, GameData.LaneMax.y - GameData.LaneMin.y - Obstacles[Index].ObstacleCollisionSize.y - Obstacles[Index].ObstacleCollisionStartOffset.y);
+		float RandomY = CP_Random_RangeFloat(-Obstacles[Index].ObstacleCollisionStartOffset.y * Obstacles[Index].SizeMultiplier, GameData.LaneMax.y - GameData.LaneMin.y - Obstacles[Index].ObstacleCollisionSize.y - Obstacles[Index].ObstacleCollisionStartOffset.y * Obstacles[Index].SizeMultiplier);
 		Obstacles[Index].ObstaclePos = CP_Vector_Set(GameData.LaneMax.x, RandomY);
 	}
 	SortObstacles();

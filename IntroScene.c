@@ -15,7 +15,7 @@ void Intro_init(void)
 	CP_System_SetWindowTitle("Surfers_Day");
 	CP_Settings_ImageMode(CP_POSITION_CORNER);
 	DigipenIcon = CP_Image_Load("./Assets/DigiPen_RED.png");
-	TeamIcon = CP_Image_Load("./Assets/Racing Laboratory.png");
+	TeamIcon = CP_Image_Load("./Assets/logo.png");
 	DeltaTime = 0.f;
 	WindowCenterX = CP_System_GetWindowWidth()/2.f;
 	WindowCenterY = CP_System_GetWindowHeight() / 2.f;
@@ -42,8 +42,8 @@ void Intro_update(void)
 	}
 	else
 	{
-		float TeamIconWidth = (float)CP_Image_GetWidth(TeamIcon) * 0.5f;
-		float TeamIconHeight = (float)CP_Image_GetHeight(TeamIcon) * 0.5f;
+		float TeamIconWidth = (float)CP_Image_GetWidth(TeamIcon) * 7.f;
+		float TeamIconHeight = (float)CP_Image_GetHeight(TeamIcon) * 7.f;
 		if (DeltaTime < 7.5f)
 		{
 			CP_Image_Draw(TeamIcon, WindowCenterX - (TeamIconWidth / 2.f), WindowCenterY - TeamIconHeight / 2.f, TeamIconWidth, TeamIconHeight, MapToInt((DeltaTime - 5.f) / 2.5f));

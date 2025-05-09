@@ -109,9 +109,21 @@ void drone()
     if (CharacterData.CharacterState == HEIGHESTWAVE)
     {
         CharacterDrawRatio = 0.5f;
+        DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x - 30.f, GameData.LaneMin.y + CharacterData.CharacterPos.y * CharacterDrawRatio - 80.f, dronePosx, dronePosy);
     }
-    float HandOffsetDelta = (CharacterData.HandOffset.x - CharacterData.HandOffset.x * 0.8f)/2.f;
-    DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x - HandOffsetDelta * (1 - CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y)), GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y * CharacterDrawRatio, dronePosx, dronePosy);
+    else if (CharacterData.CharacterState == STARTWAVE || CharacterData.CharacterState == ENDWAVE)
+    {
+        DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x - 20.f, GameData.LaneMin.y + CharacterData.CharacterPos.y * CharacterDrawRatio - 70.f, dronePosx, dronePosy);
+    }
+    else if (CharacterData.CharacterState == WAVING)
+    {
+        DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x - 30.f, GameData.LaneMin.y + CharacterData.CharacterPos.y * CharacterDrawRatio - 48.f, dronePosx, dronePosy);
+    }
+    else
+    {
+        float HandOffsetDelta = (CharacterData.HandOffset.x - CharacterData.HandOffset.x * 0.8f) / 2.f;
+        DrawLine(GameData.LaneMin.x + CharacterData.CharacterPos.x + CharacterData.HandOffset.x - HandOffsetDelta * (1 - CharacterData.CharacterPos.y / (GameData.LaneMax.y - GameData.LaneMin.y)), GameData.LaneMin.y + CharacterData.CharacterPos.y + CharacterData.HandOffset.y * CharacterDrawRatio, dronePosx, dronePosy);
+    }
 }
 
 void DrawLine(float CharacterX, float CharacterY, float DroneX, float DroneY)

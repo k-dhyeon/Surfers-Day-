@@ -28,6 +28,7 @@ extern FObstacleData JellyfishData;
 extern FObstacleData SharkData;
 extern FObstacleData ReefData;
 extern FObstacleData DrumData;
+extern FObstacleData WhaleData;
 
 extern FBatteryData BatteryData;
 
@@ -41,5 +42,7 @@ extern CP_Image MaxBattery;
 extern CP_Image DroneImage;
 extern CP_Image Sand;
 extern CP_Image Bridge;
+extern CP_Image ScoreBoardBackground;
+extern CP_Image ScoreBoardInGame;
 
 void InitAsset();

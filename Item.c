@@ -92,7 +92,7 @@ void UpdateItemsPosition()
 		}
 		else
 		{
-			MedalItem.ItemPos.y += GameData.Speed * CP_System_GetDt() * 0.1f;
+			MedalItem.ItemPos.y += CP_System_GetDt()*100.f;
 		}
 	}
 }

@@ -94,7 +94,7 @@ void ScoreBoradUpdate(void)
 		}
 		CP_Graphics_DrawRect(WindowCenterX - 220.f + offset*i, WindowCenterY - 300.f, 100.f, 100.f);
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-		CP_Font_DrawText(TempStr, WindowCenterX - 220.f + offset * i, WindowCenterY - 300.f);
+		CP_Font_DrawText(TempStr, WindowCenterX - 192.f + offset * i, WindowCenterY - 295.f);
 	}
 
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));

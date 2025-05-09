@@ -26,11 +26,11 @@ void MainMenuInit(void)
 	CP_Settings_RectMode(CP_POSITION_CORNER);
 	WindowCenterX = (float)CP_System_GetWindowWidth()/2.f;
 	WindowCenterY = (float)CP_System_GetWindowHeight()/2.f;
-	StartButtonPosX = WindowCenterX - (ButtonSizeX / 2.f) ;
+	StartButtonPosX = WindowCenterX + WindowCenterX/2.f - (ButtonSizeX / 2.f) ;
 	StartButtonPosY = WindowCenterY - (ButtonSizeY)-5.f;
-	QuitButtonPosX = WindowCenterX - (ButtonSizeX / 2.f);
+	QuitButtonPosX = WindowCenterX + WindowCenterX / 2.f - (ButtonSizeX / 2.f);
 	QuitButtonPosY = WindowCenterY + (ButtonSizeY)+5.f;
-	RankButtonPosX = WindowCenterX - (ButtonSizeX / 2.f);
+	RankButtonPosX = WindowCenterX + WindowCenterX / 2.f - (ButtonSizeX / 2.f);
 	RankButtonPosY = WindowCenterY;
 	PlayMainMenuBGM();
 

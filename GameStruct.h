@@ -69,6 +69,8 @@ typedef struct FObstacleData {
 
 	CP_Image ObstacleImage;
 	float Score;
+	float SizeMultiplier;
+	float SpeedMultiplier;
 }FObstacleData;
 
 typedef struct FGameData {

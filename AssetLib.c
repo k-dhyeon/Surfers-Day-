@@ -25,6 +25,7 @@ FObstacleData JellyfishData;
 FObstacleData SharkData;
 FObstacleData ReefData;
 FObstacleData DrumData;
+FObstacleData WhaleData;
 
 FBatteryData BatteryData;
 
@@ -39,6 +40,10 @@ CP_Image DroneImage;
 
 CP_Image Sand;
 CP_Image Bridge;
+
+CP_Image ScoreBoardBackground;
+CP_Image ScoreBoardInGame;
+
 void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/game_to_dance.mp3");
@@ -73,7 +78,7 @@ void InitAsset()
 		SeaGullAnimationData[i].Position.y = CP_Random_RangeFloat(100.f, CP_System_GetWindowHeight() / 2.f - 150.f);
 		SeaGullAnimationData[i].PlayRatio = CP_Random_RangeFloat(0.4f, 2.f);
 	}
-	Sand = CP_Image_Load("./Assets/NearDistance.png");
+	Sand = CP_Image_Load("./Assets/BreakWater.png");
 	Bridge = CP_Image_Load("./Assets/Bridge.png");
 
 	TurtleData.ObstacleImage = CP_Image_Load("./Assets/Turtle.png");
@@ -154,6 +159,11 @@ void InitAsset()
 	DrumData.ObstacleCollisionSize = CP_Vector_Set(80.f, 40.f);
 	DrumData.Score = 50.f;
 
+	WhaleData.ObstacleImage = CP_Image_Load("./Assets/Whale.png");
+	WhaleData.ObstacleImageSize = CP_Vector_Set(3600.f, 192.f);
+	WhaleData.ObstacleCollisionStartOffset = CP_Vector_Set(650.f, 0.f);
+	WhaleData.ObstacleCollisionSize = CP_Vector_Set(1000.f, 300.f);
+	WhaleData.Score = 1000.f;
 
 	BatteryData.BatteryImage = CP_Image_Load("./Assets/Battery.png");
 	BatteryData.BatteryImageSize = CP_Vector_Set(30.f, 30.f);
@@ -166,5 +176,6 @@ void InitAsset()
 	MaxBattery = CP_Image_Load("./Assets/100Battery.png");
 
 	DroneImage = CP_Image_Load("./Assets/Drone.png");
+	ScoreBoardInGame = CP_Image_Load("./Assets/ScoreBoardIngame.png");
 }
 

@@ -57,10 +57,10 @@ void game_update(void)
 	UpdateObstaclesPosition();
 	UpdateItemsPosition();
 	CheckItemsCollision();
-	DrawNearBackGround();
 	RenderObjects();
 	RenderBatteries();
 	RenderSpeedItems();
+	DrawNearBackGround();
 	
 
 	if (BigWaveData.WaveIndex >= BigWaveData.WaveRiderableStartIndex + 1 && BigWaveData.WaveIndex <= BigWaveData.WaveRiderableEndIndex - 1)
@@ -70,6 +70,7 @@ void game_update(void)
 
 		CP_Image_Draw(WaveTop, 0.f, GameData.LaneMin.y - BigWaveData.WaveImageSize.y + DrawOffsetY, BigWaveData.WaveImageSize.x, BigWaveData.WaveImageSize.y, 150);
 	}
+	RenderWhale();
 	RenderMedal();
 	drone();
 	energybar();

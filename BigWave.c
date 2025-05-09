@@ -2,15 +2,24 @@
 #include "cprocessing.h"
 #include "stdio.h"
 #include "Item.h"
+#include "AssetLib.h"
 
 float LastWavingGameSpeed = 0.f;
 float AnimationNextTime = 2.f;
+
+int WhaleImageIndex;
+float WhaleAnimationTimer;
+
 void BeginWave()
 {
 	BigWaveData.bIsValid = true;
 	BigWaveData.AnimationTimer = 0.f;
 	BigWaveData.WaveIndex = 0;
 	BigWaveData.WaveMaxIndex = 8;
+	WhaleData.bIsValid = CP_Random_GetBool();
+	WhaleData.ObstaclePos = CP_Vector_Set(GameData.LaneMax.x,GameData.LaneMin.y);
+	WhaleImageIndex = 0;
+	WhaleAnimationTimer = 0.f;
 }
 
 void UpdateWave()
@@ -102,7 +111,10 @@ void UpdateWave()
 			BeginWave();
 		}
 	}
+
+	
 	CheckRideWave();
+
 }
 
 void RemoveWave()
@@ -110,6 +122,7 @@ void RemoveWave()
 	BigWaveData.bIsValid = false;
 	BigWaveData.bIsRiderable = false;
 	BigWaveData.WaveETA = CP_Random_RangeFloat(10.f, 20.f);
+	WhaleData.bIsValid = false;
 }
 
 void CheckRideWave()
@@ -140,6 +153,38 @@ void CheckRideWave()
 		{
 			SetCharacterState(ENDWAVE);
 			GameData.Speed = LastWavingGameSpeed;
+		}
+	}
+}
+
+void RenderWhale()
+{
+	if (WhaleData.bIsValid)
+	{
+		CP_Image_DrawSubImage(WhaleData.ObstacleImage, WhaleData.ObstaclePos.x, WhaleData.ObstaclePos.y-320.f, WhaleData.ObstacleImageSize.x/3.f * 3.0f, WhaleData.ObstacleImageSize.y * 3.0f,
+			WhaleData.ObstacleImageSize.x/3 * WhaleImageIndex,
+			0,
+			(WhaleData.ObstacleImageSize.x/3) * (WhaleImageIndex + 1),
+			WhaleData.ObstacleImageSize.y,
+			255);
+		WhaleData.ObstaclePos.x -= 300.f * CP_System_GetDt();
+		WhaleAnimationTimer += CP_System_GetDt();
+		if (WhaleAnimationTimer >1.f)
+		{
+			WhaleAnimationTimer = 0;
+			if (WhaleImageIndex == 2)
+			{
+				WhaleImageIndex = 0;
+			}
+			else
+			{
+				WhaleImageIndex++;
+			}
+		}
+		if (bDebugMode)
+		{
+			CP_Settings_Fill(CP_Color_Create(255, 255, 0, 100));
+			CP_Graphics_DrawRect(GameData.LaneMin.x + WhaleData.ObstaclePos.x + WhaleData.ObstacleCollisionStartOffset.x, WhaleData.ObstaclePos.y + WhaleData.ObstacleCollisionStartOffset.y, WhaleData.ObstacleCollisionSize.x + WhaleData.ObstacleCollisionStartOffset.x, WhaleData.ObstacleCollisionSize.y);
 		}
 	}
 }

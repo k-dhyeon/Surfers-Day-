@@ -9,3 +9,5 @@ void UpdateWave();
 void RemoveWave();
 
 void CheckRideWave();
+
+void RenderWhale();
