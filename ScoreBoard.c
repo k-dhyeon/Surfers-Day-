@@ -29,12 +29,13 @@ char PlayerInitial[4];
 void ScoreBoradInit(void)
 {
 	CP_System_SetWindowSize(1600, 900);
-	RestartPosX = WindowCenterX - 260.f;
-	RestartPosY = WindowCenterY;
-	GoToMainPosX = WindowCenterX + 110.f;
-	GoToMainPosY = WindowCenterY;
 	SocreBoardBtnSizeX = 250.f;
 	SocreBoardBtnSizeY = 100.f;
+	RestartPosX = WindowCenterX - SocreBoardBtnSizeX * 1.5f;
+	RestartPosY = WindowCenterY;
+	GoToMainPosX = WindowCenterX + SocreBoardBtnSizeX / 2.f;
+	GoToMainPosY = WindowCenterY;
+
 
 	for (int i = 0;i < 150;i++)
 	{
@@ -59,12 +60,14 @@ void ScoreBoradUpdate(void)
 {
 	CP_Settings_Fill(CP_Color_Create(70, 70, 70, 30));
 	CP_Graphics_DrawRect(0,0,1600, 900);	
-	
+
+	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_TOP);
+
 	char ScoreBuffer[128] = { 0 };
-	sprintf_s(ScoreBuffer, 128, "Score : %f", CharacterData.Score);
+	sprintf_s(ScoreBuffer, 128, "Score : %.2f", CharacterData.Score);
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Settings_TextSize(80.f);
-	CP_Font_DrawText(ScoreBuffer, WindowCenterX - 220.f, WindowCenterY - 150.f);
+	CP_Font_DrawText(ScoreBuffer, WindowCenterX, WindowCenterY - 100.f);
 
 	if (CurrentPlayerIndex != -1)
 	{
@@ -72,14 +75,15 @@ void ScoreBoradUpdate(void)
 		sprintf_s(RankBuffer, 128, "Your Rank : %d", CurrentPlayerIndex+1);
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 		CP_Settings_TextSize(80.f);
-		CP_Font_DrawText(RankBuffer, WindowCenterX - 220.f, WindowCenterY - 200.f);
+		CP_Font_DrawText(RankBuffer, WindowCenterX, WindowCenterY - 180.f);
 	}
 	else
 	{
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 		CP_Settings_TextSize(80.f);
-		CP_Font_DrawText("Out of Rank", WindowCenterX - 220.f, WindowCenterY - 200.f);
+		CP_Font_DrawText("Out of Rank", WindowCenterX, WindowCenterY - 180.f);
 	}
+	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_LEFT, CP_TEXT_ALIGN_V_TOP);
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -93,22 +97,22 @@ void ScoreBoradUpdate(void)
 		{
 			CP_Settings_Fill(CP_Color_Create(128, 128, 128, 255));
 		}
-		CP_Graphics_DrawRect(WindowCenterX - 220.f + offset*i, WindowCenterY - 300.f, 100.f, 100.f);
+		CP_Graphics_DrawRect(WindowCenterX - 200.f + offset*i, WindowCenterY - 300.f, 100.f, 100.f);
 		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-		CP_Font_DrawText(TempStr, WindowCenterX - 192.f + offset * i, WindowCenterY - 295.f);
+		CP_Font_DrawText(TempStr, WindowCenterX - 200.f + 24.f + offset * i, WindowCenterY - 300.f + 18.f);
 	}
 
-	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Settings_TextSize(50.f);
 	CP_Image_Draw(UIBoard, RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
-	CP_Font_DrawText("ReStart", RestartPosX + 50.f, RestartPosY + 25.f);
+	CP_Font_DrawText("Start", RestartPosX + 50.f, RestartPosY + 25.f);
 	
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	//CP_Graphics_DrawRect(RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);
 
-	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CP_Image_Draw(UIBoard, GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
-	CP_Font_DrawText("GoToMain", GoToMainPosX + 30.f, GoToMainPosY + 25.f);
+	CP_Font_DrawText("Main", GoToMainPosX + 70.f, GoToMainPosY + 25.f);
 
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	//CP_Graphics_DrawRect(GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);

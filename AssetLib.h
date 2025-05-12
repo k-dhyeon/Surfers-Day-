@@ -48,6 +48,10 @@ extern CP_Image UIBoard;
 extern CP_Image WhaleArrowImage;
 extern CP_Image WhaleGoImage;
 
+extern CP_Image HealthBarBackGround;
+extern CP_Image HealthBar;
+extern CP_Image JumpBar;
+
 void InitAsset();
 
 void InitMenuUI();

@@ -47,6 +47,12 @@ CP_Image UIBoard;
 CP_Image WhaleArrowImage;
 CP_Image WhaleGoImage;
 
+CP_Image HealthBarBackGround;
+CP_Image HealthBar;
+CP_Image JumpBar;
+
+CP_Font DotFont;
+
 void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/game_to_dance.mp3");
@@ -198,10 +204,16 @@ void InitAsset()
 
 	WhaleArrowImage = CP_Image_Load("./Assets/arrow.png");
 	WhaleGoImage = CP_Image_Load("./Assets/go.png");
+
+	HealthBarBackGround = CP_Image_Load("./Assets/HealthBackGround.png");
+	HealthBar = CP_Image_Load("./Assets/Health.png");
+	JumpBar = CP_Image_Load("./Assets/Jump.png");
 }
 
 void InitMenuUI()
 {
 	UIBoard = CP_Image_Load("./Assets/UIBoard.png");
+	DotFont = CP_Font_Load("./Assets/lcddot_tr.ttf");
+	CP_Font_Set(DotFont);
 }
 

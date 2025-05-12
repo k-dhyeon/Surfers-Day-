@@ -24,23 +24,28 @@ void energybar()
 	energyPosy = 5.f;//dronePosy;
 	float Ratio = 1.f;//(0.8f + (1.0f - 0.8f) * DraneSizeAlpha) / 2.f;
 	
-	CP_Settings_Fill(CP_Color_Create(205, 92, 92, 255)); //河篮
-	CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyOffsetY, EnergyBarWidth * Ratio, EnergyBarHeight);
-	CP_Settings_Fill(CP_Color_Create(29, 234, 87, 123)); //没废
-	CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyOffsetY, CharacterData.Energy*2*Ratio, EnergyBarHeight);
+	//CP_Settings_Fill(CP_Color_Create(205, 92, 92, 255)); //河篮
+	//CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyOffsetY, EnergyBarWidth * Ratio, EnergyBarHeight);
+	//CP_Settings_Fill(CP_Color_Create(29, 234, 87, 123)); //没废
+	//CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyOffsetY, CharacterData.Energy*2*Ratio, EnergyBarHeight);
+	CP_Image_Draw(HealthBarBackGround, energyPosx - EnergyOffsetX, energyPosy + EnergyOffsetY, EnergyBarWidth * Ratio, EnergyBarHeight, 255);
+	CP_Image_DrawSubImage(HealthBar, energyPosx - EnergyOffsetX, energyPosy + EnergyOffsetY, EnergyBarWidth * Ratio * CharacterData.Energy / 200.f, EnergyBarHeight,0.f,0.f,(float)CP_Image_GetWidth(HealthBar)* CharacterData.Energy/200.f, (float)CP_Image_GetHeight(HealthBar), 255);
 
 	float JumpTimerRatio = CharacterData.JumpTimer == 0.f ? 1.f: CharacterData.JumpTimer / 5.f;
-	CP_Settings_Fill(CP_Color_Create(125, 125, 125, 255)); //gray
-	CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyBarHeight + EnergyOffsetY, EnergyBarWidth * Ratio, EnergyBarHeight);
-	CP_Settings_Fill(CP_Color_Create(9, 208, 239, 255)); //gray
-	CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyBarHeight + EnergyOffsetY, EnergyBarWidth * JumpTimerRatio * Ratio, EnergyBarHeight);
+	//CP_Settings_Fill(CP_Color_Create(125, 125, 125, 255)); //gray
+	//CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyBarHeight + EnergyOffsetY, EnergyBarWidth * Ratio, EnergyBarHeight);
+	//CP_Settings_Fill(CP_Color_Create(9, 208, 239, 255)); //gray
+	//CP_Graphics_DrawRect(energyPosx - EnergyOffsetX, energyPosy + EnergyBarHeight + EnergyOffsetY, EnergyBarWidth * JumpTimerRatio * Ratio, EnergyBarHeight);
+	CP_Image_Draw(HealthBarBackGround, energyPosx - EnergyOffsetX, energyPosy + EnergyBarHeight + EnergyOffsetY, EnergyBarWidth * Ratio, EnergyBarHeight, 255);
+	CP_Image_DrawSubImage(JumpBar, energyPosx - EnergyOffsetX, energyPosy + EnergyBarHeight + EnergyOffsetY, EnergyBarWidth * Ratio * JumpTimerRatio, EnergyBarHeight, 0.f, 0.f, (float)CP_Image_GetWidth(JumpBar) * JumpTimerRatio, (float)CP_Image_GetHeight(JumpBar), 255);
+
 
 	CP_Image_Draw(ScoreBoardInGame, 640.f, 10.f, (float)CP_Image_GetWidth(ScoreBoardInGame), (float)CP_Image_GetHeight(ScoreBoardInGame),255);
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CharacterData.Score += CP_System_GetDt() * GameData.Speed * 0.1f;
 	char ScoreBuffer[128] = { 0 };
-	sprintf_s(ScoreBuffer, 128, "Score : %10.2f\n", CharacterData.Score);
-	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText(ScoreBuffer, 700.f, 20.f);
+	sprintf_s(ScoreBuffer, 128, "Score : %10.2f", CharacterData.Score);
+	CP_Settings_TextSize(35.f);
+	CP_Font_DrawText(ScoreBuffer, 700.f, 30.f);
 }
 
