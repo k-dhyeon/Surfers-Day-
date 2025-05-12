@@ -350,7 +350,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = TurtleData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = TurtleData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = TurtleData.Score;
-//		break;
+		break;
 	case 1:
 		Obstacles[Index].ObstacleImage = BoxData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = BoxData.ObstacleImageSize;
