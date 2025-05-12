@@ -24,14 +24,7 @@ void InitKeyInput()
 
 void UpdateKeyInput()
 {
-	if (CharacterData.CharacterState == STARTWAVE || CharacterData.CharacterState == ENDWAVE)
-	{
-		bIsLeftPressed = false;
-		bIsRightPressed = false;
-		bIsForwardPressed = false;
-		bIsBackwardPressed = false;
-		return;
-	}
+	
 	if (CP_Input_KeyDown(KEY_W))//Move Left
 	{
 		bIsLeftPressed = true;
@@ -64,7 +57,12 @@ void UpdateKeyInput()
 	{
 		bIsBackwardPressed = false;
 	}
-
+	if (CharacterData.CharacterState == STARTWAVE || CharacterData.CharacterState == ENDWAVE)
+	{
+		bIsLeftPressed = false;
+		bIsRightPressed = false;
+		return;
+	}
 	if (CP_Input_KeyTriggered(KEY_SPACE))//Jump?
 	{
 		if (CharacterData.CharacterState == STANDING)

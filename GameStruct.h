@@ -71,6 +71,9 @@ typedef struct FObstacleData {
 	float Score;
 	float SizeMultiplier;
 	float SpeedMultiplier;
+	int ImageAnimationIndex;
+	int ImageAnimationTotalIndex;
+	float ImageAnimationTimer;
 }FObstacleData;
 
 typedef struct FGameData {

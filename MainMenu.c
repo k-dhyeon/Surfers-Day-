@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "BGM.h"
 #include "RankMenu.h"
-
+#include "AssetLib.h"
 float WindowCenterX;
 float WindowCenterY;
 float ButtonSizeX = 200.f;
@@ -20,6 +20,7 @@ CP_Image MainMenuBackground;
 
 void MainMenuInit(void)
 {
+	InitMenuUI();
 	MainMenuBackground = CP_Image_Load("./Assets/MainMenuBackground.png");
 	CP_System_SetWindowSize(1600, 900);
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_CENTER, CP_TEXT_ALIGN_V_MIDDLE);
@@ -44,19 +45,22 @@ void MainMenuUpdate(void)
 	CP_Settings_TextSize(38.f);
 	//StartButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
-	CP_Graphics_DrawRect(StartButtonPosX, StartButtonPosY, ButtonSizeX, ButtonSizeY);
+	CP_Image_Draw(UIBoard, StartButtonPosX, StartButtonPosY, ButtonSizeX, ButtonSizeY, 255);
+	//CP_Graphics_DrawRect(StartButtonPosX, StartButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	
 	CP_Font_DrawText("Game Start",StartButtonPosX+(ButtonSizeX /2.0f) , StartButtonPosY + (ButtonSizeY / 2.f));
 	//QuitButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
-	CP_Graphics_DrawRect(QuitButtonPosX, QuitButtonPosY, ButtonSizeX, ButtonSizeY);
+	CP_Image_Draw(UIBoard, QuitButtonPosX, QuitButtonPosY, ButtonSizeX, ButtonSizeY, 255);
+	//CP_Graphics_DrawRect(QuitButtonPosX, QuitButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 
 	CP_Font_DrawText("Quit", QuitButtonPosX + (ButtonSizeX / 2.0f) , QuitButtonPosY + (ButtonSizeY / 2.f));
 	//RankButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
-	CP_Graphics_DrawRect(RankButtonPosX, RankButtonPosY, ButtonSizeX, ButtonSizeY);
+	CP_Image_Draw(UIBoard, RankButtonPosX, RankButtonPosY, ButtonSizeX, ButtonSizeY, 255);
+	//CP_Graphics_DrawRect(RankButtonPosX, RankButtonPosY, ButtonSizeX, ButtonSizeY);
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 
 	CP_Font_DrawText("Rank", RankButtonPosX + (ButtonSizeX / 2.0f), RankButtonPosY + (ButtonSizeY / 2.f));

@@ -63,6 +63,16 @@ void UpdateObstaclesPosition()
 			else
 			{
 				Obstacles[i].ObstaclePos.x -= GameData.Speed*CP_System_GetDt() * Obstacles[i].SpeedMultiplier;
+				Obstacles[i].ImageAnimationTimer += CP_System_GetDt();
+				if (Obstacles[i].ImageAnimationTimer > Obstacles[i].SpeedMultiplier)
+				{
+					Obstacles[i].ImageAnimationTimer = 0.f;
+					Obstacles[i].ImageAnimationIndex++;
+					if (Obstacles[i].ImageAnimationIndex == Obstacles[i].ImageAnimationTotalIndex)
+					{
+						Obstacles[i].ImageAnimationIndex = 0;
+					}
+				}
 			}
 		}
 	}
@@ -277,7 +287,8 @@ void RenderObjects()
 		{
 			if (Obstacles[i].bIsValid)
 			{
-				CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x*Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, 255);
+				CP_Image_DrawSubImage(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x * Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, (float)CP_Image_GetWidth(Obstacles[i].ObstacleImage) / Obstacles[i].ImageAnimationTotalIndex * Obstacles[i].ImageAnimationIndex, 0.f, (float)CP_Image_GetWidth(Obstacles[i].ObstacleImage) / Obstacles[i].ImageAnimationTotalIndex * (Obstacles[i].ImageAnimationIndex + 1), (float)CP_Image_GetHeight(Obstacles[i].ObstacleImage), 255);
+				//CP_Image_Draw(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x*Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, 255);
 				//CollisionDebug
 				if (bDebugMode)
 				{
@@ -302,7 +313,8 @@ void RenderObjects()
 			if (Obstacles[i].bIsValid)
 			{
 				// 장애물 그리기
-				CP_Image_Draw(Obstacles[i].ObstacleImage, floorf(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x), GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x * Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, 255);
+				CP_Image_DrawSubImage(Obstacles[i].ObstacleImage, GameData.LaneMin.x + Obstacles[i].ObstaclePos.x, GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x * Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, (float)CP_Image_GetWidth(Obstacles[i].ObstacleImage) / Obstacles[i].ImageAnimationTotalIndex * Obstacles[i].ImageAnimationIndex, 0.f, (float)CP_Image_GetWidth(Obstacles[i].ObstacleImage) / Obstacles[i].ImageAnimationTotalIndex * (Obstacles[i].ImageAnimationIndex + 1), (float)CP_Image_GetHeight(Obstacles[i].ObstacleImage), 255);
+				//CP_Image_Draw(Obstacles[i].ObstacleImage, floorf(GameData.LaneMin.x + Obstacles[i].ObstaclePos.x), GameData.LaneMin.y + Obstacles[i].ObstaclePos.y, Obstacles[i].ObstacleImageSize.x * Obstacles[i].SizeMultiplier, Obstacles[i].ObstacleImageSize.y * Obstacles[i].SizeMultiplier, 255);
 				//CollisionDebug
 				if (bDebugMode)
 				{
@@ -342,6 +354,8 @@ void SetObstacleByRandom(int Index)
 {
 	unsigned int RandomNum = CP_Random_GetInt();
 	Obstacles[Index].bIsValid = true;
+	Obstacles[Index].ImageAnimationTimer = 0.f;
+	Obstacles[Index].ImageAnimationIndex = 0;
 	switch (RandomNum % OBSTACLE_NUM)
 	{
 	case 0:
@@ -350,6 +364,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = TurtleData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = TurtleData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = TurtleData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = TurtleData.ImageAnimationTotalIndex;
 		break;
 	case 1:
 		Obstacles[Index].ObstacleImage = BoxData.ObstacleImage;
@@ -357,6 +372,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = BoxData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = BoxData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = BoxData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = BoxData.ImageAnimationTotalIndex;
 //		break;
 	case 2:
 		Obstacles[Index].ObstacleImage = BallData.ObstacleImage;
@@ -364,6 +380,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = BallData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = BallData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = BallData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = BallData.ImageAnimationTotalIndex;
 		break;
 	case 3:
 		Obstacles[Index].ObstacleImage = DolphinData.ObstacleImage;
@@ -371,6 +388,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = DolphinData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = DolphinData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = DolphinData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = DolphinData.ImageAnimationTotalIndex;
 		break;
 	case 4:
 		Obstacles[Index].ObstacleImage = CameraData.ObstacleImage;
@@ -378,6 +396,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = CameraData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = CameraData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = CameraData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = CameraData.ImageAnimationTotalIndex;
 //		break;
 	case 5:
 		Obstacles[Index].ObstacleImage = IcecreamData.ObstacleImage;
@@ -385,6 +404,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = IcecreamData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = IcecreamData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = IcecreamData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = IcecreamData.ImageAnimationTotalIndex;
 //		break;
 	case 6:
 		Obstacles[Index].ObstacleImage = StarFishData.ObstacleImage;
@@ -392,6 +412,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = StarFishData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = StarFishData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = StarFishData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = StarFishData.ImageAnimationTotalIndex;
 		break;
 	case 7:
 		Obstacles[Index].ObstacleImage = TubeData.ObstacleImage;
@@ -399,13 +420,15 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = TubeData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = TubeData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = TubeData.Score;
-		break;
+		Obstacles[Index].ImageAnimationTotalIndex = TubeData.ImageAnimationTotalIndex;
+		//break;
 	case 8:
 		Obstacles[Index].ObstacleImage = CrabData.ObstacleImage;
 		Obstacles[Index].ObstacleImageSize = CrabData.ObstacleImageSize;
 		Obstacles[Index].ObstacleCollisionSize = CrabData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = CrabData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = CrabData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = CrabData.ImageAnimationTotalIndex;
 		break;
 	case 9:
 		Obstacles[Index].ObstacleImage = JellyfishData.ObstacleImage;
@@ -413,6 +436,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = JellyfishData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = JellyfishData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = JellyfishData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = JellyfishData.ImageAnimationTotalIndex;
 		break;
 	case 10:
 		Obstacles[Index].ObstacleImage = SharkData.ObstacleImage;
@@ -420,6 +444,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = SharkData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = SharkData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = SharkData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = SharkData.ImageAnimationTotalIndex;
 		break;
 	case 11:
 		Obstacles[Index].ObstacleImage = ReefData.ObstacleImage;
@@ -427,6 +452,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = ReefData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = ReefData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = ReefData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = ReefData.ImageAnimationTotalIndex;
 		break;
 	case 12:
 		Obstacles[Index].ObstacleImage = DrumData.ObstacleImage;
@@ -434,6 +460,7 @@ void SetObstacleByRandom(int Index)
 		Obstacles[Index].ObstacleCollisionSize = DrumData.ObstacleCollisionSize;
 		Obstacles[Index].ObstacleCollisionStartOffset = DrumData.ObstacleCollisionStartOffset;
 		Obstacles[Index].Score = DrumData.Score;
+		Obstacles[Index].ImageAnimationTotalIndex = DrumData.ImageAnimationTotalIndex;
 		break;
 	default:
 		break;

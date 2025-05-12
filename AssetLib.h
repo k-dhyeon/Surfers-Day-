@@ -44,5 +44,10 @@ extern CP_Image Sand;
 extern CP_Image Bridge;
 extern CP_Image ScoreBoardBackground;
 extern CP_Image ScoreBoardInGame;
+extern CP_Image UIBoard;
+extern CP_Image WhaleArrowImage;
+extern CP_Image WhaleGoImage;
 
 void InitAsset();
+
+void InitMenuUI();

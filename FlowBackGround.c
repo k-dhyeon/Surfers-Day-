@@ -22,7 +22,7 @@ void DrawWater()
     }
     float imageWidth = (float)CP_Image_GetWidth(SeaAnimationData.SeaImage);
     float imageHeight = (float)CP_Image_GetHeight(SeaAnimationData.SeaImage);
-    CP_Image_DrawSubImage(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y + 40.f, (imageWidth / 2.f)* SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f)* (SeaAnimationData.SeaIndex+1), imageHeight, 255);
+    CP_Image_DrawSubImage(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y-15.f, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y + 55.f, (imageWidth / 2.f)* SeaAnimationData.SeaIndex, 0.f, (imageWidth / 2.f)* (SeaAnimationData.SeaIndex+1), imageHeight, 255);
     //TEST
     //CP_Image_Draw(SeaAnimationData.SeaImage, GameData.LaneMin.x, GameData.LaneMin.y, GameData.LaneMax.x - GameData.LaneMin.x, GameData.LaneMax.y - GameData.LaneMin.y,255 );
 }

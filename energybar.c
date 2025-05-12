@@ -20,8 +20,8 @@ void energybar()
 	// 이 코드가 에너지 바 그리는 코드다
 	//CP_Image_Load("./Assets/drone.png");
 	//EnergyOffsetX = 10.f;//180 * (0.8f + (1.0f - 0.8f) * DraneSizeAlpha)/2.f;
-	energyPosx = CP_System_GetWindowWidth()- EnergyBarWidth;//dronePosx;
-	energyPosy = 0.f;//dronePosy;
+	energyPosx = 20.f;//CP_System_GetWindowWidth()- EnergyBarWidth;//dronePosx;
+	energyPosy = 5.f;//dronePosy;
 	float Ratio = 1.f;//(0.8f + (1.0f - 0.8f) * DraneSizeAlpha) / 2.f;
 	
 	CP_Settings_Fill(CP_Color_Create(205, 92, 92, 255)); //붉은

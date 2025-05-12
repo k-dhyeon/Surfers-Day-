@@ -7,8 +7,7 @@
 float LastWavingGameSpeed = 0.f;
 float AnimationNextTime = 2.f;
 
-int WhaleImageIndex;
-float WhaleAnimationTimer;
+float WhaleGoUITimer;
 
 void BeginWave()
 {
@@ -18,8 +17,9 @@ void BeginWave()
 	BigWaveData.WaveMaxIndex = 8;
 	WhaleData.bIsValid = CP_Random_GetBool();
 	WhaleData.ObstaclePos = CP_Vector_Set(GameData.LaneMax.x,GameData.LaneMin.y);
-	WhaleImageIndex = 0;
-	WhaleAnimationTimer = 0.f;
+	WhaleData.ImageAnimationIndex = 0;
+	WhaleData.ImageAnimationTimer = 0.f;
+	WhaleGoUITimer = 0.f;
 }
 
 void UpdateWave()
@@ -161,24 +161,30 @@ void RenderWhale()
 {
 	if (WhaleData.bIsValid)
 	{
-		CP_Image_DrawSubImage(WhaleData.ObstacleImage, WhaleData.ObstaclePos.x, WhaleData.ObstaclePos.y-320.f, WhaleData.ObstacleImageSize.x/3.f * 3.0f, WhaleData.ObstacleImageSize.y * 3.0f,
-			WhaleData.ObstacleImageSize.x/3 * WhaleImageIndex,
+		WhaleGoUITimer += CP_System_GetDt();
+		if (WhaleGoUITimer < 4.f)
+		{
+			CP_Image_Draw(WhaleArrowImage, 10.f, GameData.LaneMin.y - 200.f, 200.f, 100.f, 255);
+			CP_Image_Draw(WhaleGoImage, 130.f, GameData.LaneMin.y - 230.f, 200.f, 100.f, 255);
+		}
+		CP_Image_DrawSubImage(WhaleData.ObstacleImage, WhaleData.ObstaclePos.x, WhaleData.ObstaclePos.y-200.f, WhaleData.ObstacleImageSize.x/3.f * 2.5f, WhaleData.ObstacleImageSize.y * 2.5f,
+			WhaleData.ObstacleImageSize.x/3 * WhaleData.ImageAnimationIndex,
 			0,
-			(WhaleData.ObstacleImageSize.x/3) * (WhaleImageIndex + 1),
+			(WhaleData.ObstacleImageSize.x/3) * (WhaleData.ImageAnimationIndex + 1),
 			WhaleData.ObstacleImageSize.y,
 			255);
 		WhaleData.ObstaclePos.x -= 300.f * CP_System_GetDt();
-		WhaleAnimationTimer += CP_System_GetDt();
-		if (WhaleAnimationTimer >1.f)
+		WhaleData.ImageAnimationTimer += CP_System_GetDt();
+		if (WhaleData.ImageAnimationTimer >1.f)
 		{
-			WhaleAnimationTimer = 0;
-			if (WhaleImageIndex == 2)
+			WhaleData.ImageAnimationTimer = 0;
+			if (WhaleData.ImageAnimationIndex == 2)
 			{
-				WhaleImageIndex = 0;
+				WhaleData.ImageAnimationIndex = 0;
 			}
 			else
 			{
-				WhaleImageIndex++;
+				WhaleData.ImageAnimationIndex++;
 			}
 		}
 		if (bDebugMode)

@@ -34,12 +34,12 @@ int AnimationIndex = 0;
 
 void drone()
 {
-    if (CharacterData.Energy > 100.f)
-    {
-        AnimationTime = 0.f;
-        AnimationIndex = 0;
-    }
-    else
+    //if (CharacterData.Energy > 100.f)
+    //{
+    //    AnimationTime = 0.f;
+    //    AnimationIndex = 0;
+    //}
+    //else
     {
         AnimationTime += CP_System_GetDt();
         if (AnimationTime > 0.3f)

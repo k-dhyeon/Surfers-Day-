@@ -23,6 +23,7 @@ void game_init(void)
 	InitShake();
 	InitGameData();
 	InitCharacterData();
+
 	InitAsset();
 	InitItemData();
 	InitBigWaveData();

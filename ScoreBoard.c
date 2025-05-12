@@ -7,6 +7,7 @@
 #include "GlobalVariables.h"
 #include "ScoreBoard.h"
 #include "BGM.h"
+#include "AssetLib.h"
 
 #define MAX_ENTRIES 150
 #define FILENAME "leaderboard.sav"
@@ -99,16 +100,18 @@ void ScoreBoradUpdate(void)
 
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
 	CP_Settings_TextSize(50.f);
+	CP_Image_Draw(UIBoard, RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
 	CP_Font_DrawText("ReStart", RestartPosX + 50.f, RestartPosY + 25.f);
 	
-	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
-	CP_Graphics_DrawRect(RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);
+	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
+	//CP_Graphics_DrawRect(RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);
 
 	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 255));
+	CP_Image_Draw(UIBoard, GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
 	CP_Font_DrawText("GoToMain", GoToMainPosX + 30.f, GoToMainPosY + 25.f);
 
-	CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
-	CP_Graphics_DrawRect(GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);
+	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
+	//CP_Graphics_DrawRect(GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);
 	UpdateScoreBoardKeyInput();
 	
 	GetPlayerKeyBoardInput();

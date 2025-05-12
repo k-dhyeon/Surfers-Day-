@@ -43,6 +43,9 @@ CP_Image Bridge;
 
 CP_Image ScoreBoardBackground;
 CP_Image ScoreBoardInGame;
+CP_Image UIBoard;
+CP_Image WhaleArrowImage;
+CP_Image WhaleGoImage;
 
 void InitAsset()
 {
@@ -86,12 +89,14 @@ void InitAsset()
 	TurtleData.ObstacleCollisionStartOffset = CP_Vector_Set(20.f,20.f);
 	TurtleData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	TurtleData.Score = 50.f;
+	TurtleData.ImageAnimationTotalIndex = 2;
 
 	BoxData.ObstacleImage = CP_Image_Load("./Assets/Box.png");
 	BoxData.ObstacleImageSize = CP_Vector_Set(120.f, 30.f);
 	BoxData.ObstacleCollisionStartOffset = CP_Vector_Set(15.f, 20.f);
 	BoxData.ObstacleCollisionSize = CP_Vector_Set(80.f, 10.f);
 	BoxData.Score = 100.f;
+	BoxData.ImageAnimationTotalIndex = 1;
 
 	//TODO : Image Size and collision size tune needed
 	BallData.ObstacleImage = CP_Image_Load("./Assets/Ball.png");
@@ -99,75 +104,87 @@ void InitAsset()
 	BallData.ObstacleCollisionStartOffset = CP_Vector_Set(40.f, 20.f);
 	BallData.ObstacleCollisionSize = CP_Vector_Set(15.f, 30.f);
 	BallData.Score = 80.f;
+	BallData.ImageAnimationTotalIndex = 2;
 
 	DolphinData.ObstacleImage = CP_Image_Load("./Assets/Dolphin.png");
 	DolphinData.ObstacleImageSize = CP_Vector_Set(200.f, 120.f);
 	DolphinData.ObstacleCollisionStartOffset = CP_Vector_Set(30.f, 50.f);
 	DolphinData.ObstacleCollisionSize = CP_Vector_Set(80.f, 40.f);
 	DolphinData.Score = 200.f;
+	DolphinData.ImageAnimationTotalIndex = 2;
 
 	CameraData.ObstacleImage = CP_Image_Load("./Assets/Camera.png");
 	CameraData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
 	CameraData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
 	CameraData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	CameraData.Score = 50.f;
+	CameraData.ImageAnimationTotalIndex = 1;
 
 	IcecreamData.ObstacleImage = CP_Image_Load("./Assets/Icecream.png");
 	IcecreamData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
 	IcecreamData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
 	IcecreamData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	IcecreamData.Score = 50.f;
+	IcecreamData.ImageAnimationTotalIndex = 1;
 
 	StarFishData.ObstacleImage = CP_Image_Load("./Assets/StarFish.png");
 	StarFishData.ObstacleImageSize = CP_Vector_Set(100.f, 50.f);
 	StarFishData.ObstacleCollisionStartOffset = CP_Vector_Set(25.f, 20.f);
 	StarFishData.ObstacleCollisionSize = CP_Vector_Set(40.f, 30.f);
 	StarFishData.Score = 80.f;
+	StarFishData.ImageAnimationTotalIndex = 2;
 
 	TubeData.ObstacleImage = CP_Image_Load("./Assets/Tube.png");
 	TubeData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
 	TubeData.ObstacleCollisionStartOffset = CP_Vector_Set(15.f, 10.f);
 	TubeData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	TubeData.Score = 50.f;
+	TubeData.ImageAnimationTotalIndex = 1;
 
 	CrabData.ObstacleImage = CP_Image_Load("./Assets/Crab.png");
 	CrabData.ObstacleImageSize = CP_Vector_Set(100.f, 50.f);
 	CrabData.ObstacleCollisionStartOffset = CP_Vector_Set(20.f, 20.f);
 	CrabData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	CrabData.Score = 80.f;
+	CrabData.ImageAnimationTotalIndex = 2;
 
 	JellyfishData.ObstacleImage = CP_Image_Load("./Assets/Jellyfish.png");
 	JellyfishData.ObstacleImageSize = CP_Vector_Set(80.f, 50.f);
 	JellyfishData.ObstacleCollisionStartOffset = CP_Vector_Set(10.f, 10.f);
 	JellyfishData.ObstacleCollisionSize = CP_Vector_Set(50.f, 30.f);
 	JellyfishData.Score = 50.f;
+	JellyfishData.ImageAnimationTotalIndex = 2;
 
 	SharkData.ObstacleImage = CP_Image_Load("./Assets/Shark.png");
 	SharkData.ObstacleImageSize = CP_Vector_Set(150.f, 90.f);
 	SharkData.ObstacleCollisionStartOffset = CP_Vector_Set(30.f, 40.f);
 	SharkData.ObstacleCollisionSize = CP_Vector_Set(60.f, 30.f);
 	SharkData.Score = 150.f;
+	SharkData.ImageAnimationTotalIndex = 2;
 
 	ReefData.ObstacleImage = CP_Image_Load("./Assets/Reef.png");
 	ReefData.ObstacleImageSize = CP_Vector_Set(100.f, 60.f);
 	ReefData.ObstacleCollisionStartOffset = CP_Vector_Set(30.f, 20.f);
 	ReefData.ObstacleCollisionSize = CP_Vector_Set(20.f, 40.f);
 	ReefData.Score = 60.f;
+	ReefData.ImageAnimationTotalIndex = 2;
 
 	DrumData.ObstacleImage = CP_Image_Load("./Assets/Drum.png");
 	DrumData.ObstacleImageSize = CP_Vector_Set(200.f, 120.f);
 	DrumData.ObstacleCollisionStartOffset = CP_Vector_Set(40.f, 40.f);
 	DrumData.ObstacleCollisionSize = CP_Vector_Set(80.f, 40.f);
 	DrumData.Score = 200.f;
+	DrumData.ImageAnimationTotalIndex = 2;
 
 	WhaleData.ObstacleImage = CP_Image_Load("./Assets/Whale.png");
 	WhaleData.ObstacleImageSize = CP_Vector_Set(3600.f, 192.f);
 	WhaleData.ObstacleCollisionStartOffset = CP_Vector_Set(650.f, 0.f);
 	WhaleData.ObstacleCollisionSize = CP_Vector_Set(1000.f, 300.f);
 	WhaleData.Score = 1000.f;
+	WhaleData.ImageAnimationTotalIndex = 3;
 
 	BatteryData.BatteryImage = CP_Image_Load("./Assets/Battery.png");
-	BatteryData.BatteryImageSize = CP_Vector_Set(30.f, 30.f);
+	BatteryData.BatteryImageSize = CP_Vector_Set(45.f, 60.f);
 	BatteryData.bIsValid = false;
 	BatteryData.Energy = 10.f;
 
@@ -178,5 +195,13 @@ void InitAsset()
 
 	DroneImage = CP_Image_Load("./Assets/Drone.png");
 	ScoreBoardInGame = CP_Image_Load("./Assets/ScoreBoardIngame.png");
+
+	WhaleArrowImage = CP_Image_Load("./Assets/arrow.png");
+	WhaleGoImage = CP_Image_Load("./Assets/go.png");
+}
+
+void InitMenuUI()
+{
+	UIBoard = CP_Image_Load("./Assets/UIBoard.png");
 }
 
