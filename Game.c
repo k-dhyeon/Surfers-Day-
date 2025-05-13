@@ -14,6 +14,7 @@
 #include "energybar.h"
 #include "drone.h"
 #include "CameraShake.h"
+#include "Particle.h"
 
 // use CP_Engine_SetNextGameState to specify this function as the initialization function
 // this function will be called once at the beginning of the program
@@ -58,6 +59,7 @@ void game_update(void)
 	UpdateObstaclesPosition();
 	UpdateItemsPosition();
 	CheckItemsCollision();
+	generate_splash_particles(0.f,0.f);
 	RenderObjects();
 	RenderBatteries();
 	RenderSpeedItems();

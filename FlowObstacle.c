@@ -6,6 +6,7 @@
 #include "AssetLib.h"
 #include "BGM.h"
 #include "CameraShake.h"
+#include "Particle.h"
 
 float LastSpawnDeltaTime = 0.f;
 float CurrentDelay = 0.f;
@@ -276,6 +277,7 @@ void RenderCharacter_Internal()
 		100.f * (CharacterData.AnimationFrame+1) - 1,
 		100.f * (CharacterData.CharacterState + 1) - 1,
 		255);
+	generate_splash_particles(30.f,30.f);
 }
 
 void RenderObjects()
