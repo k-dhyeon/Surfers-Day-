@@ -65,7 +65,7 @@ void ScoreBoradUpdate(void)
 
 	char ScoreBuffer[128] = { 0 };
 	sprintf_s(ScoreBuffer, 128, "Score : %.2f", CharacterData.Score);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Settings_Fill(CP_Color_Create(255, 255, 128, 255));
 	CP_Settings_TextSize(80.f);
 	CP_Font_DrawText(ScoreBuffer, WindowCenterX, WindowCenterY - 100.f);
 
@@ -73,18 +73,16 @@ void ScoreBoradUpdate(void)
 	{
 		char RankBuffer[128] = { 0 };
 		sprintf_s(RankBuffer, 128, "Your Rank : %d", CurrentPlayerIndex+1);
-		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 		CP_Settings_TextSize(80.f);
 		CP_Font_DrawText(RankBuffer, WindowCenterX, WindowCenterY - 180.f);
 	}
 	else
 	{
-		CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 		CP_Settings_TextSize(80.f);
 		CP_Font_DrawText("Out of Rank", WindowCenterX, WindowCenterY - 180.f);
 	}
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_LEFT, CP_TEXT_ALIGN_V_TOP);
-
+	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	for (int i = 0; i < 3; i++)
 	{
 		float offset = 150.f;

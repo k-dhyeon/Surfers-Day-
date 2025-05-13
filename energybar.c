@@ -44,8 +44,8 @@ void energybar()
 	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
 	CharacterData.Score += CP_System_GetDt() * GameData.Speed * 0.1f;
 	char ScoreBuffer[128] = { 0 };
-	sprintf_s(ScoreBuffer, 128, "Score : %10.2f", CharacterData.Score);
+	sprintf_s(ScoreBuffer, 128, "Score : %09.f", CharacterData.Score);
 	CP_Settings_TextSize(35.f);
-	CP_Font_DrawText(ScoreBuffer, 700.f, 30.f);
+	CP_Font_DrawText(ScoreBuffer, 675.f, 35.f);
 }
 

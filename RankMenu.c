@@ -11,7 +11,7 @@
 FSaveData SaveDatas[150];
 int offsetIndex;
 float FontSize;
-float TopOffset = 135.f;
+float TopOffset = 155.f;
 float LeftOffset = 200.f;
 float RankMenuButtonSizeX = 250.f;
 float RankMenuButtonSizeY = 100.f;
@@ -34,7 +34,7 @@ void RankMenuInit()
 	}
 	loadData(SaveDatas);
 	offsetIndex = 0;
-	FontSize = 90.f;
+	FontSize = 70.f;
 	CP_Settings_TextAlignment(CP_TEXT_ALIGN_H_LEFT, CP_TEXT_ALIGN_V_TOP);
 	PrevButtonPosX = 10.f;
 	PrevButtonPosY = CP_System_GetWindowHeight()-RankMenuButtonSizeY - 10.f;
@@ -58,13 +58,13 @@ void RankMenuUpdate()
 		{
 			char RankBuffer[4] = { '\0' };
 			sprintf_s(RankBuffer, 4, "%03d", i + offsetIndex + 1);
-			CP_Font_DrawText(RankBuffer, LeftOffset + 0.f, FontSize * i + TopOffset);
+			CP_Font_DrawText(RankBuffer, LeftOffset + 0.f, (FontSize+21.f) * i + TopOffset);
 			char NameBuffer[4] = { '\0' };
 			sprintf_s(NameBuffer, 4, "%c%c%c", SaveDatas[offsetIndex + i].Initial[0], SaveDatas[offsetIndex + i].Initial[1], SaveDatas[offsetIndex + i].Initial[2]);
-			CP_Font_DrawText(NameBuffer, LeftOffset + 200.f, FontSize * i + TopOffset);
+			CP_Font_DrawText(NameBuffer, LeftOffset + 200.f, (FontSize + 21.f) * i + TopOffset);
 			char ScoreBuffer[128] = { 0 };
-			sprintf_s(ScoreBuffer, 128, ": %lf", SaveDatas[offsetIndex + i].Score);
-			CP_Font_DrawText(ScoreBuffer, LeftOffset + 450.f, FontSize * i + TopOffset);
+			sprintf_s(ScoreBuffer, 128, ": %013.4lf", SaveDatas[offsetIndex + i].Score);
+			CP_Font_DrawText(ScoreBuffer, LeftOffset + 450.f, (FontSize + 21.f) * i + TopOffset);
 		}
 	}
 
