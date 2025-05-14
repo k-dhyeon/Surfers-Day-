@@ -21,9 +21,9 @@ void HowToPlayMenuUpdate(void)
 
 	//HowToPlayButton
 	CP_Settings_Fill(CP_Color_Create(64, 64, 64, 255));
-	CP_Image_Draw(UIBoard, ExitButtonX, ExitButtonY, ExitButtonSizeX, ExitButtonSizeY, 255);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Font_DrawText("Exit", ExitButtonX + 100.f, ExitButtonY + 50.f);
+	CP_Image_Draw(QuitBoard, ExitButtonX, ExitButtonY, ExitButtonSizeX, ExitButtonSizeY, 255);
+	//CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	//CP_Font_DrawText("Exit", ExitButtonX + 100.f, ExitButtonY + 50.f);
 
 	UpdateHowToPlayMenuKeyInput();
 }

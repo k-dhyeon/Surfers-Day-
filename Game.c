@@ -20,6 +20,7 @@
 // this function will be called once at the beginning of the program
 void game_init(void)
 {
+	StopMainMenuBGM();
 	CP_System_SetWindowSize(1600, 900);
 	InitShake();
 	InitGameData();

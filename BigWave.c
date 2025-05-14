@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "Item.h"
 #include "AssetLib.h"
+#include "Particle.h"
 
 float LastWavingGameSpeed = 0.f;
 float AnimationNextTime = 2.f;
@@ -29,7 +30,7 @@ void UpdateWave()
 		float ImageSizeX = (float)CP_Image_GetWidth(BigWaveData.WaveImage);
 		float ImageSizeY = (float)CP_Image_GetHeight(BigWaveData.WaveImage);
 		BigWaveData.AnimationTimer += CP_System_GetDt();
-
+		
 		if (CharacterData.CharacterState == WAVING || CharacterData.CharacterState == HEIGHESTWAVE)
 		{
 			CharacterData.Score += CP_System_GetDt() * GameData.Speed*0.2f;
@@ -173,6 +174,7 @@ void RenderWhale()
 			(WhaleData.ObstacleImageSize.x/3) * (WhaleData.ImageAnimationIndex + 1),
 			WhaleData.ObstacleImageSize.y,
 			255);
+		generate_whale_blow_particles(WhaleData.ObstaclePos.x + 1000.f, WhaleData.ObstaclePos.y+50.f);
 		WhaleData.ObstaclePos.x -= 300.f * CP_System_GetDt();
 		WhaleData.ImageAnimationTimer += CP_System_GetDt();
 		if (WhaleData.ImageAnimationTimer >1.f)

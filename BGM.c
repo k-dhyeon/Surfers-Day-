@@ -1,5 +1,5 @@
 #include "BGM.h"
-
+#include "stdbool.h"
 
 CP_Sound MainMenuBGM;
 CP_Sound InGameBGM;
@@ -10,15 +10,21 @@ CP_Sound SFXCollision;
 CP_Sound SFXCombo;
 CP_Sound SFXGameOver;
 CP_Sound SFXMedal;
+bool bIsMainMenuPlaying = false;
 
 void PlayMainMenuBGM()
 {
-	CP_Sound_PlayAdvanced(MainMenuBGM, 1.0, 1.0, TRUE, CP_SOUND_GROUP_MUSIC);
+	if (!bIsMainMenuPlaying)
+	{
+		CP_Sound_PlayAdvanced(MainMenuBGM, 1.0, 1.0, TRUE, CP_SOUND_GROUP_MUSIC);
+		bIsMainMenuPlaying = true;
+	}
 }
 
 void StopMainMenuBGM()
 {
 	CP_Sound_StopAll();
+	bIsMainMenuPlaying = false;
 }
 
 void PlayInGameBGM()

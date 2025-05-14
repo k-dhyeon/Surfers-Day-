@@ -100,17 +100,17 @@ void ScoreBoradUpdate(void)
 		CP_Font_DrawText(TempStr, WindowCenterX - 200.f + 24.f + offset * i, WindowCenterY - 300.f + 18.f);
 	}
 
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Settings_TextSize(50.f);
-	CP_Image_Draw(UIBoard, RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
-	CP_Font_DrawText("Start", RestartPosX + 50.f, RestartPosY + 25.f);
+	//CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	//CP_Settings_TextSize(50.f);
+	CP_Image_Draw(StartBoard, RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
+	//CP_Font_DrawText("Start", RestartPosX + 50.f, RestartPosY + 25.f);
 	
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	//CP_Graphics_DrawRect(RestartPosX, RestartPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);
 
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Image_Draw(UIBoard, GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
-	CP_Font_DrawText("Main", GoToMainPosX + 70.f, GoToMainPosY + 25.f);
+	//CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	CP_Image_Draw(MainBoard, GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY, 255);
+	//CP_Font_DrawText("Main", GoToMainPosX + 70.f, GoToMainPosY + 25.f);
 
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	//CP_Graphics_DrawRect(GoToMainPosX, GoToMainPosY, SocreBoardBtnSizeX, SocreBoardBtnSizeY);

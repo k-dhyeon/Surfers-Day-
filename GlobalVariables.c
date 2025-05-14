@@ -98,7 +98,7 @@ void InitBigWaveData()
 	BigWaveData.bIsRiderable = false;
 	BigWaveData.bIsValid = false;
 	BigWaveData.WaveImageSize = CP_Vector_Set((float)CP_System_GetWindowWidth(), (float)CP_System_GetWindowHeight() / 5.f);
-	BigWaveData.WaveETA = CP_Random_RangeFloat(0.f,0.f);//(10.f,15.f);
+	BigWaveData.WaveETA = CP_Random_RangeFloat(10.f,15.f);
 	BigWaveData.WaveImage = CP_Image_Load("./Assets/Wave.png");
 	BigWaveData.WaveRiderableStartIndex = 2;
 	BigWaveData.WaveRiderableEndIndex = 5;

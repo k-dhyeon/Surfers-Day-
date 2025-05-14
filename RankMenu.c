@@ -69,25 +69,25 @@ void RankMenuUpdate()
 	}
 
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
-	CP_Image_Draw(UIBoard, PrevButtonPosX, PrevButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY, 255);
+	CP_Image_Draw(PrevBoard, PrevButtonPosX, PrevButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY, 255);
 	//CP_Graphics_DrawRect(PrevButtonPosX, PrevButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText("PREV", PrevButtonPosX + 60.f, PrevButtonPosY + 25.f);
+	//CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	//CP_Settings_TextSize(50.f);
+	//CP_Font_DrawText("PREV", PrevButtonPosX + 60.f, PrevButtonPosY + 25.f);
 
-	CP_Image_Draw(UIBoard, NextButtonPosX, NextButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY, 255);
+	CP_Image_Draw(NextBoard, NextButtonPosX, NextButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY, 255);
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	//CP_Graphics_DrawRect(NextButtonPosX, NextButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText("NEXT", NextButtonPosX + 60.f, NextButtonPosY + 25.f);
+	//CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	//CP_Settings_TextSize(50.f);
+	//CP_Font_DrawText("NEXT", NextButtonPosX + 60.f, NextButtonPosY + 25.f);
 
-	CP_Image_Draw(UIBoard, RankMenuReturnToMainButtonPosX, RankMenuReturnToMainButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY, 255);
+	CP_Image_Draw(MainBoard, RankMenuReturnToMainButtonPosX, RankMenuReturnToMainButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY, 255);
 	//CP_Settings_Fill(CP_Color_Create(255, 255, 255, 30));
 	//CP_Graphics_DrawRect(RankMenuReturnToMainButtonPosX, RankMenuReturnToMainButtonPosY, RankMenuButtonSizeX, RankMenuButtonSizeY);
-	CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
-	CP_Settings_TextSize(50.f);
-	CP_Font_DrawText("MAIN", RankMenuReturnToMainButtonPosX + 60.f, RankMenuReturnToMainButtonPosY + 25.f);
+	//CP_Settings_Fill(CP_Color_Create(0, 0, 0, 255));
+	//CP_Settings_TextSize(50.f);
+	//CP_Font_DrawText("MAIN", RankMenuReturnToMainButtonPosX + 60.f, RankMenuReturnToMainButtonPosY + 25.f);
 
 	UpdateRankMenuKeyInput();
 }

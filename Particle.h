@@ -7,3 +7,4 @@
 #define PARTICLE_COUNT 40
 
 void generate_splash_particles(float OffsetX, float OffsetY);
+void generate_whale_blow_particles(float OriginX, float OriginY);

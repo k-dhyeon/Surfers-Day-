@@ -43,7 +43,15 @@ CP_Image Bridge;
 
 CP_Image ScoreBoardBackground;
 CP_Image ScoreBoardInGame;
-CP_Image UIBoard;
+
+CP_Image StartBoard;
+CP_Image HowBoard;
+CP_Image RankBoard;
+CP_Image QuitBoard;
+CP_Image MainBoard;
+CP_Image PrevBoard;
+CP_Image NextBoard;
+
 CP_Image WhaleArrowImage;
 CP_Image WhaleGoImage;
 
@@ -56,7 +64,7 @@ CP_Font DotFont;
 void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/game_to_dance.mp3");
-	MainMenuBGM = CP_Sound_LoadMusic("./Assets/best-game-console-301284.mp3");
+	
 	
 	SFXBatteryRecharge = CP_Sound_Load("./Assets/GetBatterySFX.mp3");
 	SFXJump = CP_Sound_Load("./Assets/JumpSFX.mp3");
@@ -212,8 +220,15 @@ void InitAsset()
 
 void InitMenuUI()
 {
-	UIBoard = CP_Image_Load("./Assets/UIBoard.png");
+	StartBoard = CP_Image_Load("./Assets/StartButton.png");
+	HowBoard = CP_Image_Load("./Assets/HowButton.png");
+	RankBoard = CP_Image_Load("./Assets/RankButton.png");
+	QuitBoard = CP_Image_Load("./Assets/QuitButton.png");
+	MainBoard = CP_Image_Load("./Assets/MainButton.png");
+	PrevBoard = CP_Image_Load("./Assets/PrevButton.png");
+	NextBoard = CP_Image_Load("./Assets/NextButton.png");
 	DotFont = CP_Font_Load("./Assets/lcddot_tr.ttf");
 	CP_Font_Set(DotFont);
+	MainMenuBGM = CP_Sound_LoadMusic("./Assets/best-game-console-301284.mp3");
 }
 

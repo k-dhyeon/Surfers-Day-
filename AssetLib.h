@@ -44,7 +44,13 @@ extern CP_Image Sand;
 extern CP_Image Bridge;
 extern CP_Image ScoreBoardBackground;
 extern CP_Image ScoreBoardInGame;
-extern CP_Image UIBoard;
+extern CP_Image StartBoard;
+extern CP_Image HowBoard;
+extern CP_Image RankBoard;
+extern CP_Image QuitBoard;
+extern CP_Image MainBoard;
+extern CP_Image PrevBoard;
+extern CP_Image NextBoard;
 extern CP_Image WhaleArrowImage;
 extern CP_Image WhaleGoImage;
 
