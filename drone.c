@@ -165,7 +165,7 @@ void DrawLine(float CharacterX, float CharacterY, float DroneX, float DroneY)
         }
         CurveDepthDelta = CP_Random_RangeFloat(0.2f,1.f);
     }
-
+    CP_Settings_StrokeWeight(1.f);
     for (int i = 0; i < segments; i++) {
         float t1 = i / (float)(segments);
         float t2 = (i + 1) / (float)(segments);

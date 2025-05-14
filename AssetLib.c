@@ -56,7 +56,7 @@ CP_Font DotFont;
 void InitAsset()
 {
 	InGameBGM = CP_Sound_LoadMusic("./Assets/game_to_dance.mp3");
-	MainMenuBGM = CP_Sound_LoadMusic("./Assets/Raz Burg - Sunlight - Instrumental Version.mp3");
+	MainMenuBGM = CP_Sound_LoadMusic("./Assets/best-game-console-301284.mp3");
 	
 	SFXBatteryRecharge = CP_Sound_Load("./Assets/GetBatterySFX.mp3");
 	SFXJump = CP_Sound_Load("./Assets/JumpSFX.mp3");
